@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  findmyfood:
+    image: findmyfood
+    build:
+      context: .
+      dockerfile: Find My Food/Dockerfile
