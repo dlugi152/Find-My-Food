@@ -1,27 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Find_My_Food.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "{0} jest wymagany")]
+        [EmailAddress(ErrorMessage = "To nie jest prawidłowy {0}")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Musisz podać {0}")]
+        [StringLength(100, ErrorMessage = "{0} musi mieć długość od {2} do maks {1} znaków", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Potwierdź hasło")]
+        [Compare("Password", ErrorMessage = "Hasła nie pasują")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "{0} jest wymagana")]
+        [EnumDataType(typeof(Enums.RolesEnum))]
+        [Display(Name = "Rola")]
+        public Enums.RolesEnum Role { get; set; }
+
+        [RegistrationValidator]
+        [StringLength(255, ErrorMessage = "{0} musi mieć długość od {2} do maks {1} znaków", MinimumLength = 3)]
+        [Display(Name = "Nazwa Restauracji")]
+        public string RestaurantName { get; set; }
+
+        [RegistrationValidator]
+        //[RegularExpression()]
+        [StringLength(255, ErrorMessage = "{0} musi mieć długość od {2} do maks {1} znaków", MinimumLength = 3)]
+        [Display(Name = "Wyszukiwarka adresu")]
+        public string Address { get; set; }
+
+        [RegistrationValidator]
+        [StringLength(255, ErrorMessage = "{0} musi mieć długość od {2} do maks {1} znaków", MinimumLength = 5)]
+        [Display(Name = "Login")]
+        public string ClientName { get; set; }
+
+        public string RealAddress { get; set; }
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
     }
 }

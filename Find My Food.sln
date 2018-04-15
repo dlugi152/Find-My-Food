@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Find My Food", "Find My Food\Find My Food.csproj", "{2EEB76EB-5D3C-4DF9-A3CE-CDBCA8E93DE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindMyFood", "Find My Food\FindMyFood.csproj", "{2EEB76EB-5D3C-4DF9-A3CE-CDBCA8E93DE2}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{32EE63C1-2D6B-47D8-BBAB-B8EE2939429E}"
 EndProject

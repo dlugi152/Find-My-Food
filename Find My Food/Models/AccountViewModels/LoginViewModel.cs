@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Find_My_Food.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "{0} jest wymagany")]
+        [EmailAddress(ErrorMessage = "To nie jest prawidłowy {0}")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Musisz podać {0}")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Zapamiętaj")]
         public bool RememberMe { get; set; }
     }
 }

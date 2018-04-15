@@ -1,5 +1,3 @@
-using System;
-
 namespace Find_My_Food.Models
 {
     public class ErrorViewModel
