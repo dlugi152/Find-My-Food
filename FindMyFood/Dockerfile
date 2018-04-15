@@ -4,11 +4,11 @@ EXPOSE 80
 
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
-COPY ["Find My Food.sln", "./"]
-COPY ["Find My Food/FindMyFood.csproj", "Find My Food/"]
+COPY FindMyFood.sln, ./
+COPY FindMyFood/FindMyFood.csproj, FindMyFood/
 RUN dotnet restore -nowarn:msb3202,nu1503
 COPY . .
-WORKDIR /src/Find My Food
+WORKDIR /src/FindMyFood
 RUN dotnet build -c Release -o /app
 
 FROM build AS publish
@@ -17,4 +17,4 @@ RUN dotnet publish -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Find My Food.dll"]
+ENTRYPOINT ["dotnet", "FindMyFood.dll"]

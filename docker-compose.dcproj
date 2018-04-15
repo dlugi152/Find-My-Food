@@ -3,9 +3,9 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.0</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>32ee63c1-2d6b-47d8-bbab-b8ee2939429e</ProjectGuid>
+    <ProjectGuid>7351a5fc-113c-4bd6-9500-06e21c308769</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>http://localhost:{ServicePort}/</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>findmyfood</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

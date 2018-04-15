@@ -5,4 +5,4 @@ services:
     image: findmyfood
     build:
       context: .
-      dockerfile: Find My Food/Dockerfile
+      dockerfile: FindMyFood/Dockerfile
