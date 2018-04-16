@@ -3,6 +3,6 @@ version: '3'
 services:
   findmyfood:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Staging
     ports:
       - "80"

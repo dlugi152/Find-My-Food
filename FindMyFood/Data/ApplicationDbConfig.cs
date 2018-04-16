@@ -24,10 +24,10 @@ namespace FindMyFood.Areas.Restaurant.Data
                    .WithMany(p => p.ApplicationUser)
                    .HasForeignKey(d => d.RestaurantId)
                    .OnDelete(DeleteBehavior.Cascade);
-            builder.HasIndex(e => new { e.Email })
+            builder.HasIndex(e => new {e.Email})
                    .HasName("EmailUnique")
                    .IsUnique();
-            builder.HasIndex(e => new { e.NormalizedEmail })
+            builder.HasIndex(e => new {e.NormalizedEmail})
                    .HasName("NormEmailUnique")
                    .IsUnique();
         }

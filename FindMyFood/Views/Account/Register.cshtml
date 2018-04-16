@@ -3,74 +3,75 @@
     ViewData["Title"] = "Rejestracja";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<div class="row">
-    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-        <div class="col-md-4" style="height: 600px">
-            <h4>Stwórz nowe konto</h4>
-            <hr/>
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Role"></label>
-                <select id="RoleSelect" class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<Enums.RolesEnum>()"
-                        onchange="ChangeRegistrationRole()">
-                </select>
+<header class="masthead">
+    <div class="container h-100">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <div class="col-md-offset-1 col-md-5 float-left">
+                <section class="section-no-bottom">
+                    <h3>Stwórz nowe konto</h3>
+                </section>
+                <hr class="invisible"/>
+                <div class="form-group">
+                    <label asp-for="Role"></label>
+                    <select id="RoleSelect" class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<Enums.RolesEnum>()"
+                            onchange="ChangeRegistrationRole()">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control"/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="form-control"/>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <button class="btn btn-default btn-block" type="submit">Zarejestruj</button>
             </div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control"/>
-                <span asp-validation-for="Email" class="text-danger"></span>
+            <div id="RightPanelRestaurant" class="col-md-5 float-right">
+                <section class="section-no-bottom">
+                    <h3>Informacje o Twojej restauracji</h3>
+                </section>
+                <hr class="invisible"/>
+                <div style="display: none;">
+                    <input id="RealAddress" asp-for="RealAddress"/>
+                    <input id="Longitude" asp-for="Longitude"/>
+                    <input id="Latitude" asp-for="Latitude"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RestaurantName"></label>
+                    <input asp-for="RestaurantName" class="form-control"/>
+                    <span asp-validation-for="RestaurantName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <input id="InputAddressId" asp-for="Address" placeholder="Zostanie użyty adres wskazywany przez marker" oninput="GeocodeForm()" class="form-control"/>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div id="map" class="border border-secondary" style="height: 270px;">
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control"/>
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="col-md-5 float-right" id="RightPanelClient" style="display: none">
+                <section class="section-no-bottom">
+                    <h3>Informacje o Tobie</h3>
+                </section>
+                <hr class="invisible"/>
+                <div class="form-group">
+                    <label asp-for="ClientName"></label>
+                    <input asp-for="ClientName" class="form-control"/>
+                    <span asp-validation-for="ClientName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control"/>
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button class="btn btn-default" type="submit">Zarejestruj</button>
-        </div>
-        <div id="RightPanelRestaurant" class="col-md-4 col-md-offset-2">
-            <section>
-                <h4>Informacje o Twojej restauracji</h4>
-            </section>
-            <hr/>
-            <div style="height: 0px; visibility: hidden; width: 0px;">
-                <input id="RealAddress" asp-for="RealAddress"/>
-                <input id="Longitude" asp-for="Longitude"/>
-                <input id="Latitude" asp-for="Latitude"/>
-            </div>
-            <div class="form-group">
-                <label asp-for="RestaurantName"></label>
-                <input asp-for="RestaurantName" class="form-control"/>
-                <span asp-validation-for="RestaurantName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address"></label>
-                <input id="InputAddressId" asp-for="Address" placeholder="Zostanie użyty adres wskazywany przez marker" oninput="GeocodeForm()" class="form-control"/>
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div id="map" style="height: 270px; width: 100%;">
-            </div>
-        </div>
-        <div id="RightPanelClient" style="height: 0px; visibility: hidden; width: 0px;" class="col-md-4 col-md-offset-2">
-            <section>
-                <h4>Informacje o Tobie</h4>
-            </section>
-            <hr/>
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ClientName"></label>
-                <input asp-for="ClientName" class="form-control"/>
-                <span asp-validation-for="ClientName" class="text-danger"></span>
-            </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+</header>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

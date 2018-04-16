@@ -9,6 +9,7 @@ namespace Find_My_Food.Models.AccountViewModels
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Musisz podać {0}")]
+        [Display(Name = "Hasło")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

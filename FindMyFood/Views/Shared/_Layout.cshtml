@@ -2,52 +2,86 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Find My Food</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+    <title>@ViewData["Title"]</title>
 
+    <link href="~/templates/app/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="~/templates/app/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/templates/app/vendor/simple-line-icons/css/simple-line-icons.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="~/templates/app/device-mockups/device-mockups.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="~/templates/app/css/new-age.min.css" rel="stylesheet">
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+        <!--<link rel="stylesheet" href="~/templates/app/vendor/bootstrap/css/bootstrap.min.css"/>-->
         <link rel="stylesheet" href="~/css/site.css"/>
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+    <!--<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"/>
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"/>-->
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
     </environment>
 </head>
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<body id="page-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Find My Food</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="About">O nas</a>
+        <a class="navbar-brand js-scroll-trigger" asp-controller="Home" asp-action="Index" asp-area="">Find My Food</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#download">Aplikacja</a>
                 </li>
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#features">Możliwości</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Kontakt</a>
+                </li>
+                @await Html.PartialAsync("_LoginPartial")
             </ul>
-            @await Html.PartialAsync("_LoginPartial")
         </div>
     </div>
 </nav>
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; 2018 - Find My Food</p>
-    </footer>
-</div>
+@RenderBody()
+<hr/>
+<footer>
+    <div class="container">
+        <p>&copy; Find My Food 2018. Wszelkie prawa zastrzeżone</p>
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="#">Prywatność</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">Warunki</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">FAQ</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="~/templates/app/vendor/jquery/jquery.min.js"></script>
+<script src="~/templates/app/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="~/templates/app/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="~/templates/app/js/new-age.min.js"></script>
 
 <environment include="Development">
     <script src="~/lib/jquery/dist/jquery.js"></script>

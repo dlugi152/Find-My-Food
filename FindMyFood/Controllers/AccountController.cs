@@ -214,7 +214,9 @@ namespace Find_My_Food.Controllers
                         case Enums.RolesEnum.Restaurant:
                             model.Longitude = model.Longitude.Replace('.', ',');
                             model.Latitude = model.Latitude.Replace('.', ',');
-                            user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress, double.Parse(model.Longitude),double.Parse(model.Latitude));
+                            user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress,
+                                                             double.Parse(model.Longitude),
+                                                             double.Parse(model.Latitude));
                             context.Restaurant.Add(user.Restaurant);
                             break;
                         case Enums.RolesEnum.Client:
