@@ -18,10 +18,10 @@ namespace FindMyFood.Areas.Restaurant.Models
         public string Name { get; set; }
         public string Address { get; set; }
 
-        [CheckLongitude]
+        //[CheckLongitude]
         public double Longitude { get; set; }
 
-        [CheckLatitude]
+        //[CheckLatitude]
         public double Latitude { get; set; }
 
         public ICollection<Promotion> Promotions { get; set; } = new List<Promotion>();
