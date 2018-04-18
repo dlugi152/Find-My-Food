@@ -12,18 +12,18 @@ namespace FindMyFood.Areas.Restaurant.Data
             builder.ToTable("AppUsers");
             builder.Ignore(user => user.PhoneNumber);
             builder.Ignore(user => user.PhoneNumberConfirmed);
-            builder.Ignore(user => user.UserName);
-            builder.Ignore(user => user.NormalizedUserName);
+            builder.Property(user => user.UserName).IsRequired();
+            builder.Property(user => user.NormalizedUserName).IsRequired();
+            builder.Property(user => user.Email).IsRequired();
+            builder.Property(user => user.NormalizedUserName).IsRequired();
             builder.HasIndex(e => e.ClientId);
             builder.HasIndex(e => e.RestaurantId);
-            builder.HasOne(d => d.Client)
-                   .WithMany(p => p.ApplicationUser)
-                   .HasForeignKey(d => d.ClientId)
-                   .OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(d => d.Restaurant)
-                   .WithMany(p => p.ApplicationUser)
-                   .HasForeignKey(d => d.RestaurantId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .WithOne(user => user.ApplicationUser)
+                   .OnDelete(DeleteBehavior.Cascade).IsRequired(false);
+            builder.HasOne(d => d.Client)
+                   .WithOne(user => user.ApplicationUser)
+                   .OnDelete(DeleteBehavior.Cascade).IsRequired(false);
             builder.HasIndex(e => new {e.Email})
                    .HasName("EmailUnique")
                    .IsUnique();
@@ -104,7 +104,7 @@ namespace FindMyFood.Areas.Restaurant.Data
             builder.Property(promotion => promotion.ShortDesc).IsRequired();
             builder.HasIndex(e => e.RestaurantId);
             builder.HasOne(d => d.Restaurant)
-                   .WithMany(p => p.Promotions)
+                   .WithMany(p => p.Promotions).IsRequired()
                    .HasForeignKey(d => d.RestaurantId);
         }
     }
@@ -122,11 +122,11 @@ namespace FindMyFood.Areas.Restaurant.Data
                    .IsUnique();
 
             builder.HasOne(d => d.Client)
-                   .WithMany(p => p.Favorites)
+                   .WithMany(p => p.Favorites).IsRequired()
                    .HasForeignKey(d => d.ClientId);
 
             builder.HasOne(d => d.Restaurant)
-                   .WithMany(p => p.Favorites)
+                   .WithMany(p => p.Favorites).IsRequired()
                    .HasForeignKey(d => d.RestaurantId);
         }
     }

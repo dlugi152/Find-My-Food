@@ -108,7 +108,7 @@ section h2 { font-size: 50px; }
     #mainNav .navbar-nav > li > a:focus:hover { color: white; }
 
     #mainNav.navbar-shrink {
-        background-color: white;
+        background-color: rgba(206, 44, 44, 0.88);
         border-color: rgba(34, 34, 34, 0.1);
     }
 

@@ -23,7 +23,7 @@
     --success: #28a745;
     --info: #17a2b8;
     --warning: #ffc107;
-    --danger: #dc3545;
+    --danger: #000000;
     --light: #f8f9fa;
     --dark: #343a40;
     --breakpoint-xs: 0;
@@ -7764,9 +7764,9 @@ a.text-info:hover, a.text-info:focus { color: #117a8b !important; }
 
 a.text-warning:hover, a.text-warning:focus { color: #d39e00 !important; }
 
-.text-danger { color: #dc3545 !important; }
+.text-danger { color: #000000 !important; }
 
-a.text-danger:hover, a.text-danger:focus { color: #bd2130 !important; }
+a.text-danger:hover, a.text-danger:focus { color: #000000 !important; }
 
 .text-light { color: #f8f9fa !important; }
 

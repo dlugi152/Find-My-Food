@@ -26,7 +26,7 @@ namespace FindMyFood.Areas.Restaurant.Models
 
         public ICollection<Promotion> Promotions { get; set; } = new List<Promotion>();
         public ICollection<Favorites> Favorites { get; set; } = new List<Favorites>();
-        public ICollection<ApplicationUser> ApplicationUser { get; set; } = new List<ApplicationUser>();
+        public ApplicationUser ApplicationUser { get; set; }
     }
 
     public class CheckLatitudeAttribute : ValidationAttribute

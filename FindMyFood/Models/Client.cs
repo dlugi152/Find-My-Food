@@ -7,13 +7,12 @@ namespace FindMyFood.Areas.Restaurant.Models
     {
         public Client(string name) {
             Name = name;
-            ApplicationUser = new HashSet<ApplicationUser>();
             Favorites = new HashSet<Favorites>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<Favorites> Favorites { get; set; }
-        public ICollection<ApplicationUser> ApplicationUser { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

@@ -4,8 +4,8 @@
 @if (SignInManager.IsSignedIn(User)) {
     <li>
         <a class="nav-link btn btn-xs " asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Witaj @UserManager.GetUserName(User)!</a>
-    </li>
-    <li>
+    </li>  
+    <li style="padding-left: 10px">
         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
 
             <button id="logoutButton" class="nav-link btn btn-primary btn-xs" type="submit">Wyloguj</button>
@@ -16,7 +16,7 @@ else {
     <li>
         <a class="nav-link btn btn-primary btn-xs" asp-area="" asp-controller="Account" asp-action="Register">Rejestracja</a>
     </li>
-    <li>
+    <li style="padding-left: 10px">
         <a class="nav-link btn btn-secondary btn-xs" asp-area="" asp-controller="Account" asp-action="Login">Logowanie</a>
     </li>
 }

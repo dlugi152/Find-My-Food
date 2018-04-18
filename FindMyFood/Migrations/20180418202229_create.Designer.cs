@@ -11,7 +11,7 @@ using System;
 namespace FindMyFood.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180415160228_create")]
+    [Migration("20180418202229_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,7 @@ namespace FindMyFood.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
@@ -45,6 +46,10 @@ namespace FindMyFood.Migrations
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
+                    b.Property<string>("NormalizedUserName")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
                     b.Property<string>("PasswordHash");
 
                     b.Property<int?>("RestaurantId");
@@ -53,9 +58,14 @@ namespace FindMyFood.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientId")
+                        .IsUnique();
 
                     b.HasIndex("Email")
                         .IsUnique()
@@ -65,7 +75,12 @@ namespace FindMyFood.Migrations
                         .IsUnique()
                         .HasName("NormEmailUnique");
 
-                    b.HasIndex("RestaurantId");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex");
+
+                    b.HasIndex("RestaurantId")
+                        .IsUnique();
 
                     b.ToTable("AppUsers");
                 });
@@ -256,13 +271,13 @@ namespace FindMyFood.Migrations
             modelBuilder.Entity("Find_My_Food.Models.ApplicationUser", b =>
                 {
                     b.HasOne("FindMyFood.Areas.Restaurant.Models.Client", "Client")
-                        .WithMany("ApplicationUser")
-                        .HasForeignKey("ClientId")
+                        .WithOne("ApplicationUser")
+                        .HasForeignKey("Find_My_Food.Models.ApplicationUser", "ClientId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("FindMyFood.Areas.Restaurant.Models.Restaurant", "Restaurant")
-                        .WithMany("ApplicationUser")
-                        .HasForeignKey("RestaurantId")
+                        .WithOne("ApplicationUser")
+                        .HasForeignKey("Find_My_Food.Models.ApplicationUser", "RestaurantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

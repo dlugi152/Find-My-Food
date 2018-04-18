@@ -198,7 +198,22 @@ namespace Find_My_Food.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid) {
                 ApplicationUser user = new ApplicationUser {UserName = model.Email, Email = model.Email};
-
+                ApplicationDbContext context = ApplicationDbContext.instance;
+                switch (model.Role)
+                {
+                    case Enums.RolesEnum.Restaurant:
+                        user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress,
+                                                         double.Parse(model.Longitude.Replace('.',',')),
+                                                         double.Parse(model.Latitude.Replace('.',',')));
+                        context.Restaurant.Add(user.Restaurant);
+                        break;
+                    case Enums.RolesEnum.Client:
+                        user.Client = new Client(model.ClientName);
+                        context.Client.Add(user.Client);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
                 IdentityResult result;
                 try {
                     result = await _userManager.CreateAsync(user, model.Password);
@@ -206,28 +221,9 @@ namespace Find_My_Food.Controllers
                 catch (Exception ex) {
                     return View(model);
                 }
-
+                context.SaveChanges();
                 if (result.Succeeded) {
                     _logger.LogInformation("User created a new account with password.");
-                    ApplicationDbContext context = ApplicationDbContext.instance;
-                    switch (model.Role) {
-                        case Enums.RolesEnum.Restaurant:
-                            model.Longitude = model.Longitude.Replace('.', ',');
-                            model.Latitude = model.Latitude.Replace('.', ',');
-                            user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress,
-                                                             double.Parse(model.Longitude),
-                                                             double.Parse(model.Latitude));
-                            context.Restaurant.Add(user.Restaurant);
-                            break;
-                        case Enums.RolesEnum.Client:
-                            user.Client = new Client(model.ClientName);
-                            context.Client.Add(user.Client);
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    context.SaveChanges();
 
                     string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     string callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
