@@ -203,8 +203,8 @@ namespace Find_My_Food.Controllers
                 {
                     case Enums.RolesEnum.Restaurant:
                         user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress,
-                                                         double.Parse(model.Longitude.Replace('.',',')),
-                                                         double.Parse(model.Latitude.Replace('.',',')));
+                                                         model.Longitude,
+                                                         model.Latitude);
                         context.Restaurant.Add(user.Restaurant);
                         break;
                     case Enums.RolesEnum.Client:

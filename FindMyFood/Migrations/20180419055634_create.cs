@@ -44,8 +44,8 @@ namespace FindMyFood.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Address = table.Column<string>(nullable: false),
-                    Latitude = table.Column<double>(nullable: false),
-                    Longitude = table.Column<double>(nullable: false),
+                    Latitude = table.Column<string>(nullable: false),
+                    Longitude = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -54,7 +54,7 @@ namespace FindMyFood.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppRoleClaims",
+                name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -65,14 +65,13 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppRoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AppRoleClaims_AppRoles_RoleId",
+                        name: "FK_AspNetRoleClaims_AppRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AppRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,15 +103,13 @@ namespace FindMyFood.Migrations
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AppUsers_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,15 +129,13 @@ namespace FindMyFood.Migrations
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Favorites_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -163,8 +158,7 @@ namespace FindMyFood.Migrations
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,8 +179,7 @@ namespace FindMyFood.Migrations
                         column: x => x.UserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -206,8 +199,7 @@ namespace FindMyFood.Migrations
                         column: x => x.UserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -225,15 +217,13 @@ namespace FindMyFood.Migrations
                         column: x => x.RoleId,
                         principalTable: "AppRoles",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AppUserRoles_AppUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -253,8 +243,7 @@ namespace FindMyFood.Migrations
                         column: x => x.UserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                                     onDelete: ReferentialAction.Cascade,
-                                     onUpdate: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -309,8 +298,8 @@ namespace FindMyFood.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppRoleClaims_RoleId",
-                table: "AppRoleClaims",
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
@@ -350,7 +339,7 @@ namespace FindMyFood.Migrations
                 name: "AppUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AppRoleClaims");
+                name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
                 name: "Favorites");

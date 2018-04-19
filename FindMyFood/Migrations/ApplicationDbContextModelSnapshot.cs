@@ -151,9 +151,11 @@ namespace FindMyFood.Migrations
                     b.Property<string>("Address")
                         .IsRequired();
 
-                    b.Property<double>("Latitude");
+                    b.Property<string>("Latitude")
+                        .IsRequired();
 
-                    b.Property<double>("Longitude");
+                    b.Property<string>("Longitude")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired();

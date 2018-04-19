@@ -6,23 +6,23 @@ namespace FindMyFood.Areas.Restaurant.Models
 {
     public class Restaurant
     {
-        public Restaurant(string Name, string Address, double Longitude, double Latitude) {
+        public Restaurant(string name, string address, string longitude, string latitude) {
             //Id = 1;
-            this.Name = Name;
-            this.Address = Address;
-            this.Latitude = Latitude;
-            this.Longitude = Longitude;
+            Name = name;
+            Address = address;
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
 
-        [CheckLongitude]
-        public double Longitude { get; set; }
+        //[CheckLongitude]
+        public string Longitude { get; set; }
 
-        [CheckLatitude]
-        public double Latitude { get; set; }
+        //[CheckLatitude]
+        public string Latitude { get; set; }
 
         public ICollection<Promotion> Promotions { get; set; } = new List<Promotion>();
         public ICollection<Favorites> Favorites { get; set; } = new List<Favorites>();

@@ -11,7 +11,7 @@ using System;
 namespace FindMyFood.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180418202229_create")]
+    [Migration("20180419055634_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,9 +152,11 @@ namespace FindMyFood.Migrations
                     b.Property<string>("Address")
                         .IsRequired();
 
-                    b.Property<double>("Latitude");
+                    b.Property<string>("Latitude")
+                        .IsRequired();
 
-                    b.Property<double>("Longitude");
+                    b.Property<string>("Longitude")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired();
