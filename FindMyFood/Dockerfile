@@ -1,18 +1,18 @@
-FROM microsoft/aspnetcore:2.0 AS base
+FROM microsoft/aspnetcore:2.0-nanoserver-1709 AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 51900
+EXPOSE 44311
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM microsoft/aspnetcore-build:2.0-nanoserver-1709 AS build
 WORKDIR /src
-COPY FindMyFood.sln ./
 COPY FindMyFood/FindMyFood.csproj FindMyFood/
-RUN dotnet restore -nowarn:msb3202,nu1503
+RUN dotnet restore FindMyFood/FindMyFood.csproj
 COPY . .
 WORKDIR /src/FindMyFood
-RUN dotnet build -c Release -o /app
+RUN dotnet build FindMyFood.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish FindMyFood.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app

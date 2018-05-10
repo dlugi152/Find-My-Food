@@ -1,8 +1,8 @@
-version: '3'
+version: '3.4'
 
 services:
   findmyfood:
-    image: findmyfood
+    image: ${DOCKER_REGISTRY}findmyfood
     build:
       context: .
-      dockerfile: FindMyFood/Dockerfile
+      dockerfile: FindMyFood\Dockerfile

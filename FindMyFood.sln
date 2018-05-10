@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyFood", "FindMyFood\FindMyFood.csproj", "{23A1477B-46F7-4CB1-ADE7-9FB351EBBCBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindMyFood", "FindMyFood\FindMyFood.csproj", "{23A1477B-46F7-4CB1-ADE7-9FB351EBBCBE}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7351A5FC-113C-4BD6-9500-06E21C308769}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C6C35890-0D04-4D07-BDB5-2042C134FCC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{23A1477B-46F7-4CB1-ADE7-9FB351EBBCBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23A1477B-46F7-4CB1-ADE7-9FB351EBBCBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23A1477B-46F7-4CB1-ADE7-9FB351EBBCBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7351A5FC-113C-4BD6-9500-06E21C308769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7351A5FC-113C-4BD6-9500-06E21C308769}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7351A5FC-113C-4BD6-9500-06E21C308769}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7351A5FC-113C-4BD6-9500-06E21C308769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C35890-0D04-4D07-BDB5-2042C134FCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C35890-0D04-4D07-BDB5-2042C134FCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C35890-0D04-4D07-BDB5-2042C134FCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C35890-0D04-4D07-BDB5-2042C134FCC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
