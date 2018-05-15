@@ -5,7 +5,7 @@
     <UserSecretsId>aspnet-Find_My_Food-B7363CC6-E78F-4BD6-9861-ABC19FC6F65C</UserSecretsId>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 

@@ -5,7 +5,7 @@ declare var $:any;
 
 @Component({
     selector: 'dashboard-cmp',
-    //moduleId: module.id,
+    moduleId: module.id + '',
     templateUrl: 'dashboard.component.html'
 })
 

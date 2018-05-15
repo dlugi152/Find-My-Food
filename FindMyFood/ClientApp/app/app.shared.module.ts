@@ -17,7 +17,7 @@ import { NavbarModule } from './components/shared/navbar/navbar.module';
     declarations: [
         AppComponent,
         CounterComponent,
-        //DashboardComponent,
+        DashboardComponent,
         FetchDataComponent,
         HomeComponent
     ],
@@ -33,7 +33,7 @@ import { NavbarModule } from './components/shared/navbar/navbar.module';
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            //{ path: 'dashboard', component: DashboardComponent },
+            { path: 'dashboard', component: DashboardComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

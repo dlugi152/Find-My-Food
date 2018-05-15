@@ -3,7 +3,7 @@ version: '3.4'
 services:
   findmyfood:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Staging
       - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
       - "51900:80"

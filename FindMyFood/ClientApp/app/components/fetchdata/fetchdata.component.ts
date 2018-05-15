@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Component({
+    moduleId: module.id + '',
     selector: 'fetchdata',
     templateUrl: './fetchdata.component.html'
 })
