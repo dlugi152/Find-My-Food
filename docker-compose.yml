@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY}findmyfood
     build:
       context: .
-      dockerfile: FindMyFood\Dockerfile
+      dockerfile: FindMyFood/Dockerfile

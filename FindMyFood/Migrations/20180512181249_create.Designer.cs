@@ -11,7 +11,7 @@ using System;
 namespace FindMyFood.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180419055634_create")]
+    [Migration("20180512181249_create")]
     partial class create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace FindMyFood.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
 
             modelBuilder.Entity("Find_My_Food.Models.ApplicationUser", b =>
                 {
@@ -134,7 +134,7 @@ namespace FindMyFood.Migrations
 
                     b.Property<int>("RestaurantId");
 
-                    b.Property<string>("ShortDesc")
+                    b.Property<string>("Tags")
                         .IsRequired();
 
                     b.HasKey("Id");

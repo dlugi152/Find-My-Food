@@ -6,6 +6,10 @@ namespace FindMyFood.Areas.Restaurant.Models
 {
     public class Restaurant
     {
+        public Restaurant()
+        {
+        }
+
         public Restaurant(string name, string address, string longitude, string latitude) {
             //Id = 1;
             Name = name;

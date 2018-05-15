@@ -1,4 +1,5 @@
 ﻿using FindMyFood.Areas.Restaurant.Models;
+using FindMyFood.Models;
 using Find_My_Food.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -101,11 +102,25 @@ namespace FindMyFood.Areas.Restaurant.Data
         public void Configure(EntityTypeBuilder<Promotion> builder) {
             builder.ToTable("Promotions");
             builder.Property(promotion => promotion.Description).IsRequired();
-            builder.Property(promotion => promotion.ShortDesc).IsRequired();
+            builder.Property(promotion => promotion.Tags).IsRequired();
             builder.HasIndex(e => e.RestaurantId);
             builder.HasOne(d => d.Restaurant)
                    .WithMany(p => p.Promotions).IsRequired()
                    .HasForeignKey(d => d.RestaurantId);
+        }
+    }
+
+    internal class RatingConfig : IEntityTypeConfiguration<Rating>
+    {
+        public void Configure(EntityTypeBuilder<Rating> builder)
+        {
+            /*builder.ToTable("Promotions");
+            builder.Property(promotion => promotion.Description).IsRequired();
+            builder.Property(promotion => promotion.Tags).IsRequired();
+            builder.HasIndex(e => e.RestaurantId);
+            builder.HasOne(d => d.Restaurant)
+                .WithMany(p => p.Promotions).IsRequired()
+                .HasForeignKey(d => d.RestaurantId);*/
         }
     }
 

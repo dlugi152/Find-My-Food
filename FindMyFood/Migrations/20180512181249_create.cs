@@ -148,7 +148,7 @@ namespace FindMyFood.Migrations
                     DateStart = table.Column<DateTime>(nullable: true),
                     Description = table.Column<string>(nullable: false),
                     RestaurantId = table.Column<int>(nullable: false),
-                    ShortDesc = table.Column<string>(nullable: false)
+                    Tags = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

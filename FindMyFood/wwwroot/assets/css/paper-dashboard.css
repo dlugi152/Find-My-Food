@@ -160,7 +160,7 @@ strong {
 
 /*     General overwrite     */
 body {
-    color: #66615b;
+    color: #ffffff;
     font-size: 14px;
     font-family: 'Muli','Helvetica','Arial','sans-serif';
     background: url(../../bg-pattern.png), linear-gradient(to left, #7b4397, #dc2430);
@@ -325,7 +325,7 @@ hr {
 }
     .sidebar .nav li.active > a:before,
     .off-canvas-sidebar .nav li.active > a:before {
-        border-right: 17px solid #f3bb45;
+        border-right: 17px solid #524d4d;
         border-top: 17px solid transparent;
         border-bottom: 17px solid transparent;
         content: "";
@@ -334,17 +334,17 @@ hr {
         right: 0;
         top: 8px;
     }
-.sidebar .nav li.active > a:after,
-.off-canvas-sidebar .nav li.active > a:after {
-    border-right: 17px solid #f3bb45;
-  border-top: 17px solid transparent;
-  border-bottom: 17px solid transparent;
-  content: "";
-  display: inline-block;
-  position: absolute;
-  right: -1px;
-  top: 8px;
-}
+    .sidebar .nav li.active > a:after,
+    .off-canvas-sidebar .nav li.active > a:after {
+        border-right: 17px solid #524d4d;
+        border-top: 17px solid transparent;
+        border-bottom: 17px solid transparent;
+        content: "";
+        display: inline-block;
+        position: absolute;
+        right: -1px;
+        top: 8px;
+    }
 .navbar-toggler-icon {
     display: inline-block;
     height: 1.5em;
@@ -475,12 +475,12 @@ hr {
   width: calc(100% - 260px);
   min-height: 100%;
 }
-.main-panel > .content {
-    min-height: calc(100% - 123px);
-    border-radius: 25px;
-    background: #f3bb45;
-    padding: 20px;
-}
+    .main-panel > .content {
+        min-height: calc(100% - 123px);
+        border-radius: 25px;
+        background: #524d4d;
+        padding: 20px;
+    }
 .main-panel > .footer {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -2901,17 +2901,20 @@ textarea.form-control {
     content: "";
     z-index: 1;
   }
-  .off-canvas-sidebar.has-image::after {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background-color: rgba(17, 17, 17, 0.8);
-    display: block;
-    content: "";
-    z-index: 1;
-  }
+    button {
+        color: black;
+    }
+    .off-canvas-sidebar.has-image::after {
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background-color: rgba(17, 17, 17, 0.8);
+        display: block;
+        content: "";
+        z-index: 1;
+    }
   .off-canvas-sidebar .logo {
     position: relative;
     z-index: 4;

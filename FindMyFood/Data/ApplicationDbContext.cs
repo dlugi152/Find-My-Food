@@ -1,5 +1,6 @@
 ﻿using FindMyFood.Areas.Restaurant.Data;
 using FindMyFood.Areas.Restaurant.Models;
+using FindMyFood.Models;
 using Find_My_Food.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace Find_My_Food.Data
         public DbSet<Favorites> Favorites { get; set; }
         public DbSet<Client> Client { get; set; }
         public DbSet<Restaurant> Restaurant { get; set; }
+        //public DbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
@@ -27,6 +29,7 @@ namespace Find_My_Food.Data
             builder.Entity<Client>();
             builder.Entity<Favorites>();
             builder.Entity<Promotion>();
+            //builder.Entity<Rating>();
             builder.ApplyConfiguration(new AppUserConfig());
             builder.ApplyConfiguration(new RestaurantConfig());
             builder.ApplyConfiguration(new ClientConfig());
@@ -38,6 +41,7 @@ namespace Find_My_Food.Data
             builder.ApplyConfiguration(new AppUserTokenConfig());
             builder.ApplyConfiguration(new PromotionConfig());
             builder.ApplyConfiguration(new FavoritesConfig());
+            //builder.ApplyConfiguration(new RatingConfig());
         }
     }
 }

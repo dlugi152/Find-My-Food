@@ -13,28 +13,30 @@ namespace Find_My_Food
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) {
+        public Startup(IConfiguration configuration)
+        {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services) {
+        public void ConfigureServices(IServiceCollection services)
+        {
             services.AddDbContext<ApplicationDbContext>(options =>
-                                                            options.UseNpgsql(Configuration
-                                                                                  .GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration
+                    .GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
-                    {
-                        options.Password.RequireDigit = true;
-                        options.Password.RequiredLength = 5;
-                        options.Password.RequireUppercase = false;
-                        options.Password.RequiredUniqueChars = 3;
-                        options.Password.RequireNonAlphanumeric = false;
-                    })
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultTokenProviders();
+                {
+                    options.Password.RequireDigit = true;
+                    options.Password.RequiredLength = 5;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredUniqueChars = 3;
+                    options.Password.RequireNonAlphanumeric = false;
+                })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -44,8 +46,10 @@ namespace Find_My_Food
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
-            if (env.IsDevelopment()) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
@@ -54,7 +58,8 @@ namespace Find_My_Food
                     HotModuleReplacement = true
                 });
             }
-            else {
+            else
+            {
                 app.UseExceptionHandler("/Home/Error");
             }
 
@@ -65,12 +70,12 @@ namespace Find_My_Food
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                                "default",
-                                "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
 
                 //routes.MapSpaFallbackRoute(
                 //    name: "spa-fallback",
-                 //   defaults: new { controller = "Restaurant", action = "Index" });
+                //   defaults: new { controller = "Restaurant", action = "Index" });
             });
         }
     }

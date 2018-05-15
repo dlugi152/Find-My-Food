@@ -1,9 +1,9 @@
-FROM microsoft/aspnetcore:2.0-nanoserver-1709 AS base
+FROM microsoft/aspnetcore:2.0 AS base
 WORKDIR /app
 EXPOSE 51900
 EXPOSE 44311
 
-FROM microsoft/aspnetcore-build:2.0-nanoserver-1709 AS build
+FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 COPY FindMyFood/FindMyFood.csproj FindMyFood/
 RUN dotnet restore FindMyFood/FindMyFood.csproj
