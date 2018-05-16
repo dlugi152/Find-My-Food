@@ -3,20 +3,20 @@ import { Http } from '@angular/http';
 
 @Component({
     moduleId: module.id + '',
-    selector: 'fetchdata',
-    templateUrl: './fetchdata.component.html'
+    selector: 'promotion-delete',
+    templateUrl: './promDelete.component.html'
 })
-export class FetchDataComponent {
-    public forecasts: WeatherForecast[];
+export class PromotionDelete {
+    public forecasts: IWeatherForecast[];
 
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
         http.get(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result.json() as WeatherForecast[];
+            this.forecasts = result.json() as IWeatherForecast[];
         }, error => console.error(error));
     }
 }
 
-interface WeatherForecast {
+interface IWeatherForecast {
     dateFormatted: string;
     temperatureC: number;
     temperatureF: number;

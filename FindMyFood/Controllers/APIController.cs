@@ -59,32 +59,25 @@ namespace FindMyFood.Controllers
 
         // GET: api/API/5
         [HttpGet("Promotion/{lng}&{lat}&{radius}")]
-        public IEnumerable<PromotionAPI> GetPromotionByLocation([FromRoute] double lng, [FromRoute] double lat, [FromRoute] double radius)
-        {/*
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }*/
+        public IQueryable<PromotionAPI> GetPromotionByLocation([FromRoute] double lng, [FromRoute] double lat,
+            [FromRoute] double radius)
+        {
+            /*
+                        if (!ModelState.IsValid)
+                        {
+                            return BadRequest(ModelState);
+                        }*/
             //double d = double.Parse(_context.Restaurant.Single(m2 => m2.Id == 1).Longitude.Replace('.',','));
             //todo uwzględnić daty
-            List <Promotion> promotion = _context.Promotions.Where(m =>
-                IsInRadius(double.Parse(_context.Restaurant.Single(m2 => m2.Id == 1).Longitude.Replace('.', ',')),
-                    double.Parse(_context.Restaurant.Single(m2 => m2.Id == 1).Latitude.Replace('.', ',')),
-                    lng, lat, radius)).ToList();
-            List<PromotionAPI> promoApi = new List<PromotionAPI>();
-            foreach (var promotion1 in promotion)
-            {
-                Restaurant rest =
-                    _context.Restaurant.SingleOrDefault(restaurant => restaurant.Id == promotion1.RestaurantId);
-                promoApi.Add(new PromotionAPI(promotion1, rest));
-            }
-            /*
-        if (promotion == null)
-        {
-            return NotFound();
-        }*/
 
-            return promoApi;
+            IQueryable<PromotionAPI> promotion = from promo in _context.Promotions
+                join r in _context.Restaurant on promo.RestaurantId equals r.Id into joined
+                from r in joined
+                where IsInRadius(double.Parse(r.Longitude.Replace(".", ",")),
+                    double.Parse(r.Latitude.Replace(".", ",")), lng, lat, radius)
+                select new PromotionAPI(promo, r);
+
+            return promotion;
         }
 
         // GET: api/API/5

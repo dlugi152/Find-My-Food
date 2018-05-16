@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
     moduleId: module.id + '',
-    selector: 'counter',
-    templateUrl: './counter.component.html'
+    selector: 'promotion-add',
+    templateUrl: './promAdd.component.html'
 })
-export class CounterComponent {
+export class PromotionAdd {
+    //public forecasts: IWeatherForecast[];
     public currentCount = 0;
 
     public incrementCounter() {

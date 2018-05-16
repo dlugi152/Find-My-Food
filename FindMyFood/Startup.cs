@@ -71,11 +71,11 @@ namespace Find_My_Food
             {
                 routes.MapRoute(
                     "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    "{controller=Restaurant}/{action=Index}/{id?}");
 
-                //routes.MapSpaFallbackRoute(
-                //    name: "spa-fallback",
-                //   defaults: new { controller = "Restaurant", action = "Index" });
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                   defaults: new { controller = "Restaurant", action = "Index" });
             });
         }
     }

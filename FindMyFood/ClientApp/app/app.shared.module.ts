@@ -7,8 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
+import { PromotionDelete } from './components/promotion/delete/promDelete.component';
+import { PromotionAdd } from './components/promotion/add/promAdd.component';
 import { SidebarModule } from './components/sidebar/sidebar.module';
 import { FooterModule } from './components/shared/footer/footer.module';
 import { NavbarModule } from './components/shared/navbar/navbar.module';
@@ -16,9 +16,9 @@ import { NavbarModule } from './components/shared/navbar/navbar.module';
 @NgModule({
     declarations: [
         AppComponent,
-        CounterComponent,
+        PromotionAdd,
         DashboardComponent,
-        FetchDataComponent,
+        PromotionDelete,
         HomeComponent
     ],
     imports: [
@@ -31,8 +31,8 @@ import { NavbarModule } from './components/shared/navbar/navbar.module';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'promotion-add', component: PromotionAdd },
+            { path: 'promotion-delete', component: PromotionDelete },
             { path: 'dashboard', component: DashboardComponent },
             { path: '**', redirectTo: 'home' }
         ])

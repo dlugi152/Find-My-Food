@@ -2,17 +2,17 @@ import { Component, OnInit } from "@angular/core";
 
 declare var $:any;
 
-export interface RouteInfo {
+export interface IRouteInfo {
     path: string;
     title: string;
     icon: string;
     class: string;
 }
 
-export const ROUTES: RouteInfo[] = [
-    { path: "home", title: "Przegl¹d",  icon: "ti-panel", class: "" },
-    { path: "counter", title: "Dodaj promocje",  icon:"ti-gift", class: "" },
-    { path: "fetch-data", title: "Usuñ promocje", icon: "ti-trash", class: "" },
+export const ROUTES: IRouteInfo[] = [
+    { path: "home", title: "PrzeglÄ…d",  icon: "ti-panel", class: "" },
+    { path: "promotion-add", title: "Dodaj promocje",  icon:"ti-gift", class: "" },
+    { path: "promotion-delete", title: "UsuÅ„ promocje", icon: "ti-trash", class: "" },
     { path: 'dashboard', title: 'Informacje', icon: 'ti-home', class: '' },
     /*{ path: 'typography', title: 'Typography',  icon:'ti-text', class: '' },
     { path: 'icons', title: 'Icons',  icon:'ti-pencil-alt2', class: '' },
