@@ -89,8 +89,8 @@ function getcontentString(pos) {
                 content: myContent
             });
             document.getElementById("RealAddress").value = myContent;
-            document.getElementById("Longitude").value = pos.lat();
-            document.getElementById("Latitude").value = pos.lng();
+            document.getElementById("Latitude").value = pos.lat();
+            document.getElementById("Longitude").value = pos.lng();
             infowindow.open(map, prevMarker);
             prevMarker.addListener("click",
                 function() {

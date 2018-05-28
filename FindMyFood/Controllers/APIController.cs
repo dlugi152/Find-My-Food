@@ -73,8 +73,8 @@ namespace FindMyFood.Controllers
             IQueryable<PromotionAPI> promotion = from promo in _context.Promotions
                 join r in _context.Restaurant on promo.RestaurantId equals r.Id into joined
                 from r in joined
-                where IsInRadius(double.Parse(r.Longitude.Replace(".", ",")),
-                    double.Parse(r.Latitude.Replace(".", ",")), lng, lat, radius)
+                where IsInRadius(double.Parse(r.Longitude),
+                    double.Parse(r.Latitude), lng, lat, radius)
                 select new PromotionAPI(promo, r);
 
             return promotion;

@@ -218,7 +218,7 @@ namespace Find_My_Food.Controllers
                 try {
                     result = await _userManager.CreateAsync(user, model.Password);
                 }
-                catch (Exception ex) {
+                catch (Exception) {
                     return View(model);
                 }
                 context.SaveChanges();
