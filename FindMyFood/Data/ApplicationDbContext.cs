@@ -1,6 +1,5 @@
 ﻿using FindMyFood.Areas.Restaurant.Data;
 using FindMyFood.Areas.Restaurant.Models;
-using FindMyFood.Models;
 using Find_My_Food.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FindMyFood.Models
+﻿namespace FindMyFood.Models
 {
     public class Rating
     {

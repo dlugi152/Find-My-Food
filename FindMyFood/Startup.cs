@@ -13,16 +13,14 @@ namespace Find_My_Food
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration
                     .GetConnectionString("DefaultConnection")));
@@ -46,10 +44,8 @@ namespace Find_My_Food
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+            if (env.IsDevelopment()) {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
@@ -58,8 +54,7 @@ namespace Find_My_Food
                     HotModuleReplacement = true
                 });
             }
-            else
-            {
+            else {
                 app.UseExceptionHandler("/Home/Error");
             }
 

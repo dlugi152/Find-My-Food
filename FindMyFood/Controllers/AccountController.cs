@@ -191,52 +191,48 @@ namespace Find_My_Food.Controllers
             return View();
         }
 
+        public static async Task<ApplicationUser> AddNewUser(RegisterViewModel model,
+        UserManager<ApplicationUser> _userManager) {
+            ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            ApplicationDbContext context = ApplicationDbContext.instance;
+            switch (model.Role) {
+                case Enums.RolesEnum.Restaurant:
+                    user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress,
+                                                     model.Longitude,
+                                                     model.Latitude);
+                    context.Restaurant.Add(user.Restaurant);
+                    break;
+                case Enums.RolesEnum.Client:
+                    user.Client = new Client(model.ClientName);
+                    context.Client.Add(user.Client);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            IdentityResult result;
+            try {
+                result = await _userManager.CreateAsync(user, model.Password);
+                context.SaveChanges();
+                if (result.Succeeded)
+                    return user;
+            }
+            catch (Exception) {
+            }
+            return null;
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null) {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid) {
-                ApplicationUser user = new ApplicationUser {UserName = model.Email, Email = model.Email};
-                ApplicationDbContext context = ApplicationDbContext.instance;
-                switch (model.Role)
-                {
-                    case Enums.RolesEnum.Restaurant:
-                        user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress,
-                                                         model.Longitude,
-                                                         model.Latitude);
-                        context.Restaurant.Add(user.Restaurant);
-                        break;
-                    case Enums.RolesEnum.Client:
-                        user.Client = new Client(model.ClientName);
-                        context.Client.Add(user.Client);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-                IdentityResult result;
-                try {
-                    result = await _userManager.CreateAsync(user, model.Password);
-                }
-                catch (Exception) {
-                    return View(model);
-                }
-                context.SaveChanges();
-                if (result.Succeeded) {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    string callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    await _signInManager.SignInAsync(user, false);
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
-                }
-
-                AddErrors(result);
+                ApplicationUser user = await AddNewUser(model, _userManager);
+                _logger.LogInformation("User created a new account with password.");
+                await _signInManager.SignInAsync(user, false);
+                _logger.LogInformation("User signed in.");
+                return RedirectToLocal(returnUrl);
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -322,8 +318,8 @@ namespace Find_My_Food.Controllers
 
             ViewData["ReturnUrl"] = returnUrl;
             return View(nameof(ExternalLogin), model);
-        }
-        */
+        }*/
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code) {
@@ -383,7 +379,7 @@ namespace Find_My_Food.Controllers
                 throw new ApplicationException("A code must be supplied for password reset.");
             }
 
-            ResetPasswordViewModel model = new ResetPasswordViewModel {Code = code};
+            ResetPasswordViewModel model = new ResetPasswordViewModel { Code = code };
             return View(model);
         }
 
