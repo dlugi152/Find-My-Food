@@ -5,6 +5,8 @@ namespace FindMyFood.Areas.Restaurant.Models
 {
     public class Client
     {
+        public Client() { }
+
         public Client(string name) {
             Name = name;
             Favorites = new HashSet<Favorites>();

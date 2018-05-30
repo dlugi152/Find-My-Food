@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FindMyFood.Areas.Restaurant.Models;
@@ -10,23 +9,26 @@ using Find_My_Food.Data;
 using Find_My_Food.Models.AccountViewModels;
 using Find_My_Food.Models;
 using Microsoft.AspNetCore.Identity;
-using Find_My_Food.Services;
-using Microsoft.Extensions.Logging;
 using Find_My_Food.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FindMyFood.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api")]
-    public class APIController : Controller
+    public class ApiController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
 
-        public APIController(ApplicationDbContext context,
+        public ApiController(ApplicationDbContext context,
+            SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager) {
             _userManager = userManager;
             _context = context;
+            _signInManager = signInManager;
         }
 
         // GET: api/API
@@ -36,6 +38,8 @@ namespace FindMyFood.Controllers
         }
 
         // GET: api/API/5
+
+        [AllowAnonymous]
         [HttpGet("Promotion/{id}")]
         public async Task<IActionResult> GetPromotionById([FromRoute] int id) {
             if (!ModelState.IsValid) {
@@ -60,6 +64,7 @@ namespace FindMyFood.Controllers
         }
 
         // GET: api/API/5
+        [AllowAnonymous]
         [HttpGet("Promotion/{lng}&{lat}&{radius}")]
         public async Task<IActionResult> GetPromotionByLocation([FromRoute] double lng, [FromRoute] double lat,
             [FromRoute] double radius) {
@@ -75,11 +80,12 @@ namespace FindMyFood.Controllers
                                        double.TryParse(r.Longitude, out n) ? double.Parse(r.Longitude) : double.Parse(r.Longitude.Replace('.', ',')),
                                        double.TryParse(r.Latitude, out n) ? double.Parse(r.Latitude) : double.Parse(r.Latitude.Replace('.', ',')),
                                        lng, lat, radius)
-                                   select new PromotionAPI(promo, r)).ToListAsync();
+                                   select new GetPromotionResponse(promo, r)).ToListAsync();
             return Ok(promotion);
         }
 
         // GET: api/API/5
+        [AllowAnonymous]
         [HttpGet("Restaurant/{id}")]
         public async Task<IActionResult> GetRestaurantById([FromRoute] int id) {
             if (!ModelState.IsValid) {
@@ -96,122 +102,101 @@ namespace FindMyFood.Controllers
         }
 
         // GET: api/API/5
-        [HttpGet("Registration/login&email&password")]
+        [AllowAnonymous]
+        [HttpGet("Registration/{login}&{email}&{password}")]
         public async Task<IActionResult> Register([FromRoute] string login, [FromRoute] string email, [FromRoute] string password) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            RegisterViewModel registerViewModel = new RegisterViewModel
-            {
+            RegisterViewModel registerViewModel = new RegisterViewModel {
                 Role = Enums.RolesEnum.Client,
                 Email = email,
                 ClientName = login,
                 Password = password
             };
-            ApplicationUser user = await AccountController.AddNewUser(registerViewModel, _userManager);
 
-            if (user == null) {
-                return NotFound();
+            await _signInManager.SignOutAsync();
+            try {
+                await AccountController.AddNewUser(registerViewModel, _userManager, _signInManager);
+                return Ok(new StandardStatusResponse(true, "woohoo, everything's fine"));
             }
-
-            return Ok(registerViewModel);
+            catch (Exception ex) {
+                return Ok(new StandardStatusResponse(false, ex.Message));
+            }
         }
 
-        /*
-        // PUT: api/API/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPromotion([FromRoute] int id, [FromBody] Promotion promotion)
-        {
-            if (!ModelState.IsValid)
-            {
+        [AllowAnonymous]
+        [HttpGet("SignIn/{email}&{password}&{rememberMe}")]
+        public async Task<IActionResult> Login([FromRoute] string email, [FromRoute] string password, [FromRoute] bool rememberMe) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-
-            if (id != promotion.Id)
-            {
-                return BadRequest();
+            LoginViewModel loginViewModel = new LoginViewModel {
+                Email = email,
+                Password = password,
+                RememberMe = rememberMe
+            };
+            await _signInManager.SignOutAsync();
+            try {
+                await AccountController.Login(loginViewModel, _signInManager);
+                ApplicationUser user = await _userManager.GetUserAsync(User);
+                var client = await _context.Client.SingleOrDefaultAsync(m => m.Id == user.ClientId);
+                return Ok(new StandardStatusResponse(true, client.Name));
             }
-
-            _context.Entry(promotion).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
+            catch (Exception ex) {
+                return Ok(new StandardStatusResponse(false, ex.Message));
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PromotionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
         }
 
-        // POST: api/API
+        [HttpGet("ChangeUserPassword/{currentPassword}&{newPassword}")]
+        public async Task<IActionResult> ChangeUserPassword([FromRoute] string currentPassword,
+            [FromRoute] string newPassword) {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            ApplicationUser currentUser = await _userManager.GetUserAsync(User);
+            var result = await _userManager.ChangePasswordAsync(currentUser, currentPassword, newPassword);
+            return Ok(result.Succeeded
+                ? new StandardStatusResponse(true, "zmieniono")
+                : new StandardStatusResponse(false, "hasła nie pasują"));
+        }
+
         [HttpPost]
-        public async Task<IActionResult> PostPromotion([FromBody] Promotion promotion)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Promotions.Add(promotion);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPromotionById", new { id = promotion.Id }, promotion);
+        [HttpGet("SignOut")]
+        public async Task<IActionResult> Logout() {
+            await _signInManager.SignOutAsync();
+            return Ok("ok");
         }
-
-        // DELETE: api/API/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePromotion([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var promotion = await _context.Promotions.SingleOrDefaultAsync(m => m.Id == id);
-            if (promotion == null)
-            {
-                return NotFound();
-            }
-
-            _context.Promotions.Remove(promotion);
-            await _context.SaveChangesAsync();
-
-            return Ok(promotion);
-        }
-
-        private bool PromotionExists(int id)
-        {
-            return _context.Promotions.Any(e => e.Id == id);
-        }*/
     }
 
-    public class PromotionAPI
+    public class GetPromotionResponse
     {
-        public string restaurantName;
-        public string longitude;
-        public string latitude;
-        public string description;
-        public string rating;
-        public string address;
-        public string tags;
-        public PromotionAPI(Promotion promo, Restaurant rest) {
-            restaurantName = rest.Name;
-            longitude = rest.Longitude;
-            latitude = rest.Latitude;
-            description = promo.Description;
-            rating = "1";
-            tags = promo.Tags;
-            address = rest.Address;
+        public string RestaurantName;
+        public string Longitude;
+        public string Latitude;
+        public string Description;
+        public string Rating;
+        public string Address;
+        public string Tags;
+        public GetPromotionResponse(Promotion promo, Restaurant rest) {
+            RestaurantName = rest.Name;
+            Longitude = rest.Longitude;
+            Latitude = rest.Latitude;
+            Description = promo.Description;
+            Rating = "1";
+            Tags = promo.Tags;
+            Address = rest.Address;
+        }
+    }
+
+    public class StandardStatusResponse
+    {
+        public bool Response;
+        public string Message;
+
+        public StandardStatusResponse(bool response, string message) {
+            Response = response;
+            Message = message;
         }
     }
 }

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Find_My_Food.Controllers
 {
@@ -46,37 +45,25 @@ namespace Find_My_Food.Controllers
             return View();
         }
 
+        public static async Task Login(LoginViewModel model, SignInManager<ApplicationUser> signInManager) {
+            var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            if (!result.Succeeded)
+                throw new Exception("Nieudana próba logowania");
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null) {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid) {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                SignInResult result =
-                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
-                                                             false);
-                if (result.Succeeded) {
-                    _logger.LogInformation("Zalogowałeś się");
-                    return RedirectToLocal(returnUrl);
-                }
-
-                //if (result.RequiresTwoFactor) {
-                //    return RedirectToAction(nameof(LoginWith2fa), new {returnUrl, model.RememberMe});
-                //}
-
-                if (result.IsLockedOut) {
-                    _logger.LogWarning("Konto jest zablokowane");
-                    return RedirectToAction(nameof(Lockout));
-                }
-
-                ModelState.AddModelError(string.Empty, "Nieudana próba logowania");
+            try {
+                if (ModelState.IsValid)
+                    await Login(model, _signInManager);
                 return View(model);
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            catch (Exception) {
+                return View();
+            }
         }
 
         /*
@@ -191,15 +178,15 @@ namespace Find_My_Food.Controllers
             return View();
         }
 
-        public static async Task<ApplicationUser> AddNewUser(RegisterViewModel model,
-        UserManager<ApplicationUser> _userManager) {
-            ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+        public static async Task AddNewUser(RegisterViewModel model,
+            UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) {
+            ApplicationUser user = new ApplicationUser {UserName = model.Email, Email = model.Email};
             ApplicationDbContext context = ApplicationDbContext.instance;
             switch (model.Role) {
                 case Enums.RolesEnum.Restaurant:
                     user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress,
-                                                     model.Longitude,
-                                                     model.Latitude);
+                        model.Longitude,
+                        model.Latitude);
                     context.Restaurant.Add(user.Restaurant);
                     break;
                 case Enums.RolesEnum.Client:
@@ -209,16 +196,11 @@ namespace Find_My_Food.Controllers
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            IdentityResult result;
-            try {
-                result = await _userManager.CreateAsync(user, model.Password);
-                context.SaveChanges();
-                if (result.Succeeded)
-                    return user;
-            }
-            catch (Exception) {
-            }
-            return null;
+
+            var result = await userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded) throw new Exception(result.Errors.ToString());
+            context.SaveChanges();
+            await signInManager.SignInAsync(user, false);
         }
 
         [HttpPost]
@@ -226,13 +208,16 @@ namespace Find_My_Food.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null) {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid) {
-                ApplicationUser user = await AddNewUser(model, _userManager);
-                _logger.LogInformation("User created a new account with password.");
-                await _signInManager.SignInAsync(user, false);
-                _logger.LogInformation("User signed in.");
-                return RedirectToLocal(returnUrl);
+            try {
+                if (ModelState.IsValid) {
+                    await AddNewUser(model, _userManager, _signInManager);
+                    return RedirectToLocal(returnUrl);
+                }
             }
+            catch (Exception) {
+                // ignored
+            }
+
             // If we got this far, something failed, redisplay form
             return View(model);
         }
