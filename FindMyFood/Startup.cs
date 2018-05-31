@@ -78,7 +78,9 @@ namespace FindMyFood
             {
                 routes.MapRoute(
                     "default",
-                    "{controller=Restaurant}/{action=Index}/{id?}");
+                    env.IsDevelopment()
+                        ? "{controller=Restaurant}/{action=Index}/{id?}"
+                        : "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapSpaFallbackRoute(
                     "spa-fallback",
