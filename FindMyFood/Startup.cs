@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using FindMyFood.Data;
 using FindMyFood.Models;
-using FindMyFood.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -39,7 +38,6 @@ namespace FindMyFood
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
@@ -77,10 +75,7 @@ namespace FindMyFood
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    "default",
-                    env.IsDevelopment()
-                        ? "{controller=Restaurant}/{action=Index}/{id?}"
-                        : "{controller=Home}/{action=Index}/{id?}");
+                    "default", "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapSpaFallbackRoute(
                     "spa-fallback",
