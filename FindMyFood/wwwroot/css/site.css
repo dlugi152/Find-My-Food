@@ -1,5 +1,5 @@
 ﻿.section-no-bottom { padding-bottom: inherit; }
-.gm-style-iw { color: black;}
-.field-validation-error text-danger {
-    color: #000000 !important;
-}
+
+.gm-style-iw { color: black; }
+
+.field-validation-error text-danger { color: #000000 !important; }

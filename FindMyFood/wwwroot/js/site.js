@@ -1,6 +1,6 @@
 ﻿function ChangeRegistrationRole() {
-    var e = document.getElementById("RoleSelect");
-    var role = e.options[e.selectedIndex].value;
+    const e = document.getElementById("RoleSelect");
+    const role = e.options[e.selectedIndex].value;
     switch (role) {
     case "1":
         $("#RightPanelRestaurant").hide(300,
@@ -32,8 +32,8 @@ function clearPreviousMarker() {
 }
 
 function initialize() {
-    var latlng = new google.maps.LatLng(52.05, 19.45); //Piątek
-    var mapOptions = {
+    const latlng = new google.maps.LatLng(52.05, 19.45); //Piątek
+    const mapOptions = {
         zoom: 5,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.HYBRID,
@@ -51,7 +51,7 @@ function GeocodeForm() {
     var fewSecsAgoAddress = document.getElementById("InputAddressId").value;
     setTimeout(
         function() {
-            var address = document.getElementById("InputAddressId").value;
+            const address = document.getElementById("InputAddressId").value;
             if (address.length < 4 || address !== fewSecsAgoAddress)
                 return;
             geocoder.geocode({ 'address': address },
@@ -59,7 +59,7 @@ function GeocodeForm() {
                     map.set("zoom", 15);
                     clearPreviousMarker();
                     if (status === google.maps.GeocoderStatus.OK) {
-                        var loc = results[0].geometry.location;
+                        const loc = results[0].geometry.location;
                         map.setCenter(loc);
                         prevMarker = new google.maps.Marker({
                             map: map,

@@ -1,18 +1,19 @@
-import { Component, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, Inject } from "@angular/core";
+import { Http } from "@angular/http";
 
 @Component({
-    moduleId: module.id + '',
-    selector: 'promotion-delete',
-    templateUrl: './promDelete.component.html'
+    moduleId: module.id + "",
+    selector: "promotion-delete",
+    templateUrl: "./promDelete.component.html"
 })
 export class PromotionDelete {
-    public forecasts: IWeatherForecast[];
+    forecasts: IWeatherForecast[];
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-        http.get(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result.json() as IWeatherForecast[];
-        }, error => console.error(error));
+    constructor(http: Http, @Inject("BASE_URL") baseUrl: string) {
+        http.get(baseUrl + "api/SampleData/WeatherForecasts").subscribe(result => {
+                this.forecasts = result.json() as IWeatherForecast[];
+            },
+            error => console.error(error));
     }
 }
 

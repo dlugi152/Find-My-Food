@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FindMyFood.Areas.Restaurant.Models
+namespace FindMyFood.Models
 {
     public class Promotion
     {

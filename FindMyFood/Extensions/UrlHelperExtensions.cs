@@ -1,25 +1,26 @@
-using Find_My_Food.Controllers;
+using FindMyFood.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Microsoft.AspNetCore.Mvc
+namespace FindMyFood.Extensions
 {
     public static class UrlHelperExtensions
     {
         public static string
             EmailConfirmationLink(this IUrlHelper urlHelper, string userId, string code, string scheme) {
             return urlHelper.Action(
-                                    nameof(AccountController.ConfirmEmail),
-                                    "Account",
-                                    new {userId, code},
-                                    scheme);
+                nameof(AccountController.ConfirmEmail),
+                "Account",
+                new {userId, code},
+                scheme);
         }
 
         public static string ResetPasswordCallbackLink(this IUrlHelper urlHelper, string userId, string code,
-                                                       string scheme) {
+            string scheme) {
             return urlHelper.Action(
-                                    nameof(AccountController.ResetPassword),
-                                    "Account",
-                                    new {userId, code},
-                                    scheme);
+                nameof(AccountController.ResetPassword),
+                "Account",
+                new {userId, code},
+                scheme);
         }
     }
 }

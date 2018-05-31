@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Find_My_Food.Services
+namespace FindMyFood.Services
 {
     // This class is used by the application to send email for account confirmation and password reset.
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713

@@ -1,6 +1,6 @@
-﻿using Find_My_Food.Data;
-using Find_My_Food.Models;
-using Find_My_Food.Services;
+﻿using FindMyFood.Data;
+using FindMyFood.Models;
+using FindMyFood.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Find_My_Food
+namespace FindMyFood
 {
     public class Startup
     {
@@ -69,8 +69,8 @@ namespace Find_My_Food
                     "{controller=Restaurant}/{action=Index}/{id?}");
 
                 routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                   defaults: new { controller = "Restaurant", action = "Index" });
+                    "spa-fallback",
+                    new {controller = "Restaurant", action = "Index"});
             });
         }
     }

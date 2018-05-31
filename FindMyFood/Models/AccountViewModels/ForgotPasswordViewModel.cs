@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Find_My_Food.Models.AccountViewModels
+namespace FindMyFood.Models.AccountViewModels
 {
     public class ForgotPasswordViewModel
     {

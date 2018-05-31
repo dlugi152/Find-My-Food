@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Find_My_Food.Services
+namespace FindMyFood.Services
 {
     public interface IEmailSender
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Find_My_Food.Models
+namespace FindMyFood.Models
 {
     public class Enums
     {
@@ -8,7 +8,6 @@ namespace Find_My_Food.Models
         {
             [Display(Name = "Właściciel restauracji")]
             Restaurant,
-
             [Display(Name = "Klient")]
             Client
         }

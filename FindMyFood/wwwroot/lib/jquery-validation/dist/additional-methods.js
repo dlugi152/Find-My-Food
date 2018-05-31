@@ -37,8 +37,8 @@
 
         $.validator.addMethod("rangeWords",
             function(value, element, params) {
-                var valueStripped = stripHtml(value),
-                    regex = /\b\w+\b/g;
+                const valueStripped = stripHtml(value);
+                const regex = /\b\w+\b/g;
                 return this.optional(element) ||
                     valueStripped.match(regex).length >= params[0] && valueStripped.match(regex).length <= params[1];
             },
@@ -50,9 +50,9 @@
     $.validator.addMethod("accept",
         function(value, element, param) {
             // Split mime on commas in case we have multiple types we can accept
-            var typeParam = typeof param === "string" ? param.replace(/\s/g, "").replace(/,/g, "|") : "image/*",
-                optionalValue = this.optional(element),
-                i,
+            var typeParam = typeof param === "string" ? param.replace(/\s/g, "").replace(/,/g, "|") : "image/*";
+            const optionalValue = this.optional(element);
+            var i,
                 file;
 
             // Element is optional
@@ -70,7 +70,7 @@
                         file = element.files[i];
 
                         // Grab the mimetype from the loaded file, verify it matches
-                        if (!file.type.match(new RegExp("\\.?(" + typeParam + ")$", "i"))) {
+                        if (!file.type.match(new RegExp(`\\.?(${typeParam})$`, "i"))) {
                             return false;
                         }
                     }
@@ -104,10 +104,11 @@
                 return false;
             }
             // now '11 check'
-            var account = value.replace(/ /g, ""), // remove spaces
-                sum = 0,
-                len = account.length,
-                pos,
+            const account = value.replace(/ /g, "");
+            var // remove spaces
+                sum = 0;
+            const len = account.length;
+            var pos,
                 factor,
                 digit;
             for (pos = 0; pos < len; pos++) {
@@ -155,8 +156,8 @@
         function(value) {
             "use strict";
 
-            var num = [],
-                controlDigit,
+            const num = [];
+            var controlDigit,
                 sum,
                 i,
                 count,
@@ -384,16 +385,15 @@
  */
     $.validator.addMethod("currency",
         function(value, element, param) {
-            var isParamString = typeof param === "string",
-                symbol = isParamString ? param : param[0],
-                soft = isParamString ? true : param[1],
-                regex;
+            const isParamString = typeof param === "string";
+            var symbol = isParamString ? param : param[0];
+            const soft = isParamString ? true : param[1];
+            var regex;
 
             symbol = symbol.replace(/,/g, "");
             symbol = soft ? symbol + "]" : symbol + "]?";
-            regex = "^[" +
-                symbol +
-                "([1-9]{1}[0-9]{0,2}(\\,[0-9]{3})*(\\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\\.[0-9]{0,2})?|0(\\.[0-9]{0,2})?|(\\.[0-9]{1,2})?)$";
+            regex = `^[${symbol
+                }([1-9]{1}[0-9]{0,2}(\\,[0-9]{3})*(\\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\\.[0-9]{0,2})?|0(\\.[0-9]{0,2})?|(\\.[0-9]{1,2})?)$`;
             regex = new RegExp(regex);
             return this.optional(element) || regex.test(value);
 
@@ -429,9 +429,9 @@
  */
     $.validator.addMethod("dateITA",
         function(value, element) {
-            var check = false,
-                re = /^\d{1,2}\/\d{1,2}\/\d{4}$/,
-                adata,
+            var check = false;
+            const re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+            var adata,
                 gg,
                 mm,
                 aaaa,
@@ -467,7 +467,7 @@
     $.validator.addMethod("extension",
         function(value, element, param) {
             param = typeof param === "string" ? param.replace(/,/g, "|") : "png|jpe?g|gif";
-            return this.optional(element) || value.match(new RegExp("\\.(" + param + ")$", "i"));
+            return this.optional(element) || value.match(new RegExp(`\\.(${param})$`, "i"));
         },
         $.validator.format("Please enter a value with a valid extension."));
 
@@ -492,8 +492,8 @@
             }
 
             // remove spaces and to upper case
-            var iban = value.replace(/ /g, "").toUpperCase(),
-                ibancheckdigits = "",
+            const iban = value.replace(/ /g, "").toUpperCase();
+            var ibancheckdigits = "",
                 leadingZeroes = true,
                 cRest = "",
                 cOperator = "",
@@ -585,7 +585,7 @@
             // Strict checking should return FALSE for unknown
             // countries.
             if (typeof bbanpattern !== "undefined") {
-                ibanregexp = new RegExp("^[A-Z]{2}\\d{2}" + bbanpattern + "$", "");
+                ibanregexp = new RegExp(`^[A-Z]{2}\\d{2}${bbanpattern}$`, "");
                 if (!(ibanregexp.test(iban))) {
                     return false; // invalid country specific format
                 }
@@ -606,7 +606,7 @@
             // calculate the result of: ibancheckdigits % 97
             for (p = 0; p < ibancheckdigits.length; p++) {
                 cChar = ibancheckdigits.charAt(p);
-                cOperator = "" + cRest + "" + cChar;
+                cOperator = `${cRest}${cChar}`;
                 cRest = cOperator % 97;
             }
             return cRest === 1;
@@ -769,7 +769,7 @@
                 return true;
             }
             if (typeof param === "string") {
-                param = new RegExp("^(?:" + param + ")$");
+                param = new RegExp(`^(?:${param})$`);
             }
             return param.test(value);
         },
@@ -920,14 +920,14 @@
  */
     $.validator.addMethod("require_from_group",
         function(value, element, options) {
-            var $fields = $(options[1], element.form),
-                $fieldsFirst = $fields.eq(0),
-                validator =
-                    $fieldsFirst.data("valid_req_grp") ? $fieldsFirst.data("valid_req_grp") : $.extend({}, this),
-                isValid = $fields.filter(function() {
-                        return validator.elementValue(this);
-                    }).length >=
-                    options[0];
+            const $fields = $(options[1], element.form);
+            const $fieldsFirst = $fields.eq(0);
+            var validator =
+                $fieldsFirst.data("valid_req_grp") ? $fieldsFirst.data("valid_req_grp") : $.extend({}, this);
+            const isValid = $fields.filter(function() {
+                    return validator.elementValue(this);
+                }).length >=
+                options[0];
 
             // Store the cloned validator for future validation
             $fieldsFirst.data("valid_req_grp", validator);
@@ -967,13 +967,13 @@
  */
     $.validator.addMethod("skip_or_fill_minimum",
         function(value, element, options) {
-            var $fields = $(options[1], element.form),
-                $fieldsFirst = $fields.eq(0),
-                validator = $fieldsFirst.data("valid_skip") ? $fieldsFirst.data("valid_skip") : $.extend({}, this),
-                numberFilled = $fields.filter(function() {
-                    return validator.elementValue(this);
-                }).length,
-                isValid = numberFilled === 0 || numberFilled >= options[0];
+            const $fields = $(options[1], element.form);
+            const $fieldsFirst = $fields.eq(0);
+            var validator = $fieldsFirst.data("valid_skip") ? $fieldsFirst.data("valid_skip") : $.extend({}, this);
+            const numberFilled = $fields.filter(function() {
+                return validator.elementValue(this);
+            }).length;
+            const isValid = numberFilled === 0 || numberFilled >= options[0];
 
             // Store the cloned validator for future validation
             $fieldsFirst.data("valid_skip", validator);
@@ -1029,17 +1029,17 @@
 
     $.validator.addMethod("stateUS",
         function(value, element, options) {
-            var isDefault = typeof options === "undefined",
-                caseSensitive = (isDefault || typeof options.caseSensitive === "undefined")
-                    ? false
-                    : options.caseSensitive,
-                includeTerritories = (isDefault || typeof options.includeTerritories === "undefined")
-                    ? false
-                    : options.includeTerritories,
-                includeMilitary = (isDefault || typeof options.includeMilitary === "undefined")
-                    ? false
-                    : options.includeMilitary,
-                regex;
+            const isDefault = typeof options === "undefined";
+            const caseSensitive = (isDefault || typeof options.caseSensitive === "undefined")
+                ? false
+                : options.caseSensitive;
+            const includeTerritories = (isDefault || typeof options.includeTerritories === "undefined")
+                ? false
+                : options.includeTerritories;
+            const includeMilitary = (isDefault || typeof options.includeMilitary === "undefined")
+                ? false
+                : options.includeMilitary;
+            var regex;
 
             if (!includeTerritories && !includeMilitary) {
                 regex =
@@ -1106,13 +1106,13 @@
                 return false;
             }
 
-            var LL = [
-                    "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "S", "T", "U", "V", "W",
-                    "X", "Y", "Z"
-                ],
-                VL = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 7, 9, 2, 3, 4, 5, 6, 7, 8, 9],
-                FL = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2],
-                rs = 0,
+            const LL = [
+                "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "S", "T", "U", "V", "W",
+                "X", "Y", "Z"
+            ];
+            const VL = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 7, 9, 2, 3, 4, 5, 6, 7, 8, 9];
+            const FL = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2];
+            var rs = 0,
                 i,
                 n,
                 d,

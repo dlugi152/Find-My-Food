@@ -208,11 +208,11 @@
         {
             // http://jqueryvalidation.org/blank-selector/
             blank: function(a) {
-                return !$.trim("" + $(a).val());
+                return !$.trim(`${$(a).val()}`);
             },
             // http://jqueryvalidation.org/filled-selector/
             filled: function(a) {
-                return !!$.trim("" + $(a).val());
+                return !!$.trim(`${$(a).val()}`);
             },
             // http://jqueryvalidation.org/unchecked-selector/
             unchecked: function(a) {
@@ -231,7 +231,7 @@
     $.validator.format = function(source, params) {
         if (arguments.length === 1) {
             return function() {
-                var args = $.makeArray(arguments);
+                const args = $.makeArray(arguments);
                 args.unshift(source);
                 return $.validator.format.apply(this, args);
             };
@@ -244,7 +244,7 @@
         }
         $.each(params,
             function(i, n) {
-                source = source.replace(new RegExp("\\{" + i + "\\}", "g"),
+                source = source.replace(new RegExp(`\\{${i}\\}`, "g"),
                     function() {
                         return n;
                     });
@@ -302,7 +302,7 @@
                     // Insert      => 45
                     // Num lock    => 144
                     // AltGr key   => 225
-                    var excludedKeys = [
+                    const excludedKeys = [
                         16, 17, 18, 20, 35, 36, 37,
                         38, 39, 40, 45, 144, 225
                     ];
@@ -397,9 +397,9 @@
                         });
 
                     function delegate(event) {
-                        var validator = $.data(this.form, "validator"),
-                            eventType = "on" + event.type.replace(/^validate/, ""),
-                            settings = validator.settings;
+                        const validator = $.data(this.form, "validator");
+                        const eventType = `on${event.type.replace(/^validate/, "")}`;
+                        const settings = validator.settings;
                         if (settings[eventType] && !$(this).is(settings.ignore)) {
                             settings[eventType].call(validator, this, event);
                         }
@@ -448,9 +448,9 @@
 
                 // http://jqueryvalidation.org/Validator.element/
                 element: function(element) {
-                    var cleanElement = this.clean(element),
-                        checkElement = this.validationTargetFor(cleanElement),
-                        result = true;
+                    const cleanElement = this.clean(element);
+                    const checkElement = this.validationTargetFor(cleanElement);
+                    var result = true;
 
                     this.lastElement = checkElement;
 
@@ -484,7 +484,7 @@
                         // add items to error list and map
                         $.extend(this.errorMap, errors);
                         this.errorList = [];
-                        for (var name in errors) {
+                        for (let name in errors) {
                             this.errorList.push({
                                 message: errors[name],
                                 element: this.findByName(name)[0]
@@ -512,10 +512,10 @@
                     this.lastElement = null;
                     this.prepareForm();
                     this.hideErrors();
-                    var i,
-                        elements = this.elements()
-                            .removeData("previousValue")
-                            .removeAttr("aria-invalid");
+                    var i;
+                    const elements = this.elements()
+                        .removeData("previousValue")
+                        .removeAttr("aria-invalid");
 
                     if (this.settings.unhighlight) {
                         for (i = 0; elements[i]; i++) {
@@ -614,7 +614,7 @@
                 },
 
                 errors: function() {
-                    var errorClass = this.settings.errorClass.split(" ").join(".");
+                    const errorClass = this.settings.errorClass.split(" ").join(".");
                     return $(this.settings.errorElement + "." + errorClass, this.errorContext);
                 },
 
@@ -638,9 +638,9 @@
                 },
 
                 elementValue: function(element) {
-                    var val,
-                        $element = $(element),
-                        type = element.type;
+                    var val;
+                    const $element = $(element);
+                    const type = element.type;
 
                     if (type === "radio" || type === "checkbox") {
                         return this.findByName(element.name).filter(":checked").val();
@@ -658,14 +658,14 @@
                 check: function(element) {
                     element = this.validationTargetFor(this.clean(element));
 
-                    var rules = $(element).rules(),
-                        rulesCount = $.map(rules,
-                            function(n, i) {
-                                return i;
-                            }).length,
-                        dependencyMismatch = false,
-                        val = this.elementValue(element),
-                        result,
+                    const rules = $(element).rules();
+                    const rulesCount = $.map(rules,
+                        function(n, i) {
+                            return i;
+                        }).length;
+                    var dependencyMismatch = false;
+                    const val = this.elementValue(element);
+                    var result,
                         method,
                         rule;
 
@@ -694,19 +694,14 @@
                             }
                         } catch (e) {
                             if (this.settings.debug && window.console) {
-                                console.log("Exception occurred when checking element " +
-                                    element.id +
-                                    ", check the '" +
-                                    rule.method +
-                                    "' method.",
+                                console.log(
+                                    `Exception occurred when checking element ${element.id}, check the '${rule.method
+                                    }' method.`,
                                     e);
                             }
                             if (e instanceof TypeError) {
-                                e.message += ".  Exception occurred when checking element " +
-                                    element.id +
-                                    ", check the '" +
-                                    rule.method +
-                                    "' method.";
+                                e.message += `.  Exception occurred when checking element ${element.id}, check the '${
+                                    rule.method}' method.`;
                             }
 
                             throw e;
@@ -725,21 +720,20 @@
                 // specified in the element's HTML5 data attribute
                 // return the generic message if present and no method specific message is present
                 customDataMessage: function(element, method) {
-                    return $(element).data("msg" +
-                            method.charAt(0).toUpperCase() +
-                            method.substring(1).toLowerCase()) ||
+                    return $(element)
+                        .data(`msg${method.charAt(0).toUpperCase()}${method.substring(1).toLowerCase()}`) ||
                         $(element).data("msg");
                 },
 
                 // return the custom message for the given element name and validation method
                 customMessage: function(name, method) {
-                    var m = this.settings.messages[name];
+                    const m = this.settings.messages[name];
                     return m && (m.constructor === String ? m : m[method]);
                 },
 
                 // return the first defined argument, allowing empty strings
                 findDefined: function() {
-                    for (var i = 0; i < arguments.length; i++) {
+                    for (let i = 0; i < arguments.length; i++) {
                         if (arguments[i] !== undefined) {
                             return arguments[i];
                         }
@@ -754,13 +748,13 @@
                         // title is never undefined, so handle empty string as undefined
                         !this.settings.ignoreTitle && element.title || undefined,
                         $.validator.messages[method],
-                        "<strong>Warning: No message defined for " + element.name + "</strong>"
+                        `<strong>Warning: No message defined for ${element.name}</strong>`
                     );
                 },
 
                 formatAndAdd: function(element, rule) {
-                    var message = this.defaultMessage(element, rule.method),
-                        theregex = /\$?\{(\d+)\}/g;
+                    var message = this.defaultMessage(element, rule.method);
+                    const theregex = /\$?\{(\d+)\}/g;
                     if (typeof message === "function") {
                         message = message.call(this, rule.parameters, element);
                     } else if (theregex.test(message)) {
@@ -840,7 +834,7 @@
                         error.html(message);
                     } else {
                         // create error element
-                        error = $("<" + this.settings.errorElement + ">")
+                        error = $(`<${this.settings.errorElement}>`)
                             .attr("id", elementID + "-error")
                             .addClass(this.settings.errorClass)
                             .html(message || "");
@@ -850,7 +844,7 @@
                         if (this.settings.wrapper) {
                             // make sure the element is visible, even in IE
                             // actually showing the wrapped element is handled elsewhere
-                            place = error.hide().show().wrap("<" + this.settings.wrapper + "/>").parent();
+                            place = error.hide().show().wrap(`<${this.settings.wrapper}/>`).parent();
                         }
                         if (this.labelContainer.length) {
                             this.labelContainer.append(place);
@@ -864,7 +858,7 @@
                         if (error.is("label")) {
                             // If the error is a label, then associate using 'for'
                             error.attr("for", elementID);
-                        } else if (error.parents("label[for='" + elementID + "']").length === 0) {
+                        } else if (error.parents(`label[for='${elementID}']`).length === 0) {
                             // If the element is not a child of an associated label, then it's necessary
                             // to explicitly apply aria-describedby
 
@@ -872,9 +866,9 @@
                             // Respect existing non-error aria-describedby
                             if (!describedBy) {
                                 describedBy = errorID;
-                            } else if (!describedBy.match(new RegExp("\\b" + errorID + "\\b"))) {
+                            } else if (!describedBy.match(new RegExp(`\\b${errorID}\\b`))) {
                                 // Add to end of list if not already present
-                                describedBy += " " + errorID;
+                                describedBy += ` ${errorID}`;
                             }
                             $(element).attr("aria-describedby", describedBy);
 
@@ -884,7 +878,7 @@
                                 $.each(this.groups,
                                     function(name, testgroup) {
                                         if (testgroup === group) {
-                                            $("[name='" + name + "']", this.currentForm)
+                                            $(`[name='${name}']`, this.currentForm)
                                                 .attr("aria-describedby", error.attr("id"));
                                         }
                                     });
@@ -903,9 +897,9 @@
                 },
 
                 errorsFor: function(element) {
-                    var name = this.idOrName(element),
-                        describer = $(element).attr("aria-describedby"),
-                        selector = "label[for='" + name + "'], label[for='" + name + "'] *";
+                    const name = this.idOrName(element);
+                    const describer = $(element).attr("aria-describedby");
+                    var selector = `label[for='${name}'], label[for='${name}'] *`;
 
                     // aria-describedby should directly reference the error element
                     if (describer) {
@@ -937,7 +931,7 @@
                 },
 
                 findByName: function(name) {
-                    return $(this.currentForm).find("[name='" + name + "']");
+                    return $(this.currentForm).find(`[name='${name}']`);
                 },
 
                 getLength: function(value, element) {
@@ -969,7 +963,7 @@
                 },
 
                 optional: function(element) {
-                    var val = this.elementValue(element);
+                    const val = this.elementValue(element);
                     return !$.validator.methods.required.call(this, val, element) && "dependency-mismatch";
                 },
 
@@ -1038,8 +1032,8 @@
             },
 
             classRules: function(element) {
-                var rules = {},
-                    classes = $(element).attr("class");
+                var rules = {};
+                const classes = $(element).attr("class");
 
                 if (classes) {
                     $.each(classes.split(" "),
@@ -1076,10 +1070,10 @@
             },
 
             attributeRules: function(element) {
-                var rules = {},
-                    $element = $(element),
-                    type = element.getAttribute("type"),
-                    method,
+                const rules = {};
+                const $element = $(element);
+                const type = element.getAttribute("type");
+                var method,
                     value;
 
                 for (method in $.validator.methods) {
@@ -1112,22 +1106,22 @@
             },
 
             dataRules: function(element) {
-                var rules = {},
-                    $element = $(element),
-                    type = element.getAttribute("type"),
-                    method,
+                const rules = {};
+                const $element = $(element);
+                const type = element.getAttribute("type");
+                var method,
                     value;
 
                 for (method in $.validator.methods) {
-                    value = $element.data("rule" + method.charAt(0).toUpperCase() + method.substring(1).toLowerCase());
+                    value = $element.data(`rule${method.charAt(0).toUpperCase()}${method.substring(1).toLowerCase()}`);
                     this.normalizeAttributeRule(rules, type, method, value);
                 }
                 return rules;
             },
 
             staticRules: function(element) {
-                var rules = {},
-                    validator = $.data(element.form, "validator");
+                var rules = {};
+                const validator = $.data(element.form, "validator");
 
                 if (validator.settings.rules) {
                     rules = $.validator.normalizeRule(validator.settings.rules[element.name]) || {};
@@ -1145,7 +1139,7 @@
                             return;
                         }
                         if (val.param || val.depends) {
-                            var keepRule = true;
+                            let keepRule = true;
                             switch (typeof val.depends) {
                             case "string":
                                 keepRule = !!$(val.depends, element.form).length;
@@ -1237,7 +1231,7 @@
                     }
                     if (element.nodeName.toLowerCase() === "select") {
                         // could be an array for select-multiple or a string, both are fine this way
-                        var val = $(element).val();
+                        const val = $(element).val();
                         return val && val.length > 0;
                     }
                     if (this.checkable(element)) {
@@ -1331,19 +1325,19 @@
 
                 // http://jqueryvalidation.org/minlength-method/
                 minlength: function(value, element, param) {
-                    var length = $.isArray(value) ? value.length : this.getLength(value, element);
+                    const length = $.isArray(value) ? value.length : this.getLength(value, element);
                     return this.optional(element) || length >= param;
                 },
 
                 // http://jqueryvalidation.org/maxlength-method/
                 maxlength: function(value, element, param) {
-                    var length = $.isArray(value) ? value.length : this.getLength(value, element);
+                    const length = $.isArray(value) ? value.length : this.getLength(value, element);
                     return this.optional(element) || length <= param;
                 },
 
                 // http://jqueryvalidation.org/rangelength-method/
                 rangelength: function(value, element, param) {
-                    var length = $.isArray(value) ? value.length : this.getLength(value, element);
+                    const length = $.isArray(value) ? value.length : this.getLength(value, element);
                     return this.optional(element) || (length >= param[0] && length <= param[1]);
                 },
 
@@ -1366,7 +1360,7 @@
                 equalTo: function(value, element, param) {
                     // bind to the blur event of the target in order to revalidate whenever the target field is updated
                     // TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
-                    var target = $(param);
+                    const target = $(param);
                     if (this.settings.onfocusout) {
                         target.off(".validate-equalTo").on("blur.validate-equalTo",
                             function() {
@@ -1406,13 +1400,13 @@
                     $.ajax($.extend(true,
                         {
                             mode: "abort",
-                            port: "validate" + element.name,
+                            port: `validate${element.name}`,
                             dataType: "json",
                             data: data,
                             context: validator.currentForm,
                             success: function(response) {
-                                var valid = response === true || response === "true",
-                                    errors,
+                                const valid = response === true || response === "true";
+                                var errors,
                                     message,
                                     submitted;
 
@@ -1452,7 +1446,7 @@
 // Use a prefilter if available (1.5+)
     if ($.ajaxPrefilter) {
         $.ajaxPrefilter(function(settings, _, xhr) {
-            var port = settings.port;
+            const port = settings.port;
             if (settings.mode === "abort") {
                 if (pendingRequests[port]) {
                     pendingRequests[port].abort();
@@ -1464,8 +1458,8 @@
         // Proxy ajax
         ajax = $.ajax;
         $.ajax = function(settings) {
-            var mode = ("mode" in settings ? settings : $.ajaxSettings).mode,
-                port = ("port" in settings ? settings : $.ajaxSettings).port;
+            const mode = ("mode" in settings ? settings : $.ajaxSettings).mode;
+            const port = ("port" in settings ? settings : $.ajaxSettings).port;
             if (mode === "abort") {
                 if (pendingRequests[port]) {
                     pendingRequests[port].abort();

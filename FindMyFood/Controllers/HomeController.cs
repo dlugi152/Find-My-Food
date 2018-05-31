@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using Find_My_Food.Models;
+using FindMyFood.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Find_My_Food.Controllers
+namespace FindMyFood.Controllers
 {
     public class HomeController : Controller
     {

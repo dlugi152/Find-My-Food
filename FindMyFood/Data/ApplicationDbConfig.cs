@@ -1,11 +1,9 @@
-﻿using FindMyFood.Areas.Restaurant.Models;
-using FindMyFood.Models;
-using Find_My_Food.Models;
+﻿using FindMyFood.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FindMyFood.Areas.Restaurant.Data
+namespace FindMyFood.Data
 {
     internal class AppUserConfig : IEntityTypeConfiguration<ApplicationUser>
     {
@@ -20,23 +18,23 @@ namespace FindMyFood.Areas.Restaurant.Data
             builder.HasIndex(e => e.ClientId);
             builder.HasIndex(e => e.RestaurantId);
             builder.HasOne(d => d.Restaurant)
-                   .WithOne(user => user.ApplicationUser)
-                   .OnDelete(DeleteBehavior.Cascade).IsRequired(false);
+                .WithOne(user => user.ApplicationUser)
+                .OnDelete(DeleteBehavior.Cascade).IsRequired(false);
             builder.HasOne(d => d.Client)
-                   .WithOne(user => user.ApplicationUser)
-                   .OnDelete(DeleteBehavior.Cascade).IsRequired(false);
+                .WithOne(user => user.ApplicationUser)
+                .OnDelete(DeleteBehavior.Cascade).IsRequired(false);
             builder.HasIndex(e => new {e.Email})
-                   .HasName("EmailUnique")
-                   .IsUnique();
+                .HasName("EmailUnique")
+                .IsUnique();
             builder.HasIndex(e => new {e.NormalizedEmail})
-                   .HasName("NormEmailUnique")
-                   .IsUnique();
+                .HasName("NormEmailUnique")
+                .IsUnique();
         }
     }
 
-    internal class RestaurantConfig : IEntityTypeConfiguration<Models.Restaurant>
+    internal class RestaurantConfig : IEntityTypeConfiguration<Restaurant>
     {
-        public void Configure(EntityTypeBuilder<Models.Restaurant> builder) {
+        public void Configure(EntityTypeBuilder<Restaurant> builder) {
             builder.ToTable("Restaurants");
             builder.Property(user => user.Name).IsRequired();
             builder.Property(user => user.Address).IsRequired();
@@ -105,44 +103,32 @@ namespace FindMyFood.Areas.Restaurant.Data
             builder.Property(promotion => promotion.Tags).IsRequired();
             builder.HasIndex(e => e.RestaurantId);
             builder.HasOne(d => d.Restaurant)
-                   .WithMany(p => p.Promotions).IsRequired()
-                   .HasForeignKey(d => d.RestaurantId);
+                .WithMany(p => p.Promotions).IsRequired()
+                .HasForeignKey(d => d.RestaurantId);
         }
     }
 
     internal class RatingConfig : IEntityTypeConfiguration<Rating>
     {
-        public void Configure(EntityTypeBuilder<Rating> builder)
-        {
-            /*builder.ToTable("Promotions");
-            builder.Property(promotion => promotion.Description).IsRequired();
-            builder.Property(promotion => promotion.Tags).IsRequired();
-            builder.HasIndex(e => e.RestaurantId);
-            builder.HasOne(d => d.Restaurant)
-                .WithMany(p => p.Promotions).IsRequired()
-                .HasForeignKey(d => d.RestaurantId);*/
-        }
-    }
+        public void Configure(EntityTypeBuilder<Rating> builder) {
+            builder.ToTable("Ratings");
+            builder.Property(rating => rating.Rate).IsRequired();
 
-    internal class FavoritesConfig : IEntityTypeConfiguration<Favorites>
-    {
-        public void Configure(EntityTypeBuilder<Favorites> builder) {
-            builder.ToTable("Favorites");
             builder.HasIndex(e => e.ClientId);
 
             builder.HasIndex(e => e.RestaurantId);
 
             builder.HasIndex(e => new {e.ClientId, e.RestaurantId})
-                   .HasName("FavUnique")
-                   .IsUnique();
+                .HasName("RatUnique")
+                .IsUnique();
 
             builder.HasOne(d => d.Client)
-                   .WithMany(p => p.Favorites).IsRequired()
-                   .HasForeignKey(d => d.ClientId);
+                .WithMany(p => p.Ratings).IsRequired()
+                .HasForeignKey(d => d.ClientId);
 
             builder.HasOne(d => d.Restaurant)
-                   .WithMany(p => p.Favorites).IsRequired()
-                   .HasForeignKey(d => d.RestaurantId);
+                .WithMany(p => p.Ratings).IsRequired()
+                .HasForeignKey(d => d.RestaurantId);
         }
     }
 }

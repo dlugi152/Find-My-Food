@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace Find_My_Food.Models.ManageViewModels
+namespace FindMyFood.Models.ManageViewModels
 {
     public class ExternalLoginsViewModel
     {

@@ -1,6 +1,8 @@
-﻿@inject SignInManager<ApplicationUser> SignInManager
+﻿@using FindMyFood.Models
+@using FindMyFood.Views.Manage
+@inject SignInManager<ApplicationUser> SignInManager
 @{
-    bool hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
 
 <ul class="nav nav-pills nav-stacked">

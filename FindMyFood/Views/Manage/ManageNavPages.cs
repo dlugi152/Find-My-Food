@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace Find_My_Food.Views.Manage
+namespace FindMyFood.Views.Manage
 {
     public static class ManageNavPages
     {
@@ -33,7 +33,7 @@ namespace Find_My_Food.Views.Manage
         }
 
         public static string PageNavClass(ViewContext viewContext, string page) {
-            string activePage = viewContext.ViewData["ActivePage"] as string;
+            var activePage = viewContext.ViewData["ActivePage"] as string;
             return string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase) ? "active" : null;
         }
 

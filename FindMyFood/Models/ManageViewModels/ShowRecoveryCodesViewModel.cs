@@ -1,4 +1,4 @@
-﻿namespace Find_My_Food.Models.ManageViewModels
+﻿namespace FindMyFood.Models.ManageViewModels
 {
     public class ShowRecoveryCodesViewModel
     {

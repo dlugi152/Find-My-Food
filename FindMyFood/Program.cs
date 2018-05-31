@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Find_My_Food
+namespace FindMyFood
 {
     public class Program
     {

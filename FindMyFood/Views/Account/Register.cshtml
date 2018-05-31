@@ -1,4 +1,5 @@
-﻿@model RegisterViewModel
+﻿@using FindMyFood.Models
+@model FindMyFood.Models.AccountViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "Rejestracja";
 }
@@ -10,25 +11,26 @@
                 <section class="section-no-bottom">
                     <h3>Stwórz nowe konto</h3>
                 </section>
-                <hr class="invisible" />
+                <hr class="invisible"/>
                 <div class="form-group">
                     <label asp-for="Role"></label>
                     <select id="RoleSelect" class="form-control" asp-for="Role" asp-items="Html.GetEnumSelectList<Enums.RolesEnum>()"
-                            onchange="ChangeRegistrationRole()"></select>
+                            onchange="ChangeRegistrationRole()">
+                    </select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control" />
+                    <input asp-for="Email" class="form-control"/>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Password"></label>
-                    <input asp-for="Password" class="form-control" />
+                    <input asp-for="Password" class="form-control"/>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ConfirmPassword"></label>
-                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <input asp-for="ConfirmPassword" class="form-control"/>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div asp-validation-summary="All" class="text-danger"></div>

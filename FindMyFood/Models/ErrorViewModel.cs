@@ -1,4 +1,4 @@
-namespace Find_My_Food.Models
+namespace FindMyFood.Models
 {
     public class ErrorViewModel
     {

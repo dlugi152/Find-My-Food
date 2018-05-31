@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-declare var $:any;
+declare var $: any;
 
 export interface IRouteInfo {
     path: string;
@@ -10,10 +10,10 @@ export interface IRouteInfo {
 }
 
 export const ROUTES: IRouteInfo[] = [
-    { path: "home", title: "Przegląd",  icon: "ti-panel", class: "" },
-    { path: "promotion-add", title: "Dodaj promocje",  icon:"ti-gift", class: "" },
+    { path: "home", title: "Przegląd", icon: "ti-panel", class: "" },
+    { path: "promotion-add", title: "Dodaj promocje", icon: "ti-gift", class: "" },
     { path: "promotion-delete", title: "Usuń promocje", icon: "ti-trash", class: "" },
-    { path: 'dashboard', title: 'Informacje', icon: 'ti-home', class: '' },
+    { path: "dashboard", title: "Informacje", icon: "ti-home", class: "" },
     /*{ path: 'typography', title: 'Typography',  icon:'ti-text', class: '' },
     { path: 'icons', title: 'Icons',  icon:'ti-pencil-alt2', class: '' },
     { path: 'maps', title: 'Maps',  icon:'ti-map', class: '' },
@@ -22,16 +22,17 @@ export const ROUTES: IRouteInfo[] = [
 ];
 
 @Component({
-    moduleId: module.id + '',
+    moduleId: module.id + "",
     selector: "sidebar-cmp",
     templateUrl: "sidebar.component.html",
 })
-
 export class SidebarComponent implements OnInit {
-    public menuItems: any[];
+    menuItems: any[];
+
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
+
     isNotMobileMenu() {
         return false;
         /*if($(window).width() > 991){

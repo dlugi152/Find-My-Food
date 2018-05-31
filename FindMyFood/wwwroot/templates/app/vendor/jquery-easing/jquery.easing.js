@@ -8,12 +8,12 @@
 
 (function(factory) {
     if (typeof define === "function" && define.amd) {
-        define(['jquery'],
+        define(["jquery"],
             function($) {
                 return factory($);
             });
     } else if (typeof module === "object" && typeof module.exports === "object") {
-        exports = factory(require('jquery'));
+        exports = factory(require("jquery"));
     } else {
         factory(jQuery);
     }
@@ -35,8 +35,8 @@
 
 // x is the fraction of animation progress, in the range 0..1
     function bounceOut(x) {
-        var n1 = 7.5625,
-            d1 = 2.75;
+        const n1 = 7.5625;
+        const d1 = 2.75;
         if (x < 1 / d1) {
             return n1 * x * x;
         } else if (x < 2 / d1) {
@@ -50,7 +50,7 @@
 
     $.extend($.easing,
         {
-            def: 'easeOutQuad',
+            def: "easeOutQuad",
             swing: function(x) {
                 return $.easing[$.easing.def](x);
             },

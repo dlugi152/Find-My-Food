@@ -1,27 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FindMyFood.Migrations
 {
     public partial class create : Migration
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 name: "AppRoles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppRoles", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_AppRoles", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Clients",
@@ -31,10 +27,7 @@ namespace FindMyFood.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Name = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Clients", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Restaurants",
@@ -42,57 +35,55 @@ namespace FindMyFood.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Name = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: false),
-                    Latitude = table.Column<string>(nullable: false),
                     Longitude = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false)
+                    Latitude = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Restaurants", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Restaurants", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
+                name: "AppNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<int>(nullable: false)
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_AppNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AppRoles_RoleId",
+                        name: "FK_AppNetRoleClaims_AppRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AppRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AppUsers",
                 columns: table => new
                 {
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ClientId = table.Column<int>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: false),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    RestaurantId = table.Column<int>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: false)
+                    UserName = table.Column<string>(maxLength: 256, nullable: false),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: false),
+                    Email = table.Column<string>(maxLength: 256, nullable: false),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    ClientId = table.Column<int>(nullable: true),
+                    RestaurantId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,39 +93,15 @@ namespace FindMyFood.Migrations
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AppUsers_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Favorites",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    ClientId = table.Column<int>(nullable: false),
-                    RestaurantId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Favorites", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Favorites_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Favorites_Restaurants_RestaurantId",
-                        column: x => x.RestaurantId,
-                        principalTable: "Restaurants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -143,11 +110,11 @@ namespace FindMyFood.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    DateEnd = table.Column<DateTime>(nullable: true),
-                    DateStart = table.Column<DateTime>(nullable: true),
                     Description = table.Column<string>(nullable: false),
-                    RestaurantId = table.Column<int>(nullable: false),
-                    Tags = table.Column<string>(nullable: false)
+                    Tags = table.Column<string>(nullable: false),
+                    DateStart = table.Column<DateTime>(nullable: true),
+                    DateEnd = table.Column<DateTime>(nullable: true),
+                    RestaurantId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -157,7 +124,37 @@ namespace FindMyFood.Migrations
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Rate = table.Column<int>(nullable: false),
+                    ClientId = table.Column<int>(nullable: false),
+                    RestaurantId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Restaurants_RestaurantId",
+                        column: x => x.RestaurantId,
+                        principalTable: "Restaurants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,9 +163,9 @@ namespace FindMyFood.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -178,7 +175,8 @@ namespace FindMyFood.Migrations
                         column: x => x.UserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,13 +190,14 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_AppUserLogins", x => new {x.LoginProvider, x.ProviderKey});
                     table.ForeignKey(
                         name: "FK_AppUserLogins_AppUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,19 +209,21 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_AppUserRoles", x => new {x.UserId, x.RoleId});
                     table.ForeignKey(
                         name: "FK_AppUserRoles_AppRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AppRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AppUserRoles_AppUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -236,13 +237,14 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_AppUserTokens", x => new {x.UserId, x.LoginProvider, x.Name});
                     table.ForeignKey(
                         name: "FK_AppUserTokens_AppUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade,
+                        onUpdate: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -297,34 +299,33 @@ namespace FindMyFood.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
+                name: "IX_AppNetRoleClaims_RoleId",
+                table: "AppNetRoleClaims",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Favorites_ClientId",
-                table: "Favorites",
-                column: "ClientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Favorites_RestaurantId",
-                table: "Favorites",
-                column: "RestaurantId");
-
-            migrationBuilder.CreateIndex(
-                name: "FavUnique",
-                table: "Favorites",
-                columns: new[] { "ClientId", "RestaurantId" },
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Promotions_RestaurantId",
                 table: "Promotions",
                 column: "RestaurantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_ClientId",
+                table: "Ratings",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_RestaurantId",
+                table: "Ratings",
+                column: "RestaurantId");
+
+            migrationBuilder.CreateIndex(
+                name: "RatUnique",
+                table: "Ratings",
+                columns: new[] {"ClientId", "RestaurantId"},
+                unique: true);
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "AppUserClaims");
 
@@ -338,13 +339,13 @@ namespace FindMyFood.Migrations
                 name: "AppUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "Favorites");
+                name: "AppNetRoleClaims");
 
             migrationBuilder.DropTable(
                 name: "Promotions");
+
+            migrationBuilder.DropTable(
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "AppUsers");
