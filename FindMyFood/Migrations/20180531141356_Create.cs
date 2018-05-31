@@ -1,27 +1,23 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using System;
 
 namespace FindMyFood.Migrations
 {
     public partial class Create : Migration
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 name: "AppRoles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppRoles", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_AppRoles", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Clients",
@@ -31,10 +27,7 @@ namespace FindMyFood.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Name = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Clients", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Restaurants",
@@ -42,15 +35,12 @@ namespace FindMyFood.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Name = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: false),
+                    Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
-                    Latitude = table.Column<double>(nullable: false)
+                    Name = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Restaurants", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Restaurants", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "AppNetRoleClaims",
@@ -58,9 +48,9 @@ namespace FindMyFood.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
+                    RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,22 +68,22 @@ namespace FindMyFood.Migrations
                 name: "AppUsers",
                 columns: table => new
                 {
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    ClientId = table.Column<int>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: false),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: false),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: false),
-                    Email = table.Column<string>(maxLength: 256, nullable: false),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
+                    RestaurantId = table.Column<int>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: true),
-                    RestaurantId = table.Column<int>(nullable: true)
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,11 +110,11 @@ namespace FindMyFood.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Description = table.Column<string>(nullable: false),
-                    Tags = table.Column<string>(nullable: false),
-                    DateStart = table.Column<DateTime>(nullable: true),
                     DateEnd = table.Column<DateTime>(nullable: true),
-                    RestaurantId = table.Column<int>(nullable: false)
+                    DateStart = table.Column<DateTime>(nullable: true),
+                    Description = table.Column<string>(nullable: false),
+                    RestaurantId = table.Column<int>(nullable: false),
+                    Tags = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,8 +134,8 @@ namespace FindMyFood.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Rate = table.Column<int>(nullable: false),
                     ClientId = table.Column<int>(nullable: false),
+                    Rate = table.Column<int>(nullable: false),
                     RestaurantId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -173,9 +163,9 @@ namespace FindMyFood.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,7 +190,7 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_AppUserLogins", x => new {x.LoginProvider, x.ProviderKey});
                     table.ForeignKey(
                         name: "FK_AppUserLogins_AppUsers_UserId",
                         column: x => x.UserId,
@@ -219,7 +209,7 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_AppUserRoles", x => new {x.UserId, x.RoleId});
                     table.ForeignKey(
                         name: "FK_AppUserRoles_AppRoles_RoleId",
                         column: x => x.RoleId,
@@ -247,7 +237,7 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_AppUserTokens", x => new {x.UserId, x.LoginProvider, x.Name});
                     table.ForeignKey(
                         name: "FK_AppUserTokens_AppUsers_UserId",
                         column: x => x.UserId,
@@ -331,12 +321,11 @@ namespace FindMyFood.Migrations
             migrationBuilder.CreateIndex(
                 name: "RatUnique",
                 table: "Ratings",
-                columns: new[] { "ClientId", "RestaurantId" },
+                columns: new[] {"ClientId", "RestaurantId"},
                 unique: true);
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "AppUserClaims");
 
