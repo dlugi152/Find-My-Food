@@ -90,7 +90,9 @@ function getcontentString(pos) {
             });
             document.getElementById("RealAddress").value = myContent;
             document.getElementById("Latitude").value = pos.lat();
+            document.getElementById("Latitude").value = document.getElementById("Latitude").value.replace(".", ",");
             document.getElementById("Longitude").value = pos.lng();
+            document.getElementById("Longitude").value = document.getElementById("Longitude").value.replace(".", ",");
             infowindow.open(map, prevMarker);
             prevMarker.addListener("click",
                 function() {

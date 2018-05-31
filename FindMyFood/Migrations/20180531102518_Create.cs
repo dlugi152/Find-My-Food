@@ -4,9 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FindMyFood.Migrations
 {
-    public partial class create : Migration
+    public partial class Create : Migration
     {
-        protected override void Up(MigrationBuilder migrationBuilder) {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
             migrationBuilder.CreateTable(
                 name: "AppRoles",
                 columns: table => new
@@ -17,7 +18,10 @@ namespace FindMyFood.Migrations
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
                 },
-                constraints: table => { table.PrimaryKey("PK_AppRoles", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppRoles", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Clients",
@@ -27,7 +31,10 @@ namespace FindMyFood.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Name = table.Column<string>(nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Clients", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Restaurants",
@@ -37,10 +44,13 @@ namespace FindMyFood.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Name = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: false),
-                    Longitude = table.Column<string>(nullable: false),
-                    Latitude = table.Column<string>(nullable: false)
+                    Longitude = table.Column<double>(nullable: false),
+                    Latitude = table.Column<double>(nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Restaurants", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Restaurants", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "AppNetRoleClaims",
@@ -190,7 +200,7 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserLogins", x => new {x.LoginProvider, x.ProviderKey});
+                    table.PrimaryKey("PK_AppUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
                         name: "FK_AppUserLogins_AppUsers_UserId",
                         column: x => x.UserId,
@@ -209,7 +219,7 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserRoles", x => new {x.UserId, x.RoleId});
+                    table.PrimaryKey("PK_AppUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
                         name: "FK_AppUserRoles_AppRoles_RoleId",
                         column: x => x.RoleId,
@@ -237,7 +247,7 @@ namespace FindMyFood.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUserTokens", x => new {x.UserId, x.LoginProvider, x.Name});
+                    table.PrimaryKey("PK_AppUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AppUserTokens_AppUsers_UserId",
                         column: x => x.UserId,
@@ -321,11 +331,12 @@ namespace FindMyFood.Migrations
             migrationBuilder.CreateIndex(
                 name: "RatUnique",
                 table: "Ratings",
-                columns: new[] {"ClientId", "RestaurantId"},
+                columns: new[] { "ClientId", "RestaurantId" },
                 unique: true);
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder) {
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
             migrationBuilder.DropTable(
                 name: "AppUserClaims");
 

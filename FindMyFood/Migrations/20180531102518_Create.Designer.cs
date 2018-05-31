@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FindMyFood.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180531093947_create")]
-    partial class create
+    [Migration("20180531102518_Create")]
+    partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -154,11 +154,9 @@ namespace FindMyFood.Migrations
                     b.Property<string>("Address")
                         .IsRequired();
 
-                    b.Property<string>("Latitude")
-                        .IsRequired();
+                    b.Property<double>("Latitude");
 
-                    b.Property<string>("Longitude")
-                        .IsRequired();
+                    b.Property<double>("Longitude");
 
                     b.Property<string>("Name")
                         .IsRequired();

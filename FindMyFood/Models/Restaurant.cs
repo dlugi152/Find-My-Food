@@ -6,7 +6,7 @@ namespace FindMyFood.Models
     {
         public Restaurant() { }
 
-        public Restaurant(string name, string address, string longitude, string latitude) {
+        public Restaurant(string name, string address, double longitude, double latitude) {
             Name = name;
             Address = address;
             Latitude = latitude;
@@ -17,9 +17,9 @@ namespace FindMyFood.Models
         public string Name { get; set; }
         public string Address { get; set; }
 
-        public string Longitude { get; set; }
+        public double Longitude { get; set; }
 
-        public string Latitude { get; set; }
+        public double Latitude { get; set; }
 
         public ICollection<Promotion> Promotions { get; set; } = new List<Promotion>();
         public ICollection<Rating> Ratings { get; set; } = new List<Rating>();

@@ -63,20 +63,15 @@ namespace FindMyFood.Controllers
         public async Task<IActionResult> GetPromotionByLocation([FromRoute] double lng, [FromRoute] double lat,
             [FromRoute] double radius) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var user = await _userManager.GetUserAsync(User);
+            var client = user != null ? await _context.Client.SingleOrDefaultAsync(m => m.Id == user.ClientId) : null;
             //todo uwzględnić daty
-            double n = 5;
             var promotion = await (from promo in _context.Promotions
                 join r in _context.Restaurant on promo.RestaurantId equals r.Id into joined
                 from r in joined
-                where IsInRadius(
-                    double.TryParse(r.Longitude, out n)
-                        ? double.Parse(r.Longitude)
-                        : double.Parse(r.Longitude.Replace('.', ',')),
-                    double.TryParse(r.Latitude, out n)
-                        ? double.Parse(r.Latitude)
-                        : double.Parse(r.Latitude.Replace('.', ',')),
-                    lng, lat, radius)
-                select new GetPromotionResponse(promo, r)).ToListAsync();
+                where IsInRadius(r.Longitude, r.Latitude, lng, lat, radius)
+                select new GetPromotionResponse(promo, r, client)).ToListAsync();
             return Ok(promotion);
         }
 
@@ -165,18 +160,27 @@ namespace FindMyFood.Controllers
     {
         public string Address;
         public string Description;
-        public string Latitude;
-        public string Longitude;
-        public string Rating;
+        public double Latitude;
+        public double Longitude;
+        public int Rating;
         public string RestaurantName;
         public string Tags;
 
-        public GetPromotionResponse(Promotion promo, Restaurant rest) {
+        public GetPromotionResponse(Promotion promo, Restaurant rest, Client client) {
             RestaurantName = rest.Name;
             Longitude = rest.Longitude;
             Latitude = rest.Latitude;
             Description = promo.Description;
-            Rating = "1";
+            if (client == null)
+                Rating = -1;
+            else {
+                Rating rating = ApplicationDbContext.instance.Ratings.SingleOrDefault(r =>
+                    r.ClientId == client.Id && r.RestaurantId == rest.Id);
+                if (rating != null) Rating = rating.Rate;
+                else
+                    Rating = -1;
+            }
+
             Tags = promo.Tags;
             Address = rest.Address;
         }

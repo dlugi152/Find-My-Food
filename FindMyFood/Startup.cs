@@ -1,9 +1,11 @@
-﻿using FindMyFood.Data;
+﻿using System.Globalization;
+using FindMyFood.Data;
 using FindMyFood.Models;
 using FindMyFood.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -58,6 +60,16 @@ namespace FindMyFood
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            var supportedCultures = new[]
+            {
+                new CultureInfo("pl-PL")
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pl-PL"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
             app.UseStaticFiles();
 
             app.UseAuthentication();

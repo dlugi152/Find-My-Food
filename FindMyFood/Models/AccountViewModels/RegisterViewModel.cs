@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace FindMyFood.Models.AccountViewModels
 {
@@ -42,7 +43,7 @@ namespace FindMyFood.Models.AccountViewModels
         public string ClientName { get; set; }
 
         public string RealAddress { get; set; }
-        public string Longitude { get; set; }
-        public string Latitude { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
     }
 }
