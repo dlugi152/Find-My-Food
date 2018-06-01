@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using FindMyFood.Data;
 using FindMyFood.Models;
@@ -8,7 +10,6 @@ using FindMyFood.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 namespace FindMyFood.Controllers
@@ -50,7 +51,7 @@ namespace FindMyFood.Controllers
             return Ok(promotion);
         }
 
-        private bool IsInRadius(double lng1, double lat1, double lng2, double lat2, double radius) {
+        private static bool IsInRadius(double lng1, double lat1, double lng2, double lat2, double radius) {
             var p = Math.PI / 180;
             var a = 0.5 - Math.Cos((lat2 - lat1) * p) / 2 + Math.Cos(lat1 * p) *
                     Math.Cos(lat2 * p) * (1 - Math.Cos((lng2 - lng1) * p)) / 2;
@@ -155,6 +156,69 @@ namespace FindMyFood.Controllers
             await _signInManager.SignOutAsync();
             return Ok("ok");
         }
+
+        [HttpPost]
+        [Route("AddPromotion")]
+        public async Task<IActionResult> AddPromotion([FromBody] AddPromotionRequest promo) {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            Restaurant restaurant;
+            try {
+                var user = await _userManager.GetUserAsync(User);
+                restaurant = await _context.Restaurant.SingleOrDefaultAsync(m => m.Id == user.RestaurantId);
+            }
+            catch (Exception) {
+                return Ok(new StandardStatusResponse(false, "Problem z Twoim kontem"));
+            }
+
+            var newPromotion = new Promotion
+            {
+                Restaurant = restaurant,
+                RestaurantId = restaurant.Id,
+                Description = promo.Description
+            };
+            string[] ses;
+            try {
+                ses = promo.Tags.Split(',');
+                for (var i = 0; i < ses.Length; i++)
+                    ses[i] = ses[i].Trim();
+                if (ses.Any(s => s == ""))
+                    throw new Exception();
+            }
+            catch (Exception) {
+                return Ok(new StandardStatusResponse(false, "Nieprawidlowe wartości w tagach"));
+            }
+
+            newPromotion.Tags = "";
+            foreach (var s in ses)
+                newPromotion.Tags += s + ",";
+            newPromotion.Tags = newPromotion.Tags.Remove(newPromotion.Tags.Length - 1);
+
+            if (!(string.IsNullOrEmpty(promo.StartTime + promo.DateRange + promo.EndTime) ||
+                  (!string.IsNullOrEmpty(promo.StartTime) &&
+                   !string.IsNullOrEmpty(promo.DateRange) && !string.IsNullOrEmpty(promo.EndTime))))
+                return Ok(new StandardStatusResponse(false,
+                    "Musisz podać jednocześnie zakres dat i godziny lub jednocześnie żadne z nich"));
+            try {
+                var split = promo.DateRange.Split(' ');
+                newPromotion.DateStart = DateTime.Parse(split[0] + " " + promo.StartTime);
+                newPromotion.DateEnd = DateTime.Parse(split[3] + " " + promo.EndTime);
+                if (DateTime.Compare(newPromotion.DateStart.Value, newPromotion.DateEnd.Value) >= 0)
+                    return Ok(new StandardStatusResponse(false,
+                        "Promocja kończy się wcześniej niż się rozpoczyna lub trwa za krótko"));
+            }
+            catch (Exception) {
+                newPromotion.DateEnd = newPromotion.DateStart = null;
+            }
+
+            _context.Promotions.Add(newPromotion);
+            try {
+                await _context.SaveChangesAsync();
+                return Ok(new StandardStatusResponse(true, "Wszystko ok"));
+            }
+            catch (Exception) {
+                return Ok(newPromotion);
+            }
+        }
     }
 
     public class GetPromotionResponse
@@ -196,5 +260,14 @@ namespace FindMyFood.Controllers
             Response = response;
             Message = message;
         }
+    }
+
+    public class AddPromotionRequest
+    {
+        public string DateRange { get; set; }
+        public string Description { get; set; }
+        public string EndTime { get; set; }
+        public string StartTime { get; set; }
+        public string Tags { get; set; }
     }
 }

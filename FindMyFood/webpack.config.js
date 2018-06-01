@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const AotPlugin = require('@ngtools/webpack').AotPlugin;
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const flatpickr = require("flatpickr");
 
 module.exports = (env) => {
     // Configuration in common to both client-side and server-side bundles

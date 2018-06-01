@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FindMyFood.Data;
-using FindMyFood.Extensions;
 using FindMyFood.Models;
 using FindMyFood.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -55,7 +54,7 @@ namespace FindMyFood.Controllers
             try {
                 if (ModelState.IsValid)
                     await Login(model, _signInManager);
-                return View(model);
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception) {
                 return View();

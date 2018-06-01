@@ -1,61 +1,61 @@
 <h1>Dodaj promocję</h1>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
-
 <div class="row">
-    <form method="post">
+    <form method="post" (ngSubmit)="onSubmit()" [formGroup]="myform">
         <div class="col-md-5 float-left">
             <section class="section-no-bottom">
-                <h3>Stwórz nowe konto</h3>
+                <h3>Podstawowe informacje</h3>
             </section>
-            <hr class="invisible"/>
-            <div class="form-group">
+            <hr class="invisible" />
+            <div class="form-group" [ngClass]="{
+  'has-error': myform.controls.Description.invalid && myform.controls.Description.dirty,
+  'has-success': myform.controls.Description.valid && myform.controls.Description.dirty
+}">
                 <label>Opis</label>
-                <input class="form-control"/>
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input type="text" class="form-control"
+                       formControlName="Description">
+                <div class="text-danger" *ngIf="myform.controls.Description.errors && (myform.controls.Description.dirty || myform.controls.Description.touched)">
+                    <p *ngIf="myform.controls.Description.errors.required">Opis jest wymagany</p>
+                    <p *ngIf="myform.controls.Description.errors.minlength">Opis musi mieć {{myform.controls.Description.errors.minlength.requiredLength}} znaków</p>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{
+  'has-error': myform.controls.Tags.invalid && myform.controls.Tags.dirty,
+  'has-success': myform.controls.Tags.valid && myform.controls.Tags.dirty
+}">
+                <label>Tagi</label>
+                <input type="text" class="form-control" formControlName="Tags">
+                <div class="text-danger" *ngIf="myform.controls.Tags.errors && (myform.controls.Tags.dirty || myform.controls.Tags.touched)">
+                    <p *ngIf="myform.controls.Tags.errors.required">Tagi są wymagane</p>
+                    <p *ngIf="myform.controls.Tags.errors.pattern">Tagi podaje się po przecinku. Minimum trzy tagi. Przykład: "tag1, ta g2, tag3". Białe znaki są dozwolone tylko w środku tagu.</p>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control"/>
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <button class="btn btn-info btn-fill btn-wd"
+                        type="submit"
+                        [disabled]="myform.invalid"
+                        id="submit"
+                        value="Submit">
+                    Stwórz
+                </button>
             </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control"/>
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <button class="btn btn-info btn-fill btn-wd" type="submit">Stwórz</button>
         </div>
-        <div id="RightPanelRestaurant" class="col-md-5 float-right">
+        <div class="col-md-5 float-right">
             <section class="section-no-bottom">
                 <h3>Przedział czasowy</h3>
             </section>
-            <hr class="invisible"/>
-            <div style="display: none;">
-                <input id="RealAddress" asp-for="RealAddress"/>
-                <input id="Longitude" asp-for="Longitude"/>
-                <input id="Latitude" asp-for="Latitude"/>
-            </div>
-            <input id="datepicker" width="270"/>
-            <script>
-                $('#datepicker').datepicker({
-                    uiLibrary: 'bootstrap'
-                });
-            </script>
+            <hr class="invisible" />
             <div class="form-group">
-                <label asp-for="Address"></label>
-                <input id="InputAddressId" asp-for="Address" placeholder="Zostanie użyty adres wskazywany przez marker" oninput="GeocodeForm()" class="form-control"/>
-                <span asp-validation-for="Address" class="text-danger"></span>
+                <label>Data początkowa i końcowa</label>
+                <input class="form-control" id="dateRangeId" formControlName="DateRange" type="text" placeholder="Wybierz zakres dat">
+            </div>
+            <div class="form-group">
+                <label>Godzina początkowa</label>
+                <input class="form-control" id="timeStartId" formControlName="StartTime" type="text" placeholder="Godzina początkowa">
+            </div>
+            <div class="form-group">
+                <label>Godzina końcowa</label>
+                <input class="form-control" id="timeEndId" formControlName="EndTime" type="text" placeholder="Godzina końcowa">
             </div>
         </div>
     </form>
-</div>
-<div class="row">
-    <p>This is a simple example of an Angular component.</p>
-
-    <p>Current count: <strong>{{ currentCount }}</strong></p>
-
-    <button (click)="incrementCounter()">Increment</button>
 </div>

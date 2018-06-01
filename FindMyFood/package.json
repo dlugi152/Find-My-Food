@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "@types/chartist": "^0.9.34",
+    "angular4-datepicker": "^1.0.1",
     "angularjs-bootstrap-datetimepicker": "^1.1.4",
     "chartist": "^0.9.4",
     "datepicker-bootstrap": "^1.8.0",
