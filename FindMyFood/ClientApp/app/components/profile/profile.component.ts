@@ -1,5 +1,13 @@
 import { Component, Inject } from "@angular/core";
 import { Http } from "@angular/http";
+import {
+    ReactiveFormsModule,
+    FormsModule,
+    FormGroup,
+    FormControl,
+    Validators,
+    FormBuilder
+} from "@angular/forms";
 
 @Component({
     moduleId: module.id + "",
@@ -7,62 +15,124 @@ import { Http } from "@angular/http";
     templateUrl: "./profile.component.html"
 })
 export class ProfileComponent {
-    restaurant: Restaurant;
+    restaurant: IRestaurantFull;
+    ports: string[];
+    myform: FormGroup;
+
+    updateProfileInfo() {
+        this.http.get("api/GetExtendedRestaurant").subscribe(result => {
+                this.restaurant = result.json() as IRestaurantFull;
+            },
+            error => console.error(error));
+    }
 
     constructor(private http: Http, @Inject("BASE_URL") baseUrl: string) {
         http.get(baseUrl + "api/GetExtendedRestaurant").subscribe(result => {
-                //this.restaurant = result.json() as IRestaurant;
-                
+                this.restaurant = result.json() as IRestaurantFull;
+                this.ports = ["https", "http"];
+                var port = this.ports[0];
+                if (this.restaurant.website == null)
+                    this.restaurant.website = "";
+                for (let port1 of this.ports)
+                    if (this.restaurant.website.search(port1 + "://") != -1) {
+                        port = port1;
+                        break;
+                    }
+                this.myform = new FormGroup({
+                    name: new FormControl(this.restaurant.name,
+                        [
+                            Validators.required
+                        ]),
+                    ceofirstname: new FormControl(this.restaurant.ceofirstname),
+                    ceolastname: new FormControl(this.restaurant.ceolastname),
+                    address: new FormControl(this.restaurant.address),
+                    city: new FormControl(this.restaurant.city),
+                    country: new FormControl(this.restaurant.country),
+                    postalCode: new FormControl(this.restaurant.postalCode),
+                    //longitude: number;
+                    //latitude: number;
+                    longDescription: new FormControl(this.restaurant.longDescription),
+                    motto: new FormControl(this.restaurant.motto),
+                    website: new FormControl(this.restaurant.website.replace("https://", "").replace("http://", "")),
+                    county: new FormControl(this.restaurant.county),
+                    street: new FormControl(this.restaurant.street),
+                    streetNumber: new FormControl(this.restaurant.streetNumber),
+                    province: new FormControl(this.restaurant.province),
+                    port: new FormControl(port, Validators.required)
+                });
             },
             error => console.error(error));
-        this.restaurant = new Restaurant();
-        this.restaurant.address = "Jakiś adres";
-        this.restaurant.name = "nazwa";
-        this.restaurant.email = "mejl";
-        this.restaurant.ceofirstname = "imie";
-        this.restaurant.ceolastname = "nazwisko";
-        this.restaurant.city = "miasto";
-        this.restaurant.country = "polska";
-        this.restaurant.postalCode = "kodpocztowy";
-        this.restaurant.longDescription = "bardzo długo opis\nz entarami i w ogóle";
-        this.restaurant.motto = "kolacja bez piwa to nie kolacja";
-        this.restaurant.website = "https://www.example.com";
-        this.restaurant.nopromotions = 1;
-        this.restaurant.rating = 4.5;
-        this.restaurant.norates = 2;
-        this.restaurant.lastRates = new Array(3);
-        this.restaurant.lastRates[0] = new SingleRate();
-        this.restaurant.lastRates[1] = new SingleRate();
-        this.restaurant.lastRates[0].login = "tomasz152";
-        this.restaurant.lastRates[0].rate = 5;
-        this.restaurant.lastRates[1].login = "asd";
-        this.restaurant.lastRates[1].rate = 4;
     }
 
-    update() {
 
+    onSubmit() {
+        console.log("sumbit");
+        this.myform.value.website = this.myform.value.port + "://" + this.myform.value.website;
+        this.myform.value.address = this.getFullAddress(this.myform.value);
+        this.http.post("/api/UpdateProfile", this.myform.value).subscribe((val: any): void => {
+                let response = val.json() as IStandardResponse;
+                if (response.response) {
+                    alert("zaktualizowano");
+                    this.updateProfileInfo();
+                } else
+                    alert(`Niepowodzenie z powodu: ${response.message}`);
+            },
+            response => {
+                console.log("POST call in error", response);
+            },
+            () => {
+                console.log("The POST observable is now completed.");
+            });
+    }
+
+    getFullAddress(value: any): string {
+        return value.street +
+            " " +
+            value.streetNumber +
+            ", " +
+            value.postalCode +
+            " " +
+            value.city +
+            ", " +
+            value.country;
     }
 }
 
-class SingleRate {
+interface ISingleRate {
     login: string;
     rate: number;
 }
 
-class Restaurant {
-    name: string;
+interface IRestaurantFull extends IRestaurantInfo  {
     email: string;
+    longitude: number;
+    latitude: number;
+    nopromotions: number;
+    rating: number;
+    norates: number;
+    lastRates: ISingleRate[];
+}
+
+interface IRestaurantInfo {
+    name: string;
     ceofirstname: string;
     ceolastname: string;
     address: string;
     city: string;
     country: string;
     postalCode: string;
+    //longitude: number;
+    //latitude: number;
     longDescription: string;
     motto: string;
     website: string;
-    nopromotions: number;
-    rating: number;
-    norates: number;
-    lastRates: SingleRate[];
+    county: string;
+    street: string;
+    streetNumber: string;
+    province: string;
+}
+
+interface IStandardResponse {
+    response: boolean,
+    message: string,
 }

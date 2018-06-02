@@ -7,7 +7,7 @@
         <div class="col-lg-4 col-md-5">
             <div class="card card-user">
                 <div class="image">
-                    obrazek<!--<img src="assets/img/background.jpg" alt="..." />-->
+                    <!--<img src="assets/img/background.jpg" alt="..." />-->
                 </div>
                 <div class="content">
                     <div class="author">
@@ -17,7 +17,10 @@
                             <a href="{{restaurant.website}}"><small>{{restaurant.website}}</small></a>
                         </h4>
                     </div>
-                    <p class="description text-center">
+                    <p class="description text-center" *ngIf="!restaurant.motto">
+                        "miejsce na Twoje motto"
+                    </p>
+                    <p class="description text-center" *ngIf="restaurant.motto">
                         "{{restaurant.motto}}"
                     </p>
                 </div>
@@ -68,18 +71,18 @@
                     <h4 class="title">Edycja profilu</h4>
                 </div>
                 <div class="content">
-                    <form>
+                    <form method="post" (ngSubmit)="onSubmit()" [formGroup]="myform">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nazwa restauracji</label>
-                                    <input type="text" class="form-control border-input" placeholder="Nazwa restauracji" value="{{restaurant.name}}">
+                                    <input type="text" class="form-control border-input" placeholder="Nazwa restauracji" formControlName="name">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Adres email</label>
-                                    <input disabled type="email" class="form-control border-input" placeholder="{{restaurant.email}}">
+                                    <input disabled type="text" class="form-control border-input" value="{{restaurant.email}}">
                                 </div>
                             </div>
                         </div>
@@ -87,21 +90,27 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Imię prezesa</label>
-                                    <input type="text" class="form-control border-input" placeholder="Imię" value="{{restaurant.ceofirstname}}">
+                                    <input type="text" class="form-control border-input" placeholder="Imię" formControlName="ceofirstname">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nazwisko</label>
-                                    <input type="text" class="form-control border-input" placeholder="Nazwisko" value="{{restaurant.ceolastname}}">
+                                    <input type="text" class="form-control border-input" placeholder="Nazwisko" formControlName="ceolastname">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-9">
                                 <div class="form-group">
-                                    <label>Adres</label>
-                                    <input type="text" class="form-control border-input" placeholder="Adres lokalu" value="{{restaurant.address}}">
+                                    <label>Wyświetlany adres</label>
+                                    <input type="text" class="form-control border-input" disabled placeholder="Adres lokalu" value="{{restaurant.address}}" formControlName="address">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Kod pocztowy</label>
+                                    <input type="text" class="form-control border-input" placeholder="Kod pocztowy" formControlName="postalCode">
                                 </div>
                             </div>
                         </div>
@@ -109,19 +118,39 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Miasto</label>
-                                    <input type="text" class="form-control border-input" placeholder="Miasto" value="{{restaurant.city}}">
+                                    <input type="text" class="form-control border-input" placeholder="Miasto" formControlName="city">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Kraj</label>
-                                    <input type="text" class="form-control border-input" placeholder="Kraj" value="{{restaurant.country}}">
+                                    <input type="text" class="form-control border-input" placeholder="Kraj" formControlName="country">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Kod pocztowy</label>
-                                    <input type="number" class="form-control border-input" placeholder="Kod pocztowy" value="{{restaurant.postalCode}}">
+                                    <label>Powiat</label>
+                                    <input type="text" class="form-control border-input" placeholder="Powiat" formControlName="county">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Województwo</label>
+                                    <input type="text" class="form-control border-input" placeholder="Województwo" formControlName="province">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Ulica</label>
+                                    <input type="text" class="form-control border-input" placeholder="Ulica" formControlName="street">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Numer</label>
+                                    <input type="text" class="form-control border-input" placeholder="Numer" formControlName="streetNumber">
                                 </div>
                             </div>
                         </div>
@@ -129,8 +158,28 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Dłuższy opis</label>
-                                    <textarea rows="5" class="form-control border-input" placeholder="Miejsce na dłuższy opis">{{restaurant.longDescription}}</textarea>
+                                    <textarea rows="5" class="form-control border-input" formControlName="longDescription" placeholder="Miejsce na dłuższy opis"></textarea>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Motto</label>
+                                    <textarea rows="1" class="form-control border-input" formControlName="motto" placeholder="Miejsce na Twoje motto"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Strona domowa</label>
+                                <select id="portId" formControlName="port" class="form-control border-input">
+                                    <option *ngFor="let option of ports" [value]="option">{{option}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-9">
+                                <label class="invisible">blank</label>
+                                <textarea rows="1" class="form-control border-input" formControlName="website" placeholder="Adres Twojej strony domowej (może być profil na facebooku)"></textarea>
                             </div>
                         </div>
                         <div class="text-center">
@@ -141,6 +190,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

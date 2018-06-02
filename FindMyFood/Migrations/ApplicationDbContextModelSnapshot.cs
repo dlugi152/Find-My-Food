@@ -3,6 +3,9 @@ using FindMyFood.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace FindMyFood.Migrations
@@ -150,12 +153,36 @@ namespace FindMyFood.Migrations
                     b.Property<string>("Address")
                         .IsRequired();
 
+                    b.Property<string>("Ceofirstname");
+
+                    b.Property<string>("Ceolastname");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Country");
+
+                    b.Property<string>("County");
+
                     b.Property<double>("Latitude");
+
+                    b.Property<string>("LongDescription");
 
                     b.Property<double>("Longitude");
 
+                    b.Property<string>("Motto");
+
                     b.Property<string>("Name")
                         .IsRequired();
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<string>("Province");
+
+                    b.Property<string>("Street");
+
+                    b.Property<string>("StreetNumber");
+
+                    b.Property<string>("Website");
 
                     b.HasKey("Id");
 

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using FindMyFood.Data;
 using FindMyFood.Models;
@@ -67,14 +65,12 @@ namespace FindMyFood.Controllers
             [FromRoute] double radius) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var user = await _userManager.GetUserAsync(User);
-            var client = user != null ? await _context.Client.SingleOrDefaultAsync(m => m.Id == user.ClientId) : null;
             //todo uwzględnić daty
             var promotion = await (from promo in _context.Promotions
                 join r in _context.Restaurant on promo.RestaurantId equals r.Id into joined
                 from r in joined
                 where IsInRadius(r.Longitude, r.Latitude, lng, lat, radius)
-                select new GetPromotionResponse(promo, r, client)).ToListAsync();
+                select new GetPromotionResponse(promo, r)).ToListAsync();
             return Ok(promotion);
         }
 
@@ -169,8 +165,10 @@ namespace FindMyFood.Controllers
             catch (Exception) {
                 return Ok(new StandardStatusResponse(false, "Problem z Twoim kontem"));
             }
-            var promotions = await (from promo in (_context.Promotions.Where(promotion => promotion.RestaurantId == restaurant.Id))
-                select new GetSimplePromotionResponse(promo)).ToListAsync();
+
+            var promotions =
+                await (from promo in (_context.Promotions.Where(promotion => promotion.RestaurantId == restaurant.Id))
+                    select new GetSimplePromotionResponse(promo)).ToListAsync();
             return Ok(promotions);
         }
 
@@ -192,6 +190,80 @@ namespace FindMyFood.Controllers
             _context.Promotions.Remove(promotion);
             await _context.SaveChangesAsync();
             return Ok(new StandardStatusResponse(true, "usunięto"));
+        }
+
+        [HttpPost]
+        [HttpGet("GetExtendedRestaurant")]
+        public async Task<IActionResult> GetExtendedRestaurant() {
+            Restaurant restaurant;
+            ApplicationUser user;
+            try {
+                user = await _userManager.GetUserAsync(User);
+                restaurant = await _context.Restaurant.SingleOrDefaultAsync(m => m.Id == user.RestaurantId);
+            }
+            catch (Exception) {
+                return Ok(new StandardStatusResponse(false, "problem z Twoim kontem"));
+            }
+
+            var response = new ExtendedRestaurantResponse
+            {
+                Name = restaurant.Name,
+                Address = restaurant.Address,
+                Ceofirstname = restaurant.Ceofirstname,
+                City = restaurant.City,
+                Ceolastname = restaurant.Ceolastname,
+                Country = restaurant.Country,
+                Latitude = restaurant.Latitude,
+                LongDescription = restaurant.LongDescription,
+                Longitude = restaurant.Longitude,
+                Motto = restaurant.Motto,
+                PostalCode = restaurant.PostalCode,
+                Website = restaurant.Website,
+                Nopromotions = _context.Promotions.Count(promotion => promotion.RestaurantId == restaurant.Id),
+                Norates = _context.Ratings.Count(rating => rating.RestaurantId == restaurant.Id),
+                Rating = _context.Ratings.Any(rating => rating.RestaurantId==restaurant.Id) ? _context.Ratings.Average(rating => rating.Rate) : -1,
+                LastRates = (from rate in _context.Ratings.Where(rating => rating.RestaurantId == restaurant.Id)
+                    orderby rate.Id descending
+                    select new SingleRate(rate.Client.Name, rate.Rate)).Take(3),
+                Email = user.Email,
+                County = restaurant.County,
+                Province = restaurant.Province,
+                Street = restaurant.Street,
+                StreetNumber = restaurant.StreetNumber
+            };
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] ExtendedRestaurantInfo info) {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            Restaurant restaurant;
+            try {
+                var user = await _userManager.GetUserAsync(User);
+                restaurant = await _context.Restaurant.SingleOrDefaultAsync(m => m.Id == user.RestaurantId);
+            }
+            catch (Exception) {
+                return Ok(new StandardStatusResponse(false, "Problem z Twoim kontem"));
+            }
+
+            restaurant.County = info.County;
+            restaurant.PostalCode = info.PostalCode;
+            restaurant.Province = info.Province;
+            restaurant.Street = info.Street;
+            restaurant.StreetNumber = info.StreetNumber;
+            restaurant.Website = info.Website;
+            restaurant.Address = info.Address;
+            restaurant.Name = info.Name;
+            restaurant.Ceofirstname = info.Ceofirstname;
+            restaurant.Ceolastname = info.Ceolastname;
+            restaurant.City = info.City;
+            restaurant.Country = info.Country;
+            restaurant.LongDescription = info.LongDescription;
+            restaurant.Motto = info.Motto;
+            _context.Update(restaurant);
+            _context.SaveChanges();
+            return Ok(new StandardStatusResponse(true, "zaktualizowano"));
         }
 
         [HttpPost]
@@ -281,25 +353,16 @@ namespace FindMyFood.Controllers
         public string Description;
         public double Latitude;
         public double Longitude;
-        public int Rating;
+        public double Rating;
         public string RestaurantName;
         public string Tags;
 
-        public GetPromotionResponse(Promotion promo, Restaurant rest, Client client) {
+        public GetPromotionResponse(Promotion promo, Restaurant rest) {
             RestaurantName = rest.Name;
             Longitude = rest.Longitude;
             Latitude = rest.Latitude;
             Description = promo.Description;
-            if (client == null)
-                Rating = -1;
-            else {
-                Rating rating = ApplicationDbContext.instance.Ratings.SingleOrDefault(r =>
-                    r.ClientId == client.Id && r.RestaurantId == rest.Id);
-                if (rating != null) Rating = rating.Rate;
-                else
-                    Rating = -1;
-            }
-
+            Rating = rest.Ratings.Average(rating => rating.Rate);
             Tags = promo.Tags;
             Address = rest.Address;
         }
@@ -323,5 +386,48 @@ namespace FindMyFood.Controllers
         public string EndTime { get; set; }
         public string StartTime { get; set; }
         public string Tags { get; set; }
+    }
+
+    public class ExtendedRestaurantResponse : ExtendedRestaurantInfo
+    {
+        
+        public int Nopromotions { get; set; }
+        public double Rating { get; set; }
+        public int Norates { get; set; }
+        public IEnumerable<SingleRate> LastRates { get; set; }
+    }
+
+    public class ExtendedRestaurantInfo
+    {
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+
+        public double Longitude { get; set; }
+
+        public double Latitude { get; set; }
+        public string Ceofirstname { get; set; }
+        public string Ceolastname { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string PostalCode { get; set; }
+        public string LongDescription { get; set; }
+        public string Motto { get; set; }
+        public string Website { get; set; }
+        public string County { get; set; }
+        public string Street { get; set; }
+        public string StreetNumber { get; set; }
+        public string Province { get; set; }
+    }
+
+    public class SingleRate
+    {
+        public SingleRate(string login, int rate) {
+            Login = login;
+            Rate = rate;
+        }
+
+        public string Login { get; set; }
+        public int Rate { get; set; }
     }
 }

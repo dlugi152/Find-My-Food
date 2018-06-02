@@ -36,9 +36,21 @@ namespace FindMyFood.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Address = table.Column<string>(nullable: false),
+                    Ceofirstname = table.Column<string>(nullable: true),
+                    Ceolastname = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    County = table.Column<string>(nullable: true),
                     Latitude = table.Column<double>(nullable: false),
+                    LongDescription = table.Column<string>(nullable: true),
                     Longitude = table.Column<double>(nullable: false),
-                    Name = table.Column<string>(nullable: false)
+                    Motto = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    PostalCode = table.Column<string>(nullable: true),
+                    Province = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true),
+                    StreetNumber = table.Column<string>(nullable: true),
+                    Website = table.Column<string>(nullable: true)
                 },
                 constraints: table => { table.PrimaryKey("PK_Restaurants", x => x.Id); });
 
