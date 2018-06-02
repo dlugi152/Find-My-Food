@@ -6,7 +6,7 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from "./components/app/app.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { HomeComponent } from "./components/home/home.component";
+import { ProfileComponent } from "./components/profile/profile.component";
 import { PromotionDelete } from "./components/promotion/delete/promDelete.component";
 import { PromotionAdd } from "./components/promotion/add/promAdd.component";
 import { SidebarModule } from "./components/sidebar/sidebar.module";
@@ -19,7 +19,7 @@ import { NavbarModule } from "./components/shared/navbar/navbar.module";
         PromotionAdd,
         DashboardComponent,
         PromotionDelete,
-        HomeComponent
+        ProfileComponent
     ],
     imports: [
         CommonModule,
@@ -30,12 +30,12 @@ import { NavbarModule } from "./components/shared/navbar/navbar.module";
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: "", redirectTo: "home", pathMatch: "full" },
-            { path: "home", component: HomeComponent },
+            { path: "", redirectTo: "dashboard", pathMatch: "full" },
+            { path: "profile", component: ProfileComponent },
             { path: "promotion-add", component: PromotionAdd },
             { path: "promotion-delete", component: PromotionDelete },
             { path: "dashboard", component: DashboardComponent },
-            { path: "**", redirectTo: "home" }
+            { path: "**", redirectTo: "dashboard" }
         ])
     ]
 })

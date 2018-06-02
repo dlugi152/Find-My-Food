@@ -9,16 +9,11 @@ export interface IRouteInfo {
     class: string;
 }
 
-export const ROUTES: IRouteInfo[] = [
-    { path: "home", title: "Przegląd", icon: "ti-panel", class: "" },
+export const routes: IRouteInfo[] = [
+    { path: "dashboard", title: "Informacje", icon: "ti-home", class: "" },
     { path: "promotion-add", title: "Dodaj promocje", icon: "ti-gift", class: "" },
     { path: "promotion-delete", title: "Usuń promocje", icon: "ti-trash", class: "" },
-    { path: "dashboard", title: "Informacje", icon: "ti-home", class: "" },
-    /*{ path: 'typography', title: 'Typography',  icon:'ti-text', class: '' },
-    { path: 'icons', title: 'Icons',  icon:'ti-pencil-alt2', class: '' },
-    { path: 'maps', title: 'Maps',  icon:'ti-map', class: '' },
-    { path: 'notifications', title: 'Notifications',  icon:'ti-bell', class: '' },
-    { path: 'upgrade', title: 'Upgrade to PRO',  icon:'ti-export', class: 'active-pro' },*/
+    { path: "profile", title: "Profil", icon: "ti-panel", class: "" }
 ];
 
 @Component({
@@ -30,7 +25,7 @@ export class SidebarComponent implements OnInit {
     menuItems: any[];
 
     ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.menuItems = routes.filter(menuItem => menuItem);
     }
 
     isNotMobileMenu() {

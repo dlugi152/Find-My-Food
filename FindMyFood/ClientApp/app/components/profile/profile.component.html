@@ -1,0 +1,146 @@
+<p *ngIf="!restaurant">
+    <em>Ładowanie...</em>
+</p>
+
+<div class="container-fluid" *ngIf="restaurant">
+    <div class="row">
+        <div class="col-lg-4 col-md-5">
+            <div class="card card-user">
+                <div class="image">
+                    obrazek<!--<img src="assets/img/background.jpg" alt="..." />-->
+                </div>
+                <div class="content">
+                    <div class="author">
+                        <i class="avatar border-white ti-user" alt="..."></i>
+                        <h4 class="title">
+                            {{restaurant.name}}<br />
+                            <a href="{{restaurant.website}}"><small>{{restaurant.website}}</small></a>
+                        </h4>
+                    </div>
+                    <p class="description text-center">
+                        "{{restaurant.motto}}"
+                    </p>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-1">
+                            <h5>{{restaurant.nopromotions}}<br /><small>Promocje</small></h5>
+                        </div>
+                        <div class="col-md-4 text-primary">
+                            <h5>{{restaurant.rating}}<br /><small>Średnia ocen</small></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>{{restaurant.norates}}<br /><small>Oceny</small></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Ostatnie oceny</h4>
+                </div>
+                <div class="content">
+                    <ul class="list-unstyled team-members">
+                        <li *ngFor="let user of restaurant.lastRates">
+                            <div class="row" *ngIf="user">
+                                <div class="col-xs-3">
+                                    <div>
+                                        <i class="avatar border-white ti-user" alt="..."></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    {{user.login}}
+                                    <br />
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <div class="text-primary">{{user.rate}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-7">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Edycja profilu</h4>
+                </div>
+                <div class="content">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nazwa restauracji</label>
+                                    <input type="text" class="form-control border-input" placeholder="Nazwa restauracji" value="{{restaurant.name}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Adres email</label>
+                                    <input disabled type="email" class="form-control border-input" placeholder="{{restaurant.email}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Imię prezesa</label>
+                                    <input type="text" class="form-control border-input" placeholder="Imię" value="{{restaurant.ceofirstname}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nazwisko</label>
+                                    <input type="text" class="form-control border-input" placeholder="Nazwisko" value="{{restaurant.ceolastname}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Adres</label>
+                                    <input type="text" class="form-control border-input" placeholder="Adres lokalu" value="{{restaurant.address}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Miasto</label>
+                                    <input type="text" class="form-control border-input" placeholder="Miasto" value="{{restaurant.city}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Kraj</label>
+                                    <input type="text" class="form-control border-input" placeholder="Kraj" value="{{restaurant.country}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Kod pocztowy</label>
+                                    <input type="number" class="form-control border-input" placeholder="Kod pocztowy" value="{{restaurant.postalCode}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Dłuższy opis</label>
+                                    <textarea rows="5" class="form-control border-input" placeholder="Miejsce na dłuższy opis">{{restaurant.longDescription}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-info btn-fill btn-wd">Zaktualizuj profil</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

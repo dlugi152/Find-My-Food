@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -158,6 +159,42 @@ namespace FindMyFood.Controllers
         }
 
         [HttpPost]
+        [HttpGet("MyPromotions")]
+        public async Task<IActionResult> PromotionsOfSignedIn() {
+            Restaurant restaurant;
+            try {
+                var user = await _userManager.GetUserAsync(User);
+                restaurant = await _context.Restaurant.SingleOrDefaultAsync(m => m.Id == user.RestaurantId);
+            }
+            catch (Exception) {
+                return Ok(new StandardStatusResponse(false, "Problem z Twoim kontem"));
+            }
+            var promotions = await (from promo in (_context.Promotions.Where(promotion => promotion.RestaurantId == restaurant.Id))
+                select new GetSimplePromotionResponse(promo)).ToListAsync();
+            return Ok(promotions);
+        }
+
+        [HttpPost]
+        [HttpGet("DeletePromotion/{id}")]
+        public async Task<IActionResult> DeletePromotionOfSigned([FromRoute] int id) {
+            Restaurant restaurant;
+            try {
+                var user = await _userManager.GetUserAsync(User);
+                restaurant = await _context.Restaurant.SingleOrDefaultAsync(m => m.Id == user.RestaurantId);
+            }
+            catch (Exception) {
+                return Ok(new StandardStatusResponse(false, "Problem z Twoim kontem"));
+            }
+
+            var promotion = await _context.Promotions.SingleOrDefaultAsync(m => m.Id == id);
+            if (restaurant.Id != promotion.RestaurantId)
+                return Ok(new StandardStatusResponse(false, "to nie jest promocja zalogowanego użytkownika"));
+            _context.Promotions.Remove(promotion);
+            await _context.SaveChangesAsync();
+            return Ok(new StandardStatusResponse(true, "usunięto"));
+        }
+
+        [HttpPost]
         [Route("AddPromotion")]
         public async Task<IActionResult> AddPromotion([FromBody] AddPromotionRequest promo) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -218,6 +255,23 @@ namespace FindMyFood.Controllers
             catch (Exception) {
                 return Ok(newPromotion);
             }
+        }
+    }
+
+    public class GetSimplePromotionResponse
+    {
+        public string Description;
+        public string Tags;
+        public string DateStart;
+        public string DateEnd;
+        public int Id;
+
+        public GetSimplePromotionResponse(Promotion promo) {
+            Id = promo.Id;
+            Description = promo.Description;
+            Tags = promo.Tags;
+            DateStart = promo.DateStart.HasValue ? promo.DateStart.Value.ToString(CultureInfo.CurrentCulture) : "---";
+            DateEnd = promo.DateEnd.HasValue ? promo.DateEnd.Value.ToString(CultureInfo.CurrentCulture) : "---";
         }
     }
 

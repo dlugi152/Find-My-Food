@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
     moduleId: module.id + "",
@@ -7,19 +8,46 @@ import { Http } from "@angular/http";
     templateUrl: "./promDelete.component.html"
 })
 export class PromotionDelete {
-    forecasts: IWeatherForecast[];
+    promotions: IPromotion[];
 
-    constructor(http: Http, @Inject("BASE_URL") baseUrl: string) {
-        http.get(baseUrl + "api/SampleData/WeatherForecasts").subscribe(result => {
-                this.forecasts = result.json() as IWeatherForecast[];
+    constructor(private http: Http, @Inject("BASE_URL") baseUrl: string) {
+        http.get(baseUrl + "api/MyPromotions").subscribe(result => {
+            this.promotions = result.json() as IPromotion[];
+                console.log(this.promotions);
             },
             error => console.error(error));
     }
+
+    deleteById(id: number) {
+        this.http.get(`/api/DeletePromotion/${id}`).subscribe((val: any): void => {
+                let response = val.json() as IStandardResponse;
+                if (response.response) {
+                    this.http.get("api/MyPromotions").subscribe(result => {
+                            this.promotions = result.json() as IPromotion[];
+                            console.log(this.promotions);
+                        },
+                        error => console.error(error));
+                } else
+                    alert(`Niepowodzenie z powodu: ${response.message}`);
+            },
+            response => {
+                console.log("POST call in error", response);
+            },
+            () => {
+                console.log("The POST observable is now completed.");
+            });
+    }
 }
 
-interface IWeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
+interface IPromotion {
+    id: number;
+    description: string;
+    tags: string;
+    dateStart: string;
+    dateEnd: string;
+}
+
+interface IStandardResponse {
+    response: boolean,
+    message: string,
 }
