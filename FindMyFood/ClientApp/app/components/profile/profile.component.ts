@@ -72,8 +72,8 @@ export class ProfileComponent {
         this.http.post("/api/UpdateProfile", this.myform.value).subscribe((val: any): void => {
                 let response = val.json() as IStandardResponse;
                 if (response.response) {
-                    alert("zaktualizowano");
                     this.updateProfileInfo();
+                    alert("zaktualizowano");
                 } else
                     alert(`Niepowodzenie z powodu: ${response.message}`);
             },
