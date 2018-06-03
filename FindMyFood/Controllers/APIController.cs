@@ -153,6 +153,33 @@ namespace FindMyFood.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet("Rate/{email}&{password}&{restaurantId}&{rate}")]
+        public async Task<IActionResult> Rate([FromRoute] string email, [FromRoute] string password,
+            [FromRoute] int restaurantId, [FromRoute] int rate) {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            try {
+                ApplicationUser appUser = _context.Users.SingleOrDefault(user => user.Email == email);
+                if (!await _userManager.CheckPasswordAsync(appUser, password))
+                    return Ok(new StandardStatusResponse(false, "Nieprawidłowe dane logowania"));
+                Rating rating = new Rating();
+                var id = _context.Client.SingleOrDefault(client => client.Id == appUser.ClientId)?.Id;
+                if (id == null)
+                    return Ok(new StandardStatusResponse(false,
+                        "Stontaktuj się z administratorem, nieznany błąd z Twoim kontem"));
+                rating.ClientId = (int) id;
+                rating.Rate = rate;
+                rating.RestaurantId = restaurantId;
+                await _context.Ratings.AddAsync(rating);
+                await _context.SaveChangesAsync();
+                return Ok(new StandardStatusResponse(true, "Oceniono"));
+            }
+            catch (Exception) {
+                return Ok(new StandardStatusResponse(false, "Taki email nie istnieje"));
+            }
+        }
+
         [HttpPost]
         [HttpGet("SignOut")]
         public async Task<IActionResult> Logout() {
