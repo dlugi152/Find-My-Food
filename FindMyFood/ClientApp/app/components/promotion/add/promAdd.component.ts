@@ -20,6 +20,9 @@ declare var $: any;
     templateUrl: "./promAdd.component.html"
 })
 export class PromotionAdd implements OnInit {
+    selectedItems1: any;
+    selectedItems2: any;
+    selectedItems3: any;
     opts: any;
     myform: FormGroup;
     periods: { value: string; key: string }[];

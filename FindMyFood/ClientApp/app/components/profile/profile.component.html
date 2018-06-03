@@ -175,9 +175,10 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <label>Strona domowa</label>
-                                <select id="portId" formControlName="port" class="form-control border-input">
-                                    <option *ngFor="let option of ports" [value]="option">{{option}}</option>
-                                </select>
+                                <angular2-multiselect [data]="ports" [(ngModel)]="selectedItems"
+                                                      [settings]="dropdownPortSettings"
+                                                      formControlName="port">
+                                </angular2-multiselect>
                             </div>
                             <div class="col-md-9">
                                 <label class="invisible">blank</label>

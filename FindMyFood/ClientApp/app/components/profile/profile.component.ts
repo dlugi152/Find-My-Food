@@ -13,8 +13,10 @@ import {
 })
 export class ProfileComponent {
     restaurant: IRestaurantFull;
-    ports: string[];
+    selectedItems: any;
+    ports: { [index: number]: string; value: string;key: number }[];
     myform: FormGroup;
+    dropdownPortSettings: any = {};
 
     updateProfileInfo() {
         this.http.get("api/GetExtendedRestaurant").subscribe(result => {
@@ -26,15 +28,25 @@ export class ProfileComponent {
     constructor(private http: Http, @Inject("BASE_URL") baseUrl: string) {
         http.get(baseUrl + "api/GetExtendedRestaurant").subscribe(result => {
                 this.restaurant = result.json() as IRestaurantFull;
-                this.ports = ["https", "http"];
-                var port = this.ports[0];
+                this.ports = [
+                    { value: "https", key: 0 },
+                    { value: "http", key: 1 }
+                ];
+                var port = this.ports[0].value;
                 if (this.restaurant.website == null)
                     this.restaurant.website = "";
                 for (let port1 of this.ports)
-                    if (this.restaurant.website.search(port1 + "://") != -1) {
-                        port = port1;
+                    if (this.restaurant.website.search(port1.value + "://") != -1) {
+                        port = port1.value;
                         break;
                     }
+                this.dropdownPortSettings = {
+                    singleSelection: true,
+                    text: "https",
+                    primaryKey: "key",
+                    labelKey: "value",
+                    enableSearchFilter: false
+                };
                 this.myform = new FormGroup({
                     name: new FormControl(this.restaurant.name,
                         [
@@ -55,7 +67,7 @@ export class ProfileComponent {
                     street: new FormControl(this.restaurant.street),
                     streetNumber: new FormControl(this.restaurant.streetNumber),
                     province: new FormControl(this.restaurant.province),
-                    port: new FormControl(port, Validators.required)
+                    port: new FormControl(port,)
                 });
             },
             error => console.error(error));
@@ -64,8 +76,13 @@ export class ProfileComponent {
 
     onSubmit() {
         console.log("sumbit");
-        this.myform.value.website = this.myform.value.port + "://" + this.myform.value.website;
+        console.log(this.myform.value.port);
+        if (this.myform.value.port == null)
+            this.myform.value.port = [this.ports[0]];
+        
+            this.myform.value.website = this.myform.value.port[0].value + "://" + this.myform.value.website;
         this.myform.value.address = this.getFullAddress(this.myform.value);
+        console.log(this.myform.value);
         this.http.post("/api/UpdateProfile", this.myform.value).subscribe((val: any): void => {
                 const response = val.json() as IStandardResponse;
                 if (response.response) {
@@ -80,6 +97,7 @@ export class ProfileComponent {
             () => {
                 console.log("The POST observable is now completed.");
             });
+        this.myform.value.website = this.myform.value.website.replace("https://", "").replace("http://", "");
     }
 
     getFullAddress(value: any): string {
