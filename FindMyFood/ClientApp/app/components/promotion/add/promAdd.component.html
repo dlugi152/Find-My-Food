@@ -59,19 +59,19 @@
                     </div>
                     <div class="form-group" *ngIf="repetitionChoosen=='singledays'">
                         <label>Dni tygodnia</label>
-                        <ng-multiselect-dropdown class="form-control"
+                        <!--<ng-multiselect-dropdown class="form-control"
                                                  [data]="weekDays"
                                                  formControlName="daysInWeek"
                                                  [settings]="dropdownSettingsMulti">
-                        </ng-multiselect-dropdown>
+                        </ng-multiselect-dropdown>-->
                     </div>
                     <div class="form-group" *ngIf="repetitionChoosen=='daily'">
                         <label>Dzień tygodnia</label>
-                        <ng-multiselect-dropdown class="form-control"
-                                                 [data]="weekDays"
-                                                 formControlName="daysInWeek"
-                                                 [settings]="dropdownSettingsSingle">
-                        </ng-multiselect-dropdown>
+                        <!--<ng-multiselect-dropdown class="form-control"
+                             [data]="weekDays"
+                             formControlName="daysInWeek"
+                             [settings]="dropdownSettingsSingle">
+    </ng-multiselect-dropdown>-->
                     </div>
                     <div *ngIf="repetitionChoosen=='once' || repetitionChoosen=='daily' || repetitionChoosen=='weekly'">
                         <div class="form-group">
