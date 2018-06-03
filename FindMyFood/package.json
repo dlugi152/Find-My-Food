@@ -68,6 +68,6 @@
     "chartist": "^0.9.4",
     "datepicker-bootstrap": "^1.8.0",
     "flatpickr": "^4.5.0",
-    "ng-multiselect-dropdown": "^0.1.9"
+    "ng-multiselect-dropdown": "^0.1.7"
   }
 }
