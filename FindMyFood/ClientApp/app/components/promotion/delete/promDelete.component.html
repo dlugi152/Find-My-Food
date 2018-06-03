@@ -8,25 +8,25 @@
 
 <table class="table" *ngIf="promotions">
     <thead>
-        <tr>
-            <th>Opis</th>
-            <th>Data początkowa</th>
-            <th>Data końcowa</th>
-            <th>Tagi</th>
-            <th>Usuń</th>
-        </tr>
+    <tr>
+        <th>Opis</th>
+        <th>Data początkowa</th>
+        <th>Data końcowa</th>
+        <th>Tagi</th>
+        <th>Usuń</th>
+    </tr>
     </thead>
     <tbody>
     <tr *ngFor="let promotion of promotions">
-            <td>{{ promotion.description }}</td>
-            <td>{{ promotion.dateStart }}</td>
-            <td>{{ promotion.dateEnd }}</td>
-            <td>{{ promotion.tags }}</td>
-            <td>
-                <a role="button" (click)="deleteById(promotion.id)">
+        <td>{{ promotion.description }}</td>
+        <td>{{ promotion.dateStart }}</td>
+        <td>{{ promotion.dateEnd }}</td>
+        <td>{{ promotion.tags }}</td>
+        <td>
+            <a role="button" (click)="deleteById(promotion.id)">
                 <i class="ti-na"></i>
-                </a>
-            </td>
-        </tr>
+            </a>
+        </td>
+    </tr>
     </tbody>
 </table>

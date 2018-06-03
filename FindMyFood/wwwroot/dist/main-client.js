@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b3c8b69b64e83cf952b4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "623c87f6bb8b8650b89e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -704,7 +704,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(65)(__webpack_require__.s = 65);
+/******/ 	return hotCreateRequire(66)(__webpack_require__.s = 66);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -729,13 +729,13 @@ module.exports = (__webpack_require__(0))(9);
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(0))(41);
+module.exports = (__webpack_require__(0))(38);
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(0))(38);
+module.exports = (__webpack_require__(0))(41);
 
 /***/ }),
 /* 5 */
@@ -778,18 +778,18 @@ module.exports = (__webpack_require__(0))(39);
 /* unused harmony export ɵh */
 /* unused harmony export ɵe */
 /* unused harmony export ɵf */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_of__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_operator_concatMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operator_filter__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Observable__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Observable__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_Observable__);
 
 /**
@@ -2957,7 +2957,7 @@ var AppComponent = (function () {
             moduleId: module.i + "",
             selector: "app",
             template: __webpack_require__(35),
-            styles: [__webpack_require__(48)]
+            styles: [__webpack_require__(49)]
         })
     ], AppComponent);
     return AppComponent;
@@ -3295,14 +3295,14 @@ module.exports = Html5Entities;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reflect_metadata__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reflect_metadata__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_reflect_metadata___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_reflect_metadata__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_zone_js__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_zone_js__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_zone_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_zone_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bootstrap__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bootstrap__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_bootstrap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_dynamic__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser_dynamic__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_app_browser_module__ = __webpack_require__(16);
 
 
@@ -3314,8 +3314,8 @@ if (true) {
     module.hot.accept();
     module.hot.dispose(function () {
         // Before restarting the app, we create a new root element and dispose the old one
-        var oldRootElem = document.querySelector('app');
-        var newRootElem = document.createElement('app');
+        var oldRootElem = document.querySelector("app");
+        var newRootElem = document.createElement("app");
         oldRootElem.parentNode.insertBefore(newRootElem, oldRootElem);
         modulePromise.then(function (appModule) { return appModule.destroy(); });
     });
@@ -3345,7 +3345,7 @@ var options = {
   name: ''
 };
 if (true) {
-  var querystring = __webpack_require__(45);
+  var querystring = __webpack_require__(46);
   var overrides = querystring.parse(__resourceQuery.slice(1));
   if (overrides.path) options.path = overrides.path;
   if (overrides.timeout) options.timeout = overrides.timeout;
@@ -3465,11 +3465,11 @@ if (typeof window !== 'undefined') {
 }
 
 function createReporter() {
-  var strip = __webpack_require__(47);
+  var strip = __webpack_require__(48);
 
   var overlay;
   if (typeof document !== 'undefined' && options.overlay) {
-    overlay = __webpack_require__(50);
+    overlay = __webpack_require__(51);
   }
 
   var styles = {
@@ -3522,7 +3522,7 @@ function createReporter() {
   };
 }
 
-var processUpdate = __webpack_require__(51);
+var processUpdate = __webpack_require__(52);
 
 var customHandler;
 var subscribeAllHandler;
@@ -3587,7 +3587,7 @@ if (module) {
   };
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, "?path=__webpack_hmr&dynamicPublicPath=true", __webpack_require__(52)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, "?path=__webpack_hmr&dynamicPublicPath=true", __webpack_require__(53)(module)))
 
 /***/ }),
 /* 13 */
@@ -3797,7 +3797,7 @@ module.exports = function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* unused harmony export getBaseUrl */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_shared_module__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_app_app_component__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common_http__ = __webpack_require__(6);
@@ -3844,23 +3844,25 @@ function getBaseUrl() {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModuleShared; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_app_app_component__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_dashboard_dashboard_component__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_profile_profile_component__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_promotion_delete_promDelete_component__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_promotion_add_promAdd_component__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_sidebar_sidebar_module__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_shared_footer_footer_module__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_shared_navbar_navbar_module__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng_multiselect_dropdown__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_shared_footer_footer_module__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_shared_navbar_navbar_module__ = __webpack_require__(25);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -3889,9 +3891,10 @@ var AppModuleShared = (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
                 __WEBPACK_IMPORTED_MODULE_10__components_sidebar_sidebar_module__["a" /* SidebarModule */],
-                __WEBPACK_IMPORTED_MODULE_12__components_shared_navbar_navbar_module__["a" /* NavbarModule */],
+                __WEBPACK_IMPORTED_MODULE_13__components_shared_navbar_navbar_module__["a" /* NavbarModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
-                __WEBPACK_IMPORTED_MODULE_11__components_shared_footer_footer_module__["a" /* FooterModule */],
+                __WEBPACK_IMPORTED_MODULE_11_ng_multiselect_dropdown__["a" /* NgMultiSelectDropDownModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_12__components_shared_footer_footer_module__["a" /* FooterModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["HttpModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_4__angular_router__["RouterModule"].forRoot([
@@ -4033,7 +4036,7 @@ var DashboardComponent = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(3);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4150,7 +4153,7 @@ var ProfileComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_flatpickr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_flatpickr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_flatpickr_dist_l10n_pl_js__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_flatpickr_dist_l10n_pl_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_flatpickr_dist_l10n_pl_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common_http__ = __webpack_require__(6);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4169,23 +4172,55 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PromotionAdd = (function () {
     function PromotionAdd(http) {
         this.http = http;
+        this.dropdownSettingsMulti = {};
+        this.dropdownSettingsSingle = {};
     }
     PromotionAdd.prototype.ngOnInit = function () {
-        __WEBPACK_IMPORTED_MODULE_1_flatpickr___default()("#dateRangeId", {
-            dateFormat: "Y-m-d H:i",
-            minDate: "today",
-            mode: "range",
-            "locale": __WEBPACK_IMPORTED_MODULE_2_flatpickr_dist_l10n_pl_js__["Polish"],
-        });
-        var timeOpts = {
-            enableTime: true,
-            noCalendar: true,
-            minuteIncrement: 30,
-            time_24hr: true,
-            "locale": __WEBPACK_IMPORTED_MODULE_2_flatpickr_dist_l10n_pl_js__["Polish"],
+        this.periods = [
+            { value: "Bez limitu", key: "nolimit" },
+            { value: "Jednorazowo", key: "once" },
+            { value: "Codziennie", key: "daily" },
+            { value: "Co tydzień", key: "weekly" },
+            { value: "Wybrane dni tygodnia", key: "singledays" }
+        ];
+        this.dropdownSettingsMulti = {
+            singleSelection: false,
+            idField: "key",
+            textField: "value",
+            itemsShowLimit: 3,
+            allowSearchFilter: false,
+            limitSelection: 7
         };
-        __WEBPACK_IMPORTED_MODULE_1_flatpickr___default()("#timeStartId", timeOpts);
-        __WEBPACK_IMPORTED_MODULE_1_flatpickr___default()("#timeEndId", timeOpts);
+        this.dropdownSettingsSingle = {
+            singleSelection: true,
+            idField: "key",
+            textField: "value",
+            closeDropDownOnSelection: true
+        };
+        this.weekDays = [
+            { key: "monday", value: "Poniedziałek" },
+            { key: "tuesday", value: "Wtorek" },
+            { key: "wednesday", value: "Środa" },
+            { key: "thursday", value: "Czwartek" },
+            { key: "friday", value: "Piątek" },
+            { key: "saturday", value: "Sobota" },
+            { key: "sunday", value: "Niedziela" }
+        ];
+        this.opts = {
+            calendar: {
+                dateFormat: "Y-m-d H:i",
+                minDate: "today",
+                mode: "range",
+                "locale": __WEBPACK_IMPORTED_MODULE_2_flatpickr_dist_l10n_pl_js__["Polish"],
+            },
+            clocks: {
+                enableTime: true,
+                noCalendar: true,
+                minuteIncrement: 30,
+                time_24hr: true,
+                "locale": __WEBPACK_IMPORTED_MODULE_2_flatpickr_dist_l10n_pl_js__["Polish"]
+            }
+        };
         //lewa strona formularzy
         this.myform = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormGroup"]({
             Description: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"]("", [
@@ -4198,7 +4233,20 @@ var PromotionAdd = (function () {
             ]),
             DateRange: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"](""),
             StartTime: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"](""),
-            EndTime: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"]("")
+            EndTime: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"](""),
+            repetitionMode: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"](this.periods[0].key),
+            daysInWeek: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormControl"]("")
+        });
+    };
+    PromotionAdd.prototype.updateCalendar = function (key) {
+        var _this = this;
+        $("#timePeriodForm").hide(300, function () {
+            _this.repetitionChoosen = key;
+            $("#timePeriodForm").show(300, function () {
+                __WEBPACK_IMPORTED_MODULE_1_flatpickr___default()("#dateRangeId", _this.opts.calendar);
+                __WEBPACK_IMPORTED_MODULE_1_flatpickr___default()("#timeStartId", _this.opts.clocks);
+                __WEBPACK_IMPORTED_MODULE_1_flatpickr___default()("#timeEndId", _this.opts.clocks);
+            });
         });
     };
     PromotionAdd.prototype.onSubmit = function () {
@@ -4206,6 +4254,11 @@ var PromotionAdd = (function () {
         if (this.myform.valid) {
             console.log("Form Submitted!");
             var value = this.myform.value;
+            var days = new Array();
+            for (var i in value.daysInWeek)
+                if (value.daysInWeek.hasOwnProperty(i))
+                    days.push(value.daysInWeek[i].key);
+            value.daysInWeek = days;
             console.log(value);
             this.http.post("/api/AddPromotion/", value).subscribe(function (val) {
                 if (val.response) {
@@ -4225,7 +4278,7 @@ var PromotionAdd = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             moduleId: module.i + "",
             selector: "promotion-add",
-            styles: [__webpack_require__(49)],
+            styles: [__webpack_require__(50)],
             template: __webpack_require__(38)
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__angular_common_http__["b" /* HttpClient */]])
@@ -4336,7 +4389,7 @@ var FooterComponent = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FooterModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__footer_component__ = __webpack_require__(22);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4448,7 +4501,7 @@ var NavbarComponent = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavbarModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_component__ = __webpack_require__(24);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4483,7 +4536,7 @@ var NavbarModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SidebarModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sidebar_component__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -8871,7 +8924,7 @@ exports = module.exports = __webpack_require__(9)(undefined);
 
 
 // module
-exports.push([module.i, ".flatpickr-months .flatpickr-month, .flatpickr-weekdays,\r\nspan.flatpickr-weekday { background: #f3bb45; }\r\n\r\n.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, \r\n.flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, \r\n.flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, \r\n.flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, \r\n.flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, \r\n.flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, \r\n.flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, \r\n.flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, \r\n.flatpickr-day.endRange.nextMonthDay {\r\n    background: #f3bb45;\r\n    border-color: #f3bb45;\r\n    color: #fff;\r\n}\r\n\r\n.flatpickr-day { color: #bcbcbc !important; }", ""]);
+exports.push([module.i, ".flatpickr-months .flatpickr-month, .flatpickr-weekdays,\r\nspan.flatpickr-weekday { background: #f3bb45; }\r\n\r\n.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange,\r\n.flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange,\r\n.flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus,\r\n.flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus,\r\n.flatpickr-day.selected:hover, .flatpickr-day.startRange:hover,\r\n.flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay,\r\n.flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay,\r\n.flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay,\r\n.flatpickr-day.endRange.nextMonthDay {\r\n    background: #f3bb45;\r\n    border-color: #f3bb45;\r\n    color: #fff;\r\n}\r\n\r\n.flatpickr-day { color: #bcbcbc !important; }", ""]);
 
 // exports
 
@@ -11402,19 +11455,19 @@ module.exports = "<div class=\"container-fluid\">\r\n    <div class=\"row\">\r\n
 /* 37 */
 /***/ (function(module, exports) {
 
-module.exports = "<p *ngIf=\"!restaurant\">\r\n    <em>Ładowanie...</em>\r\n</p>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"restaurant\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-4 col-md-5\">\r\n            <div class=\"card card-user\">\r\n                <div class=\"image\">\r\n                    <!--<img src=\"assets/img/background.jpg\" alt=\"...\" />-->\r\n                </div>\r\n                <div class=\"content\">\r\n                    <div class=\"author\">\r\n                        <i class=\"avatar border-white ti-user\" alt=\"...\"></i>\r\n                        <h4 class=\"title\">\r\n                            {{restaurant.name}}<br />\r\n                            <a href=\"{{restaurant.website}}\"><small>{{restaurant.website}}</small></a>\r\n                        </h4>\r\n                    </div>\r\n                    <p class=\"description text-center\" *ngIf=\"!restaurant.motto\">\r\n                        \"miejsce na Twoje motto\"\r\n                    </p>\r\n                    <p class=\"description text-center\" *ngIf=\"restaurant.motto\">\r\n                        \"{{restaurant.motto}}\"\r\n                    </p>\r\n                </div>\r\n                <hr>\r\n                <div class=\"text-center\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-3 col-md-offset-1\">\r\n                            <h5>{{restaurant.nopromotions}}<br /><small>Promocje</small></h5>\r\n                        </div>\r\n                        <div class=\"col-md-4 text-primary\">\r\n                            <h5>{{restaurant.rating}}<br /><small>Średnia ocen</small></h5>\r\n                        </div>\r\n                        <div class=\"col-md-3\">\r\n                            <h5>{{restaurant.norates}}<br /><small>Oceny</small></h5>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"card\" *ngIf=\"restaurant.lastRates.length\">\r\n                <div class=\"header\">\r\n                    <h4 class=\"title\">Ostatnie oceny</h4>\r\n                </div>\r\n                <div class=\"content\">\r\n                    <ul class=\"list-unstyled team-members\">\r\n                        <li *ngFor=\"let user of restaurant.lastRates\">\r\n                            <div class=\"row\" *ngIf=\"user\">\r\n                                <div class=\"col-xs-3\">\r\n                                    <div>\r\n                                        <i class=\"avatar border-white ti-user\" alt=\"...\"></i>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xs-6\">\r\n                                    {{user.login}}\r\n                                    <br />\r\n                                </div>\r\n                                <div class=\"col-xs-3 text-right\">\r\n                                    <div class=\"text-primary\">{{user.rate}}</div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-lg-8 col-md-7\">\r\n            <div class=\"card\">\r\n                <div class=\"header\">\r\n                    <h4 class=\"title\">Edycja profilu</h4>\r\n                </div>\r\n                <div class=\"content\">\r\n                    <form method=\"post\" (ngSubmit)=\"onSubmit()\" [formGroup]=\"myform\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Nazwa restauracji</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Nazwa restauracji\" formControlName=\"name\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Adres email</label>\r\n                                    <input disabled type=\"text\" class=\"form-control border-input\" value=\"{{restaurant.email}}\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Imię prezesa</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Imię\" formControlName=\"ceofirstname\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Nazwisko</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Nazwisko\" formControlName=\"ceolastname\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-9\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Wyświetlany adres</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" disabled placeholder=\"Adres lokalu\" value=\"{{restaurant.address}}\" formControlName=\"address\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-3\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Kod pocztowy</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Kod pocztowy\" formControlName=\"postalCode\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-4\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Miasto</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Miasto\" formControlName=\"city\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-4\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Kraj</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Kraj\" formControlName=\"country\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-4\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Powiat</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Powiat\" formControlName=\"county\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-5\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Województwo</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Województwo\" formControlName=\"province\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-5\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Ulica</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Ulica\" formControlName=\"street\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-2\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Numer</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Numer\" formControlName=\"streetNumber\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-12\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Dłuższy opis</label>\r\n                                    <textarea rows=\"5\" class=\"form-control border-input\" formControlName=\"longDescription\" placeholder=\"Miejsce na dłuższy opis\"></textarea>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-12\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Motto</label>\r\n                                    <textarea rows=\"1\" class=\"form-control border-input\" formControlName=\"motto\" placeholder=\"Miejsce na Twoje motto\"></textarea>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-3\">\r\n                                <label>Strona domowa</label>\r\n                                <select id=\"portId\" formControlName=\"port\" class=\"form-control border-input\">\r\n                                    <option *ngFor=\"let option of ports\" [value]=\"option\">{{option}}</option>\r\n                                </select>\r\n                            </div>\r\n                            <div class=\"col-md-9\">\r\n                                <label class=\"invisible\">blank</label>\r\n                                <textarea rows=\"1\" class=\"form-control border-input\" formControlName=\"website\" placeholder=\"Adres Twojej strony domowej (może być profil na facebooku)\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"text-center\">\r\n                            <button type=\"submit\" class=\"btn btn-info btn-fill btn-wd\">Zaktualizuj profil</button>\r\n                        </div>\r\n                        <div class=\"clearfix\"></div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+module.exports = "<p *ngIf=\"!restaurant\">\r\n    <em>Ładowanie...</em>\r\n</p>\r\n\r\n<div class=\"container-fluid\" *ngIf=\"restaurant\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-4 col-md-5\">\r\n            <div class=\"card card-user\">\r\n                <div class=\"image\">\r\n                    <!--<img src=\"assets/img/background.jpg\" alt=\"...\" />-->\r\n                </div>\r\n                <div class=\"content\">\r\n                    <div class=\"author\">\r\n                        <i class=\"avatar border-white ti-user\" alt=\"...\"></i>\r\n                        <h4 class=\"title\">\r\n                            {{restaurant.name}}<br/>\r\n                            <a href=\"{{restaurant.website}}\">\r\n                                <small>{{restaurant.website}}</small>\r\n                            </a>\r\n                        </h4>\r\n                    </div>\r\n                    <p class=\"description text-center\" *ngIf=\"!restaurant.motto\">\r\n                        \"miejsce na Twoje motto\"\r\n                    </p>\r\n                    <p class=\"description text-center\" *ngIf=\"restaurant.motto\">\r\n                        \"{{restaurant.motto}}\"\r\n                    </p>\r\n                </div>\r\n                <hr>\r\n                <div class=\"text-center\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-3 col-md-offset-1\">\r\n                            <h5>{{restaurant.nopromotions}}<br/><small>Promocje</small></h5>\r\n                        </div>\r\n                        <div class=\"col-md-4 text-primary\">\r\n                            <h5>{{restaurant.rating}}<br/><small>Średnia ocen</small></h5>\r\n                        </div>\r\n                        <div class=\"col-md-3\">\r\n                            <h5>{{restaurant.norates}}<br/><small>Oceny</small></h5>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"card\" *ngIf=\"restaurant.lastRates.length\">\r\n                <div class=\"header\">\r\n                    <h4 class=\"title\">Ostatnie oceny</h4>\r\n                </div>\r\n                <div class=\"content\">\r\n                    <ul class=\"list-unstyled team-members\">\r\n                        <li *ngFor=\"let user of restaurant.lastRates\">\r\n                            <div class=\"row\" *ngIf=\"user\">\r\n                                <div class=\"col-xs-3\">\r\n                                    <div>\r\n                                        <i class=\"avatar border-white ti-user\" alt=\"...\"></i>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xs-6\">\r\n                                    {{user.login}}\r\n                                    <br/>\r\n                                </div>\r\n                                <div class=\"col-xs-3 text-right\">\r\n                                    <div class=\"text-primary\">{{user.rate}}</div>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-lg-8 col-md-7\">\r\n            <div class=\"card\">\r\n                <div class=\"header\">\r\n                    <h4 class=\"title\">Edycja profilu</h4>\r\n                </div>\r\n                <div class=\"content\">\r\n                    <form method=\"post\" (ngSubmit)=\"onSubmit()\" [formGroup]=\"myform\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Nazwa restauracji</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Nazwa restauracji\" formControlName=\"name\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Adres email</label>\r\n                                    <input disabled type=\"text\" class=\"form-control border-input\" value=\"{{restaurant.email}}\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Imię prezesa</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Imię\" formControlName=\"ceofirstname\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Nazwisko</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Nazwisko\" formControlName=\"ceolastname\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-9\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Wyświetlany adres</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" disabled placeholder=\"Adres lokalu\" value=\"{{restaurant.address}}\" formControlName=\"address\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-3\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Kod pocztowy</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Kod pocztowy\" formControlName=\"postalCode\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-4\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Miasto</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Miasto\" formControlName=\"city\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-4\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Kraj</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Kraj\" formControlName=\"country\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-4\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Powiat</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Powiat\" formControlName=\"county\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-5\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Województwo</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Województwo\" formControlName=\"province\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-5\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Ulica</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Ulica\" formControlName=\"street\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-2\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Numer</label>\r\n                                    <input type=\"text\" class=\"form-control border-input\" placeholder=\"Numer\" formControlName=\"streetNumber\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-12\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Dłuższy opis</label>\r\n                                    <textarea rows=\"5\" class=\"form-control border-input\" formControlName=\"longDescription\" placeholder=\"Miejsce na dłuższy opis\"></textarea>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-12\">\r\n                                <div class=\"form-group\">\r\n                                    <label>Motto</label>\r\n                                    <textarea rows=\"1\" class=\"form-control border-input\" formControlName=\"motto\" placeholder=\"Miejsce na Twoje motto\"></textarea>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-3\">\r\n                                <label>Strona domowa</label>\r\n                                <select id=\"portId\" formControlName=\"port\" class=\"form-control border-input\">\r\n                                    <option *ngFor=\"let option of ports\" [value]=\"option\">{{option}}</option>\r\n                                </select>\r\n                            </div>\r\n                            <div class=\"col-md-9\">\r\n                                <label class=\"invisible\">blank</label>\r\n                                <textarea rows=\"1\" class=\"form-control border-input\" formControlName=\"website\" placeholder=\"Adres Twojej strony domowej (może być profil na facebooku)\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"text-center\">\r\n                            <button type=\"submit\" class=\"btn btn-info btn-fill btn-wd\">Zaktualizuj profil</button>\r\n                        </div>\r\n                        <div class=\"clearfix\"></div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
 
 /***/ }),
 /* 38 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Dodaj promocję</h1>\r\n<div class=\"row\">\r\n    <form method=\"post\" (ngSubmit)=\"onSubmit()\" [formGroup]=\"myform\">\r\n        <div class=\"col-md-5 float-left\">\r\n            <section class=\"section-no-bottom\">\r\n                <h3>Podstawowe informacje</h3>\r\n            </section>\r\n            <hr class=\"invisible\" />\r\n            <div class=\"form-group\" [ngClass]=\"{\r\n  'has-error': myform.controls.Description.invalid && myform.controls.Description.dirty,\r\n  'has-success': myform.controls.Description.valid && myform.controls.Description.dirty\r\n}\">\r\n                <label>Opis</label>\r\n                <input type=\"text\" class=\"form-control\"\r\n                       formControlName=\"Description\">\r\n                <div class=\"text-danger\" *ngIf=\"myform.controls.Description.errors && (myform.controls.Description.dirty || myform.controls.Description.touched)\">\r\n                    <p *ngIf=\"myform.controls.Description.errors.required\">Opis jest wymagany</p>\r\n                    <p *ngIf=\"myform.controls.Description.errors.minlength\">Opis musi mieć {{myform.controls.Description.errors.minlength.requiredLength}} znaków</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{\r\n  'has-error': myform.controls.Tags.invalid && myform.controls.Tags.dirty,\r\n  'has-success': myform.controls.Tags.valid && myform.controls.Tags.dirty\r\n}\">\r\n                <label>Tagi</label>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"Tags\">\r\n                <div class=\"text-danger\" *ngIf=\"myform.controls.Tags.errors && (myform.controls.Tags.dirty || myform.controls.Tags.touched)\">\r\n                    <p *ngIf=\"myform.controls.Tags.errors.required\">Tagi są wymagane</p>\r\n                    <p *ngIf=\"myform.controls.Tags.errors.pattern\">Tagi podaje się po przecinku. Minimum trzy tagi. Przykład: \"tag1, ta g2, tag3\". Białe znaki są dozwolone tylko w środku tagu.</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <button class=\"btn btn-info btn-fill btn-wd\"\r\n                        type=\"submit\"\r\n                        [disabled]=\"myform.invalid\"\r\n                        id=\"submit\"\r\n                        value=\"Submit\">\r\n                    Stwórz\r\n                </button>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-5 float-right\">\r\n            <section class=\"section-no-bottom\">\r\n                <h3>Przedział czasowy</h3>\r\n            </section>\r\n            <hr class=\"invisible\" />\r\n            <div class=\"form-group\">\r\n                <label>Data początkowa i końcowa</label>\r\n                <input class=\"form-control\" id=\"dateRangeId\" formControlName=\"DateRange\" type=\"text\" placeholder=\"Wybierz zakres dat\">\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>Godzina początkowa</label>\r\n                <input class=\"form-control\" id=\"timeStartId\" formControlName=\"StartTime\" type=\"text\" placeholder=\"Godzina początkowa\">\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>Godzina końcowa</label>\r\n                <input class=\"form-control\" id=\"timeEndId\" formControlName=\"EndTime\" type=\"text\" placeholder=\"Godzina końcowa\">\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>";
+module.exports = "<h1>Dodaj promocję</h1>\r\n<div class=\"row\">\r\n    <form method=\"post\" (ngSubmit)=\"onSubmit()\" [formGroup]=\"myform\">\r\n        <div class=\"col-md-5 float-left\">\r\n            <section class=\"section-no-bottom\">\r\n                <h3>Podstawowe informacje</h3>\r\n            </section>\r\n            <hr class=\"invisible\" />\r\n            <div class=\"form-group\" [ngClass]=\"{\r\n  'has-error': myform.controls.Description.invalid && myform.controls.Description.dirty,\r\n  'has-success': myform.controls.Description.valid && myform.controls.Description.dirty\r\n}\">\r\n                <label>Opis</label>\r\n                <input type=\"text\" class=\"form-control\"\r\n                       formControlName=\"Description\">\r\n                <div class=\"text-danger\" *ngIf=\"myform.controls.Description.errors && (myform.controls.Description.dirty || myform.controls.Description.touched)\">\r\n                    <p *ngIf=\"myform.controls.Description.errors.required\">Opis jest wymagany</p>\r\n                    <p *ngIf=\"myform.controls.Description.errors.minlength\">Opis musi mieć {{myform.controls.Description.errors.minlength.requiredLength}} znaków</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{\r\n  'has-error': myform.controls.Tags.invalid && myform.controls.Tags.dirty,\r\n  'has-success': myform.controls.Tags.valid && myform.controls.Tags.dirty\r\n}\">\r\n                <label>Tagi</label>\r\n                <input type=\"text\" class=\"form-control\" formControlName=\"Tags\">\r\n                <div class=\"text-danger\" *ngIf=\"myform.controls.Tags.errors && (myform.controls.Tags.dirty || myform.controls.Tags.touched)\">\r\n                    <p *ngIf=\"myform.controls.Tags.errors.required\">Tagi są wymagane</p>\r\n                    <p *ngIf=\"myform.controls.Tags.errors.pattern\">Tagi podaje się po przecinku. Minimum trzy tagi. Przykład: \"tag1, ta g2, tag3\". Białe znaki są dozwolone tylko w środku tagu.</p>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <button class=\"btn btn-info btn-fill btn-wd\"\r\n                        type=\"submit\"\r\n                        [disabled]=\"myform.invalid\"\r\n                        id=\"submit\"\r\n                        value=\"Submit\">\r\n                    Stwórz\r\n                </button>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-5\">\r\n            <section class=\"section-no-bottom\">\r\n                <h3>Przedział czasowy</h3>\r\n            </section>\r\n            <hr class=\"invisible\" />\r\n            <div class=\"form-group\">\r\n                <label for=\"period\">Powtarzanie</label>\r\n                <select class=\"form-control\" id=\"period\" required formControlName=\"repetitionMode\" value=\"{{periods[0].key}}\" (change)=\"updateCalendar($event.target.value)\">\r\n                    <option *ngFor=\"let per of periods\" [value]=\"per.key\">{{per.value}}</option>\r\n                </select>\r\n            </div>\r\n            <div id=\"timePeriodForm\">\r\n                <div *ngIf=\"repetitionChoosen!='nolimit'\">\r\n                    <div class=\"form-group\" *ngIf=\"repetitionChoosen=='once'\">\r\n                        <label>Data początkowa i końcowa</label>\r\n                        <input class=\"form-control\" id=\"dateRangeId\" formControlName=\"DateRange\" type=\"text\" placeholder=\"Wybierz zakres dat\">\r\n                    </div>\r\n                    <div class=\"form-group\" *ngIf=\"repetitionChoosen=='singledays'\">\r\n                        <label>Dni tygodnia</label>\r\n                        <ng-multiselect-dropdown class=\"form-control\"\r\n                                                 [data]=\"weekDays\"\r\n                                                 formControlName=\"daysInWeek\"\r\n                                                 [settings]=\"dropdownSettingsMulti\">\r\n                        </ng-multiselect-dropdown>\r\n                    </div>\r\n                    <div class=\"form-group\" *ngIf=\"repetitionChoosen=='daily'\">\r\n                        <label>Dzień tygodnia</label>\r\n                        <ng-multiselect-dropdown class=\"form-control\"\r\n                                                 [data]=\"weekDays\"\r\n                                                 formControlName=\"daysInWeek\"\r\n                                                 [settings]=\"dropdownSettingsSingle\">\r\n                        </ng-multiselect-dropdown>\r\n                    </div>\r\n                    <div *ngIf=\"repetitionChoosen=='once' || repetitionChoosen=='daily' || repetitionChoosen=='weekly'\">\r\n                        <div class=\"form-group\">\r\n                            <label>Godzina początkowa</label>\r\n                            <input class=\"form-control\" id=\"timeStartId\" formControlName=\"StartTime\" type=\"text\" placeholder=\"Godzina początkowa\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label>Godzina końcowa</label>\r\n                            <input class=\"form-control\" id=\"timeEndId\" formControlName=\"EndTime\" type=\"text\" placeholder=\"Godzina końcowa\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-1\">\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n            <hr class=\"invisible\" />\r\n        </div>\r\n    </form>\r\n</div>";
 
 /***/ }),
 /* 39 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Twoje promocje</h1>\r\n\r\n<p>Z tego miejsca możesz je usunąć</p>\r\n\r\n<p *ngIf=\"!promotions\">\r\n    <em>Ładowanie...</em>\r\n</p>\r\n\r\n<table class=\"table\" *ngIf=\"promotions\">\r\n    <thead>\r\n        <tr>\r\n            <th>Opis</th>\r\n            <th>Data początkowa</th>\r\n            <th>Data końcowa</th>\r\n            <th>Tagi</th>\r\n            <th>Usuń</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let promotion of promotions\">\r\n            <td>{{ promotion.description }}</td>\r\n            <td>{{ promotion.dateStart }}</td>\r\n            <td>{{ promotion.dateEnd }}</td>\r\n            <td>{{ promotion.tags }}</td>\r\n            <td>\r\n                <a role=\"button\" (click)=\"deleteById(promotion.id)\">\r\n                <i class=\"ti-na\"></i>\r\n                </a>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>";
+module.exports = "<h1>Twoje promocje</h1>\r\n\r\n<p>Z tego miejsca możesz je usunąć</p>\r\n\r\n<p *ngIf=\"!promotions\">\r\n    <em>Ładowanie...</em>\r\n</p>\r\n\r\n<table class=\"table\" *ngIf=\"promotions\">\r\n    <thead>\r\n    <tr>\r\n        <th>Opis</th>\r\n        <th>Data początkowa</th>\r\n        <th>Data końcowa</th>\r\n        <th>Tagi</th>\r\n        <th>Usuń</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let promotion of promotions\">\r\n        <td>{{ promotion.description }}</td>\r\n        <td>{{ promotion.dateStart }}</td>\r\n        <td>{{ promotion.dateEnd }}</td>\r\n        <td>{{ promotion.tags }}</td>\r\n        <td>\r\n            <a role=\"button\" (click)=\"deleteById(promotion.id)\">\r\n                <i class=\"ti-na\"></i>\r\n            </a>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>";
 
 /***/ }),
 /* 40 */
@@ -11436,6 +11489,399 @@ module.exports = "<div class=\"sidebar-wrapper\">\r\n    <div class=\"logo\">\r\
 
 /***/ }),
 /* 43 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export MultiSelectComponent */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NgMultiSelectDropDownModule; });
+/* unused harmony export ɵb */
+/* unused harmony export ɵc */
+/* unused harmony export ɵa */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(2);
+
+
+
+
+var ListItem = /** @class */ (function () {
+    function ListItem(source) {
+        if (typeof source === 'string') {
+            this.id = this.text = source;
+        }
+        if (typeof source === 'object') {
+            this.id = source.id;
+            this.text = source.text;
+        }
+    }
+    return ListItem;
+}());
+var DROPDOWN_CONTROL_VALUE_ACCESSOR = {
+    provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["NG_VALUE_ACCESSOR"],
+    useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return MultiSelectComponent; }),
+    multi: true
+};
+var noop = function () { };
+var MultiSelectComponent = /** @class */ (function () {
+    function MultiSelectComponent(cdr) {
+        this.cdr = cdr;
+        this._data = [];
+        this.selectedItems = [];
+        this.isDropdownOpen = false;
+        this._placeholder = 'Select';
+        this.filter = new ListItem(this.data);
+        this.defaultSettings = {
+            singleSelection: false,
+            idField: 'id',
+            textField: 'text',
+            enableCheckAll: true,
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            allowSearchFilter: false,
+            limitSelection: -1,
+            clearSearchFilter: true,
+            maxHeight: 197,
+            itemsShowLimit: 999999999999,
+            searchPlaceholderText: 'Search',
+            closeDropDownOnSelection: false
+        };
+        this.disabled = false;
+        this.onFilterChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.onSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.onDeSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.onSelectAll = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.onDeSelectAll = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.onTouchedCallback = noop;
+        this.onChangeCallback = noop;
+    }
+    Object.defineProperty(MultiSelectComponent.prototype, "placeholder", {
+        set: function (value) {
+            if (value) {
+                this._placeholder = value;
+            }
+            else {
+                this._placeholder = 'Select';
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MultiSelectComponent.prototype, "settings", {
+        set: function (value) {
+            if (value) {
+                this._settings = Object.assign(this.defaultSettings, value);
+            }
+            else {
+                this._settings = Object.assign(this.defaultSettings);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MultiSelectComponent.prototype, "data", {
+        set: function (value) {
+            var _this = this;
+            if (!value) {
+                this._data = [];
+            }
+            else {
+                var _items = value.filter(function (item) {
+                    if (typeof item === 'string' || (typeof item === 'object' && item && item[_this._settings.idField] && item[_this._settings.textField])) {
+                        return item;
+                    }
+                });
+                this._data = _items.map(function (item) { return typeof item === 'string'
+                    ? new ListItem(item)
+                    : new ListItem({
+                        id: item[_this._settings.idField],
+                        text: item[_this._settings.textField]
+                    }); });
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MultiSelectComponent.prototype.onFilterTextChange = function ($event) {
+        this.onFilterChange.emit($event);
+    };
+    MultiSelectComponent.prototype.onItemClick = function ($event, item) {
+        if (this.disabled) {
+            return false;
+        }
+        var found = this.isSelected(item);
+        var allowAdd = this._settings.limitSelection === -1 || (this._settings.limitSelection > 0 && this.selectedItems.length < this._settings.limitSelection);
+        if (!found) {
+            if (allowAdd) {
+                this.addSelected(item);
+            }
+        }
+        else {
+            this.removeSelected(item);
+        }
+        if (this._settings.singleSelection && this._settings.closeDropDownOnSelection) {
+            this.closeDropdown();
+        }
+    };
+    MultiSelectComponent.prototype.writeValue = function (value) {
+        var _this = this;
+        if (value !== undefined && value !== null && value.length > 0) {
+            if (this._settings.singleSelection) {
+                try {
+                    if (value.length >= 1) {
+                        var firstItem = value[0];
+                        this.selectedItems = [
+                            typeof firstItem === 'string'
+                                ? new ListItem(firstItem)
+                                : new ListItem({
+                                    id: firstItem[this._settings.idField],
+                                    text: firstItem[this._settings.textField]
+                                })
+                        ];
+                    }
+                }
+                catch (e) {
+                }
+            }
+            else {
+                var _data = value.map(function (item) { return typeof item === 'string'
+                    ? new ListItem(item)
+                    : new ListItem({
+                        id: item[_this._settings.idField],
+                        text: item[_this._settings.textField]
+                    }); });
+                if (this._settings.limitSelection > 0) {
+                    this.selectedItems = _data.splice(0, this._settings.limitSelection);
+                }
+                else {
+                    this.selectedItems = _data;
+                }
+            }
+        }
+        else {
+            this.selectedItems = [];
+        }
+        this.onChangeCallback(value);
+    };
+    MultiSelectComponent.prototype.registerOnChange = function (fn) {
+        this.onChangeCallback = fn;
+    };
+    MultiSelectComponent.prototype.registerOnTouched = function (fn) {
+        this.onTouchedCallback = fn;
+    };
+    MultiSelectComponent.prototype.onTouched = function () {
+        this.closeDropdown();
+        this.onTouchedCallback();
+    };
+    MultiSelectComponent.prototype.trackByFn = function (index, item) {
+        return item.id;
+    };
+    MultiSelectComponent.prototype.isSelected = function (clickedItem) {
+        var found = false;
+        this.selectedItems.forEach(function (item) {
+            if (clickedItem.id === item.id) {
+                found = true;
+            }
+        });
+        return found;
+    };
+    MultiSelectComponent.prototype.isLimitSelectionReached = function () {
+        return this._settings.limitSelection === this.selectedItems.length;
+    };
+    MultiSelectComponent.prototype.isAllItemsSelected = function () {
+        return this._data.length === this.selectedItems.length;
+    };
+    MultiSelectComponent.prototype.showButton = function () {
+        if (!this._settings.singleSelection) {
+            if (this._settings.limitSelection > 0) {
+                return false;
+            }
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    MultiSelectComponent.prototype.itemShowRemaining = function () {
+        return this.selectedItems.length - Number(this._settings.itemsShowLimit);
+    };
+    MultiSelectComponent.prototype.addSelected = function (item) {
+        if (this._settings.singleSelection) {
+            this.selectedItems = [];
+            this.selectedItems.push(item);
+        }
+        else {
+            this.selectedItems.push(item);
+        }
+        this.onChangeCallback(this.emittedValue(this.selectedItems));
+        this.onSelect.emit(this.emittedValue(item));
+    };
+    MultiSelectComponent.prototype.removeSelected = function (itemSel) {
+        var _this = this;
+        this.selectedItems.forEach(function (item) {
+            if (itemSel.id === item.id) {
+                _this.selectedItems.splice(_this.selectedItems.indexOf(item), 1);
+            }
+        });
+        this.onChangeCallback(this.emittedValue(this.selectedItems));
+        this.onDeSelect.emit(this.emittedValue(itemSel));
+    };
+    MultiSelectComponent.prototype.emittedValue = function (val) {
+        var _this = this;
+        var selected = [];
+        if (Array.isArray(val)) {
+            val.map(function (item) {
+                if (item.id === item.text) {
+                    selected.push(item.text);
+                }
+                else {
+                    selected.push(_this.objectify(item));
+                }
+            });
+        }
+        else {
+            if (val) {
+                if (val.id === val.text) {
+                    return val.text;
+                }
+                else {
+                    return this.objectify(val);
+                }
+            }
+        }
+        return selected;
+    };
+    MultiSelectComponent.prototype.objectify = function (val) {
+        var obj = {};
+        obj[this._settings.idField] = val.id;
+        obj[this._settings.textField] = val.text;
+        return obj;
+    };
+    MultiSelectComponent.prototype.toggleDropdown = function (evt) {
+        evt.preventDefault();
+        if (this.disabled && this._settings.singleSelection) {
+            return;
+        }
+        this.isDropdownOpen = !this.isDropdownOpen;
+    };
+    MultiSelectComponent.prototype.closeDropdown = function () {
+        this.isDropdownOpen = false;
+        if (this._settings.clearSearchFilter) {
+            this.filter.text = '';
+        }
+    };
+    MultiSelectComponent.prototype.toggleSelectAll = function () {
+        if (this.disabled) {
+            return false;
+        }
+        if (!this.isAllItemsSelected()) {
+            this.selectedItems = this._data.slice();
+            this.onSelectAll.emit(this.emittedValue(this.selectedItems));
+        }
+        else {
+            this.selectedItems = [];
+            this.onDeSelectAll.emit(this.emittedValue(this.selectedItems));
+        }
+        this.onChangeCallback(this.emittedValue(this.selectedItems));
+    };
+    return MultiSelectComponent;
+}());
+MultiSelectComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
+                selector: 'ng-multiselect-dropdown',
+                template: "<div tabindex=\"=0\" (blur)=\"onTouched()\" class=\"multiselect-dropdown\" (clickOutside)=\"closeDropdown()\">\n  <div [class.disabled]=\"disabled\">\n    <span tabindex=\"-1\" class=\"dropdown-btn\" (click)=\"toggleDropdown($event)\">\n      <span *ngIf=\"selectedItems.length == 0\">{{_placeholder}}</span>\n      <span class=\"selected-item\" *ngFor=\"let item of selectedItems;trackBy: trackByFn;let k = index\" [hidden]=\"k > _settings.itemsShowLimit-1\">\n        {{item.text}}\n        <a style=\"padding-top:2px;padding-left:2px;color:white\" (click)=\"onItemClick($event,item)\">x</a>\n      </span>\n      <span style=\"float:right !important;padding-right:4px\">\n        <span style=\"padding-right: 6px;\" *ngIf=\"itemShowRemaining()>0\">+{{itemShowRemaining()}}</span>\n        <span [ngClass]=\"isDropdownOpen ? 'dropdown-up' : 'dropdown-down'\"></span>\n      </span>\n    </span>\n  </div>\n    <div class=\"dropdown-list\" [hidden]=\"!isDropdownOpen\">\n         <ul *ngIf=\"_settings.enableCheckAll && !_settings.limitSelection\">\n            <li (click)=\"toggleSelectAll()\" *ngIf=\"_data.length > 0 && !_settings.singleSelection\" class=\"multiselect-item-checkbox\" style=\"border-bottom: 1px solid #ccc;padding:10px\">\n                <input type=\"checkbox\" [checked]=\"isAllItemsSelected()\" [disabled]=\"disabled || isLimitSelectionReached()\"/>\n                <div>{{!isAllItemsSelected() ? _settings.selectAllText : _settings.unSelectAllText}}</div>\n            </li>\n             <li class=\"filter-textbox\" *ngIf=\"_settings.allowSearchFilter\">\n                <input type=\"text\" [readOnly]=\"disabled\" [placeholder]=\"_settings.searchPlaceholderText\" [(ngModel)]=\"filter.text\"  (ngModelChange)=\"onFilterTextChange($event)\">\n            </li>\n        </ul>\n         <ul [style.maxHeight] = \"_settings.maxHeight+'px'\">\n            <li *ngFor=\"let item of _data | ng2ListFilter:filter; let i = index;\" (click)=\"onItemClick($event,item)\" class=\"multiselect-item-checkbox\">\n                <input type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"disabled || (isLimitSelectionReached() && !isSelected(item))\"/>\n                <div>{{item.text}}</div>\n            </li>\n            <li *ngIf=\"_data.length == 0\">\n                <h5>No data available</h5>\n            </li>\n        </ul>\n    </div>\n  <div class=\"dropdown-list\" [hidden]=\"!isDropdownOpen\">\n    <ul>\n      <li (click)=\"toggleSelectAll()\" *ngIf=\"showButton()\" class=\"multiselect-item-checkbox\" style=\"border-bottom: 1px solid #ccc;padding:10px\">\n        <input type=\"checkbox\" [checked]=\"isAllItemsSelected()\" [disabled]=\"disabled\" />\n        <div class='select-all-text'>{{!isAllItemsSelected() ? _settings.selectAllText : _settings.unSelectAllText}}</div>\n      </li>\n      <li class=\"filter-textbox\" *ngIf=\"_settings.allowSearchFilter\">\n        <input type=\"text\" [readOnly]=\"disabled\" [placeholder]=\"_settings.searchPlaceholderText\" [(ngModel)]=\"filter.text\">\n      </li>\n    </ul>\n    <ul [style.maxHeight]=\"_settings.maxHeight+'px'\">\n      <li *ngFor=\"let item of _data | ng2ListFilter:filter; let i = index;\" (click)=\"onItemClick($event,item)\" class=\"multiselect-item-checkbox\">\n        <input type=\"checkbox\" [checked]=\"isSelected(item)\" [disabled]=\"disabled || (isLimitSelectionReached() && !isSelected(item))\"\n        />\n        <div>{{item.text}}</div>\n      </li>\n      <li *ngIf=\"_data.length == 0\">\n        <h5>No data available</h5>\n      </li>\n    </ul>\n  </div>\n</div>\n",
+                styles: [".multiselect-dropdown{position:relative;width:100%}.multiselect-dropdown .dropdown-btn{display:inline-block;border:1px solid #adadad;width:100%;padding:6px 12px;margin-bottom:0;font-size:14px;font-weight:400;line-height:1.52857143;text-align:left;vertical-align:middle;cursor:pointer;background-image:none;border-radius:4px}.multiselect-dropdown .dropdown-btn .selected-item{border:1px solid #337ab7;margin-right:4px;background:#337ab7;padding:0 5px;color:#fff;border-radius:2px;float:left}.multiselect-dropdown .dropdown-btn .selected-item a{text-decoration:none}.multiselect-dropdown .dropdown-btn .selected-item:hover{-webkit-box-shadow:1px 1px #959595;box-shadow:1px 1px #959595}.multiselect-dropdown .dropdown-btn .dropdown-down{display:inline-block;top:10px;width:0;height:0;border-top:10px solid #adadad;border-left:10px solid transparent;border-right:10px solid transparent}.multiselect-dropdown .dropdown-btn .dropdown-up{display:inline-block;width:0;height:0;border-bottom:10px solid #adadad;border-left:10px solid transparent;border-right:10px solid transparent}.multiselect-dropdown .disabled>span{background-color:#eceeef}.dropdown-list{position:absolute;padding-top:6px;width:100%;z-index:9999;border:1px solid #ccc;border-radius:3px;background:#fff;margin-top:10px;-webkit-box-shadow:0 1px 5px #959595;box-shadow:0 1px 5px #959595}.dropdown-list ul{padding:0;list-style:none;overflow:auto;margin:0}.dropdown-list li{padding:6px 10px;cursor:pointer;text-align:left}.dropdown-list .filter-textbox{border-bottom:1px solid #ccc;position:relative;padding:10px}.dropdown-list .filter-textbox input{border:0;width:100%;padding:0 0 0 26px}.dropdown-list .filter-textbox input:focus{outline:0}.multiselect-item-checkbox input[type=checkbox]{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.multiselect-item-checkbox input[type=checkbox]:focus+div:before,.multiselect-item-checkbox input[type=checkbox]:hover+div:before{border-color:#337ab7;background-color:#f2f2f2}.multiselect-item-checkbox input[type=checkbox]:active+div:before{-webkit-transition-duration:0s;transition-duration:0s}.multiselect-item-checkbox input[type=checkbox]+div{position:relative;padding-left:2em;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;margin:0;color:#000}.multiselect-item-checkbox input[type=checkbox]+div:before{-webkit-box-sizing:content-box;box-sizing:content-box;content:'';color:#337ab7;position:absolute;top:50%;left:0;width:14px;height:14px;margin-top:-9px;border:2px solid #337ab7;text-align:center;-webkit-transition:all .4s ease;transition:all .4s ease}.multiselect-item-checkbox input[type=checkbox]+div:after{-webkit-box-sizing:content-box;box-sizing:content-box;content:'';position:absolute;-webkit-transform:scale(0);transform:scale(0);-webkit-transform-origin:50%;transform-origin:50%;-webkit-transition:-webkit-transform .2s ease-out;transition:-webkit-transform .2s ease-out;transition:transform .2s ease-out;transition:transform .2s ease-out,-webkit-transform .2s ease-out;background-color:transparent;top:50%;left:4px;width:8px;height:3px;margin-top:-4px;border-style:solid;border-color:#fff;border-width:0 0 3px 3px;-o-border-image:none;border-image:none;-webkit-transform:rotate(-45deg) scale(0);transform:rotate(-45deg) scale(0)}.multiselect-item-checkbox input[type=checkbox]:disabled+div:before{border-color:#ccc}.multiselect-item-checkbox input[type=checkbox]:disabled:focus+div:before .multiselect-item-checkbox input[type=checkbox]:disabled:hover+div:before{background-color:inherit}.multiselect-item-checkbox input[type=checkbox]:disabled:checked+div:before{background-color:#ccc}.multiselect-item-checkbox input[type=checkbox]:checked+div:after{content:'';-webkit-transition:-webkit-transform .2s ease-out;transition:-webkit-transform .2s ease-out;transition:transform .2s ease-out;transition:transform .2s ease-out,-webkit-transform .2s ease-out;-webkit-transform:rotate(-45deg) scale(1);transform:rotate(-45deg) scale(1)}.multiselect-item-checkbox input[type=checkbox]:checked+div:before{-webkit-animation:.2s ease-in borderscale;animation:.2s ease-in borderscale;background:#337ab7}@-webkit-keyframes borderscale{50%{-webkit-box-shadow:0 0 0 2px #337ab7;box-shadow:0 0 0 2px #337ab7}}@keyframes borderscale{50%{-webkit-box-shadow:0 0 0 2px #337ab7;box-shadow:0 0 0 2px #337ab7}}"],
+                providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR],
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
+            },] },
+];
+MultiSelectComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"], },
+]; };
+MultiSelectComponent.propDecorators = {
+    "placeholder": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    "disabled": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    "settings": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    "data": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    "onFilterChange": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ['onFilterChange',] },],
+    "onSelect": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ['onSelect',] },],
+    "onDeSelect": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ['onDeSelect',] },],
+    "onSelectAll": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ['onSelectAll',] },],
+    "onDeSelectAll": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"], args: ['onDeSelectAll',] },],
+    "onTouched": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"], args: ['blur',] },],
+};
+var ClickOutsideDirective = /** @class */ (function () {
+    function ClickOutsideDirective(_elementRef) {
+        this._elementRef = _elementRef;
+        this.clickOutside = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    ClickOutsideDirective.prototype.onClick = function (event, targetElement) {
+        if (!targetElement) {
+            return;
+        }
+        var clickedInside = this._elementRef.nativeElement.contains(targetElement);
+        if (!clickedInside) {
+            this.clickOutside.emit(event);
+        }
+    };
+    return ClickOutsideDirective;
+}());
+ClickOutsideDirective.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{
+                selector: '[clickOutside]'
+            },] },
+];
+ClickOutsideDirective.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
+]; };
+ClickOutsideDirective.propDecorators = {
+    "clickOutside": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
+    "onClick": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"], args: ['document:click', ['$event', '$event.target'],] },],
+};
+var ListFilterPipe = /** @class */ (function () {
+    function ListFilterPipe() {
+    }
+    ListFilterPipe.prototype.transform = function (items, filter) {
+        var _this = this;
+        if (!items || !filter) {
+            return items;
+        }
+        return items.filter(function (item) { return _this.applyFilter(item, filter); });
+    };
+    ListFilterPipe.prototype.applyFilter = function (item, filter) {
+        return !(filter.text && item.text && item.text.toLowerCase().indexOf(filter.text.toLowerCase()) === -1);
+    };
+    return ListFilterPipe;
+}());
+ListFilterPipe.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Pipe"], args: [{
+                name: 'ng2ListFilter',
+                pure: false
+            },] },
+];
+var NgMultiSelectDropDownModule = /** @class */ (function () {
+    function NgMultiSelectDropDownModule() {
+    }
+    NgMultiSelectDropDownModule.forRoot = function () {
+        return {
+            ngModule: NgMultiSelectDropDownModule
+        };
+    };
+    return NgMultiSelectDropDownModule;
+}());
+NgMultiSelectDropDownModule.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"], args: [{
+                imports: [__WEBPACK_IMPORTED_MODULE_2__angular_common__["CommonModule"], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormsModule"]],
+                declarations: [MultiSelectComponent, ClickOutsideDirective, ListFilterPipe],
+                exports: [MultiSelectComponent]
+            },] },
+];
+
+
+//# sourceMappingURL=ng-multiselect-dropdown.js.map
+
+
+/***/ }),
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11526,7 +11972,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11618,18 +12064,18 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(43);
-exports.encode = exports.stringify = __webpack_require__(44);
+exports.decode = exports.parse = __webpack_require__(44);
+exports.encode = exports.stringify = __webpack_require__(45);
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {/*! *****************************************************************************
@@ -12757,10 +13203,10 @@ var Reflect;
             Function("return this;")());
 })(Reflect || (Reflect = {}));
 //# sourceMappingURL=Reflect.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(54), __webpack_require__(64)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(55), __webpack_require__(65)))
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12773,7 +13219,7 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -12787,7 +13233,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -12801,7 +13247,7 @@ module.exports = function (str) {
     
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*eslint-env browser*/
@@ -12886,7 +13332,7 @@ function problemType (type) {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -13024,7 +13470,7 @@ module.exports = function(hash, moduleMap, options) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -13052,79 +13498,79 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(0);
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(23);
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(28);
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(4);
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(40);
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(42);
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(47);
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(6);
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(72);
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(75);
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(77);
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = (__webpack_require__(0))(8);
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);

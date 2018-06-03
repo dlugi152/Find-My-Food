@@ -39,23 +39,74 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-5 float-right">
+
+        <div class="col-md-5">
             <section class="section-no-bottom">
                 <h3>Przedział czasowy</h3>
             </section>
             <hr class="invisible" />
             <div class="form-group">
-                <label>Data początkowa i końcowa</label>
-                <input class="form-control" id="dateRangeId" formControlName="DateRange" type="text" placeholder="Wybierz zakres dat">
+                <label for="period">Powtarzanie</label>
+                <select class="form-control" id="period" required formControlName="repetitionMode" value="{{periods[0].key}}" (change)="updateCalendar($event.target.value)">
+                    <option *ngFor="let per of periods" [value]="per.key">{{per.value}}</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label>Godzina początkowa</label>
-                <input class="form-control" id="timeStartId" formControlName="StartTime" type="text" placeholder="Godzina początkowa">
+            <div id="timePeriodForm">
+                <div *ngIf="repetitionChoosen!='nolimit'">
+                    <div class="form-group" *ngIf="repetitionChoosen=='once'">
+                        <label>Data początkowa i końcowa</label>
+                        <input class="form-control" id="dateRangeId" formControlName="DateRange" type="text" placeholder="Wybierz zakres dat">
+                    </div>
+                    <div class="form-group" *ngIf="repetitionChoosen=='singledays'">
+                        <label>Dni tygodnia</label>
+                        <ng-multiselect-dropdown class="form-control"
+                                                 [data]="weekDays"
+                                                 formControlName="daysInWeek"
+                                                 [settings]="dropdownSettingsMulti">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="form-group" *ngIf="repetitionChoosen=='daily'">
+                        <label>Dzień tygodnia</label>
+                        <ng-multiselect-dropdown class="form-control"
+                                                 [data]="weekDays"
+                                                 formControlName="daysInWeek"
+                                                 [settings]="dropdownSettingsSingle">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div *ngIf="repetitionChoosen=='once' || repetitionChoosen=='daily' || repetitionChoosen=='weekly'">
+                        <div class="form-group">
+                            <label>Godzina początkowa</label>
+                            <input class="form-control" id="timeStartId" formControlName="StartTime" type="text" placeholder="Godzina początkowa">
+                        </div>
+                        <div class="form-group">
+                            <label>Godzina końcowa</label>
+                            <input class="form-control" id="timeEndId" formControlName="EndTime" type="text" placeholder="Godzina końcowa">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Godzina końcowa</label>
-                <input class="form-control" id="timeEndId" formControlName="EndTime" type="text" placeholder="Godzina końcowa">
-            </div>
+        </div>
+
+        <div class="col-md-1">
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
+            <hr class="invisible" />
         </div>
     </form>
 </div>

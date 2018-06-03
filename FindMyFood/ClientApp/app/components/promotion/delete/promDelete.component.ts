@@ -1,6 +1,5 @@
 import { Component, Inject } from "@angular/core";
 import { Http } from "@angular/http";
-import { HttpClient } from "@angular/common/http";
 
 @Component({
     moduleId: module.id + "",
@@ -12,7 +11,7 @@ export class PromotionDelete {
 
     constructor(private http: Http, @Inject("BASE_URL") baseUrl: string) {
         http.get(baseUrl + "api/MyPromotions").subscribe(result => {
-            this.promotions = result.json() as IPromotion[];
+                this.promotions = result.json() as IPromotion[];
                 console.log(this.promotions);
             },
             error => console.error(error));
@@ -20,7 +19,7 @@ export class PromotionDelete {
 
     deleteById(id: number) {
         this.http.get(`/api/DeletePromotion/${id}`).subscribe((val: any): void => {
-                let response = val.json() as IStandardResponse;
+                const response = val.json() as IStandardResponse;
                 if (response.response) {
                     this.http.get("api/MyPromotions").subscribe(result => {
                             this.promotions = result.json() as IPromotion[];

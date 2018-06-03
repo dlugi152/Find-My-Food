@@ -1,12 +1,9 @@
 import { Component, Inject } from "@angular/core";
 import { Http } from "@angular/http";
 import {
-    ReactiveFormsModule,
-    FormsModule,
     FormGroup,
     FormControl,
-    Validators,
-    FormBuilder
+    Validators
 } from "@angular/forms";
 
 @Component({
@@ -70,7 +67,7 @@ export class ProfileComponent {
         this.myform.value.website = this.myform.value.port + "://" + this.myform.value.website;
         this.myform.value.address = this.getFullAddress(this.myform.value);
         this.http.post("/api/UpdateProfile", this.myform.value).subscribe((val: any): void => {
-                let response = val.json() as IStandardResponse;
+                const response = val.json() as IStandardResponse;
                 if (response.response) {
                     this.updateProfileInfo();
                     alert("zaktualizowano");
@@ -103,7 +100,7 @@ interface ISingleRate {
     rate: number;
 }
 
-interface IRestaurantFull extends IRestaurantInfo  {
+interface IRestaurantFull extends IRestaurantInfo {
     email: string;
     longitude: number;
     latitude: number;

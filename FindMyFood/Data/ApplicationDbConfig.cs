@@ -101,6 +101,14 @@ namespace FindMyFood.Data
             builder.ToTable("Promotions");
             builder.Property(promotion => promotion.Description).IsRequired();
             builder.Property(promotion => promotion.Tags).IsRequired();
+            builder.Property(promotion => promotion.RepetitionMode).IsRequired();
+            builder.Property(promotion => promotion.Monday).IsRequired();
+            builder.Property(promotion => promotion.Tuesday).IsRequired();
+            builder.Property(promotion => promotion.Wednesday).IsRequired();
+            builder.Property(promotion => promotion.Thursday).IsRequired();
+            builder.Property(promotion => promotion.Friday).IsRequired();
+            builder.Property(promotion => promotion.Saturday).IsRequired();
+            builder.Property(promotion => promotion.Sunday).IsRequired();
             builder.HasIndex(e => e.RestaurantId);
             builder.HasOne(d => d.Restaurant)
                 .WithMany(p => p.Promotions).IsRequired()

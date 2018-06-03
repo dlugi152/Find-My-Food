@@ -61,10 +61,13 @@
   },
   "dependencies": {
     "@types/chartist": "^0.9.34",
+    "@types/jquery": "^3.2.1",
+    "angular2-multiselect-dropdown": "^2.9.0",
     "angular4-datepicker": "^1.0.1",
     "angularjs-bootstrap-datetimepicker": "^1.1.4",
     "chartist": "^0.9.4",
     "datepicker-bootstrap": "^1.8.0",
-    "flatpickr": "^4.5.0"
+    "flatpickr": "^4.5.0",
+    "ng-multiselect-dropdown": "^0.1.9"
   }
 }

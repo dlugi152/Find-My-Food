@@ -1,4 +1,5 @@
-﻿using FindMyFood.Models;
+﻿using System;
+using FindMyFood.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

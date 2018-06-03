@@ -112,20 +112,19 @@ namespace FindMyFood.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("SignIn/{email}&{password}&{rememberMe}")]
-        public async Task<IActionResult> Login([FromRoute] string email, [FromRoute] string password,
-            [FromRoute] bool rememberMe) {
+        [HttpGet("SignIn/{email}&{password}")]
+        public async Task<IActionResult> Login([FromRoute] string email, [FromRoute] string password) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var loginViewModel = new LoginViewModel
             {
                 Email = email,
                 Password = password,
-                RememberMe = rememberMe
+                RememberMe = true
             };
             await _signInManager.SignOutAsync();
             try {
                 await AccountController.Login(loginViewModel, _signInManager);
-                var user = await _userManager.GetUserAsync(User);
+                var user = await _context.Users.SingleOrDefaultAsync(applicationUser => applicationUser.Email == email);
                 var client = await _context.Client.SingleOrDefaultAsync(m => m.Id == user.ClientId);
                 return Ok(new StandardStatusResponse(true, client.Name));
             }
@@ -134,17 +133,24 @@ namespace FindMyFood.Controllers
             }
         }
 
-        [HttpGet("ChangeUserPassword/{currentPassword}&{newPassword}")]
-        public async Task<IActionResult> ChangeUserPassword([FromRoute] string currentPassword,
+        [AllowAnonymous]
+        [HttpGet("ChangeUserPassword/{email}&{currentPassword}&{newPassword}")]
+        public async Task<IActionResult> ChangeUserPassword([FromRoute] string email,
+            [FromRoute] string currentPassword,
             [FromRoute] string newPassword) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
-            var currentUser = await _userManager.GetUserAsync(User);
-            var result = await _userManager.ChangePasswordAsync(currentUser, currentPassword, newPassword);
-            return Ok(result.Succeeded
-                ? new StandardStatusResponse(true, "zmieniono")
-                : new StandardStatusResponse(false, "hasła nie pasują"));
+            try {
+                ApplicationUser appUser = _context.Users.SingleOrDefault(user => user.Email == email);
+                //var currentUser = await _userManager.GetUserAsync(User);
+                var result = await _userManager.ChangePasswordAsync(appUser, currentPassword, newPassword);
+                return Ok(result.Succeeded
+                    ? new StandardStatusResponse(true, "Zmieniono")
+                    : new StandardStatusResponse(false, "Hasła nie pasują"));
+            }
+            catch (Exception) {
+                return Ok(new StandardStatusResponse(false, "Taki email nie istnieje"));
+            }
         }
 
         [HttpPost]
@@ -221,7 +227,9 @@ namespace FindMyFood.Controllers
                 Website = restaurant.Website,
                 Nopromotions = _context.Promotions.Count(promotion => promotion.RestaurantId == restaurant.Id),
                 Norates = _context.Ratings.Count(rating => rating.RestaurantId == restaurant.Id),
-                Rating = _context.Ratings.Any(rating => rating.RestaurantId==restaurant.Id) ? _context.Ratings.Average(rating => rating.Rate) : -1,
+                Rating = _context.Ratings.Any(rating => rating.RestaurantId == restaurant.Id)
+                    ? _context.Ratings.Average(rating => rating.Rate)
+                    : -1,
                 LastRates = (from rate in _context.Ratings.Where(rating => rating.RestaurantId == restaurant.Id)
                     orderby rate.Id descending
                     select new SingleRate(rate.Client.Name, rate.Rate)).Take(3),
@@ -301,22 +309,58 @@ namespace FindMyFood.Controllers
             foreach (var s in ses)
                 newPromotion.Tags += s + ",";
             newPromotion.Tags = newPromotion.Tags.Remove(newPromotion.Tags.Length - 1);
-
-            if (!(string.IsNullOrEmpty(promo.StartTime + promo.DateRange + promo.EndTime) ||
-                  (!string.IsNullOrEmpty(promo.StartTime) &&
-                   !string.IsNullOrEmpty(promo.DateRange) && !string.IsNullOrEmpty(promo.EndTime))))
-                return Ok(new StandardStatusResponse(false,
-                    "Musisz podać jednocześnie zakres dat i godziny lub jednocześnie żadne z nich"));
+            newPromotion.RepetitionMode = promo.RepetitionMode;
             try {
-                var split = promo.DateRange.Split(' ');
-                newPromotion.DateStart = DateTime.Parse(split[0] + " " + promo.StartTime);
-                newPromotion.DateEnd = DateTime.Parse(split[3] + " " + promo.EndTime);
-                if (DateTime.Compare(newPromotion.DateStart.Value, newPromotion.DateEnd.Value) >= 0)
-                    return Ok(new StandardStatusResponse(false,
-                        "Promocja kończy się wcześniej niż się rozpoczyna lub trwa za krótko"));
+                string[] strings;
+                switch (newPromotion.RepetitionMode) {
+                    case Enums.PeriodEnum.NoLimit:
+                        newPromotion.DateStart = null;
+                        newPromotion.DateEnd = null;
+                        break;
+                    case Enums.PeriodEnum.Once:
+                        if (string.IsNullOrEmpty(promo.StartTime) ||
+                            string.IsNullOrEmpty(promo.DateRange) || string.IsNullOrEmpty(promo.EndTime))
+                            return Ok(new StandardStatusResponse(false, "Nie podano daty lub godzin"));
+                        var split = promo.DateRange.Split(' ');
+                        newPromotion.DateStart = DateTime.Parse(split[0] + " " + promo.StartTime);
+                        newPromotion.DateEnd = DateTime.Parse(split[3] + " " + promo.EndTime);
+                        if (DateTime.Compare(newPromotion.DateStart.Value, newPromotion.DateEnd.Value) >= 0)
+                            return Ok(new StandardStatusResponse(false,
+                                "Promocja kończy się wcześniej niż się rozpoczyna lub trwa za krótko"));
+                        break;
+                    case Enums.PeriodEnum.Daily:
+                        strings = promo.StartTime.Split(':');
+                        newPromotion.DateStart = new DateTime(0, 0, 0, int.Parse(strings[0]), int.Parse(strings[1]), 0);
+                        strings = promo.EndTime.Split(':');
+                        newPromotion.DateEnd = new DateTime(0, 0, 0, int.Parse(strings[0]), int.Parse(strings[1]), 0);
+                        if (DateTime.Compare(newPromotion.DateStart.Value, newPromotion.DateEnd.Value) >= 0)
+                            return Ok(new StandardStatusResponse(false,
+                                "Godzina rozpoczęcia jest wcześniejsza niż zakończenia"));
+                        break;
+                    case Enums.PeriodEnum.Weekly:
+                        strings = promo.StartTime.Split(':');
+                        newPromotion.DateStart = new DateTime(0, 0, 0, int.Parse(strings[0]), int.Parse(strings[1]), 0);
+                        strings = promo.EndTime.Split(':');
+                        newPromotion.DateEnd = new DateTime(0, 0, 0, int.Parse(strings[0]), int.Parse(strings[1]), 0);
+                        if (DateTime.Compare(newPromotion.DateStart.Value, newPromotion.DateEnd.Value) >= 0)
+                            return Ok(new StandardStatusResponse(false,
+                                "Godzina rozpoczęcia jest wcześniejsza niż zakończenia"));
+                        if (promo.DaysInWeek.Count != 1)
+                            return Ok(new StandardStatusResponse(false, "Nieprawidłowy dzień powtarzania"));
+                        newPromotion.AddDaysOfWeek(promo.DaysInWeek);
+                        break;
+                    case Enums.PeriodEnum.SingleDays:
+                        newPromotion.AddDaysOfWeek(promo.DaysInWeek);
+                        newPromotion.DateStart = newPromotion.DateEnd = null;
+                        newPromotion.AddDaysOfWeek(promo.DaysInWeek);
+                        break;
+                    default:
+                        return Ok(new StandardStatusResponse(false, "Wybrano zły sposób powtarzania"));
+                }
             }
             catch (Exception) {
-                newPromotion.DateEnd = newPromotion.DateStart = null;
+                return Ok(new StandardStatusResponse(false,
+                    "Problem z parsowaniem danych, upewnij się, że wszystkie pola są uzupełnione"));
             }
 
             _context.Promotions.Add(newPromotion);
@@ -324,8 +368,8 @@ namespace FindMyFood.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(new StandardStatusResponse(true, "Wszystko ok"));
             }
-            catch (Exception) {
-                return Ok(newPromotion);
+            catch (Exception ex) {
+                return Ok(new StandardStatusResponse(false, ex.InnerException.Message));
             }
         }
     }
@@ -386,11 +430,12 @@ namespace FindMyFood.Controllers
         public string EndTime { get; set; }
         public string StartTime { get; set; }
         public string Tags { get; set; }
+        public Enums.PeriodEnum RepetitionMode { get; set; }
+        public List<DayOfWeek> DaysInWeek { get; set; }
     }
 
     public class ExtendedRestaurantResponse : ExtendedRestaurantInfo
     {
-        
         public int Nopromotions { get; set; }
         public double Rating { get; set; }
         public int Norates { get; set; }
