@@ -46,10 +46,12 @@
             </section>
             <hr class="invisible" />
             <div class="form-group">
-                <label for="period">Powtarzanie</label>
-                <select class="form-control" id="period" required formControlName="repetitionMode" value="{{periods[0].key}}" (change)="updateCalendar($event.target.value)">
-                    <option *ngFor="let per of periods" [value]="per.key">{{per.value}}</option>
-                </select>
+                <label>Powtarzanie</label>
+                <angular2-multiselect [data]="periods" [(ngModel)]="selectedItems1"
+                                      (onSelect)="updateCalendar($event)" 
+                                      [settings]="dropdownPeriodSettingsSingle"
+                                      formControlName="repetitionMode">
+                </angular2-multiselect>
             </div>
             <div id="timePeriodForm">
                 <div *ngIf="repetitionChoosen!='nolimit'">
@@ -59,19 +61,17 @@
                     </div>
                     <div class="form-group" *ngIf="repetitionChoosen=='singledays'">
                         <label>Dni tygodnia</label>
-                        <!--<ng-multiselect-dropdown class="form-control"
-                                                 [data]="weekDays"
-                                                 formControlName="daysInWeek"
-                                                 [settings]="dropdownSettingsMulti">
-                        </ng-multiselect-dropdown>-->
+                        <angular2-multiselect [data]="weekDays" [(ngModel)]="selectedItems2" 
+                                              [settings]="dropdownDaysSettingsMulti" 
+                                              formControlName="daysInWeek">
+                        </angular2-multiselect>
                     </div>
-                    <div class="form-group" *ngIf="repetitionChoosen=='daily'">
+                    <div class="form-group" *ngIf="repetitionChoosen=='weekly'">
                         <label>Dzień tygodnia</label>
-                        <!--<ng-multiselect-dropdown class="form-control"
-                             [data]="weekDays"
-                             formControlName="daysInWeek"
-                             [settings]="dropdownSettingsSingle">
-    </ng-multiselect-dropdown>-->
+                        <angular2-multiselect [data]="weekDays" [(ngModel)]="selectedItems3"
+                                              [settings]="dropdownDaysSettingsSingle"
+                                              formControlName="daysInWeek">
+                        </angular2-multiselect>
                     </div>
                     <div *ngIf="repetitionChoosen=='once' || repetitionChoosen=='daily' || repetitionChoosen=='weekly'">
                         <div class="form-group">

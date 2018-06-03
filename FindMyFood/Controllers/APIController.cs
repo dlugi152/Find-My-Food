@@ -357,18 +357,18 @@ namespace FindMyFood.Controllers
                         break;
                     case Enums.PeriodEnum.Daily:
                         strings = promo.StartTime.Split(':');
-                        newPromotion.DateStart = new DateTime(0, 0, 0, int.Parse(strings[0]), int.Parse(strings[1]), 0);
+                        newPromotion.DateStart = new DateTime(2000, 1, 1, int.Parse(strings[0]), int.Parse(strings[1]), 0);
                         strings = promo.EndTime.Split(':');
-                        newPromotion.DateEnd = new DateTime(0, 0, 0, int.Parse(strings[0]), int.Parse(strings[1]), 0);
+                        newPromotion.DateEnd = new DateTime(2000, 1, 1, int.Parse(strings[0]), int.Parse(strings[1]), 0);
                         if (DateTime.Compare(newPromotion.DateStart.Value, newPromotion.DateEnd.Value) >= 0)
                             return Ok(new StandardStatusResponse(false,
                                 "Godzina rozpoczęcia jest wcześniejsza niż zakończenia"));
                         break;
                     case Enums.PeriodEnum.Weekly:
                         strings = promo.StartTime.Split(':');
-                        newPromotion.DateStart = new DateTime(0, 0, 0, int.Parse(strings[0]), int.Parse(strings[1]), 0);
+                        newPromotion.DateStart = new DateTime(2000, 1, 1, int.Parse(strings[0]), int.Parse(strings[1]), 0);
                         strings = promo.EndTime.Split(':');
-                        newPromotion.DateEnd = new DateTime(0, 0, 0, int.Parse(strings[0]), int.Parse(strings[1]), 0);
+                        newPromotion.DateEnd = new DateTime(2000, 1, 1, int.Parse(strings[0]), int.Parse(strings[1]), 0);
                         if (DateTime.Compare(newPromotion.DateStart.Value, newPromotion.DateEnd.Value) >= 0)
                             return Ok(new StandardStatusResponse(false,
                                 "Godzina rozpoczęcia jest wcześniejsza niż zakończenia"));
@@ -385,9 +385,9 @@ namespace FindMyFood.Controllers
                         return Ok(new StandardStatusResponse(false, "Wybrano zły sposób powtarzania"));
                 }
             }
-            catch (Exception) {
+            catch (Exception ex) {
                 return Ok(new StandardStatusResponse(false,
-                    "Problem z parsowaniem danych, upewnij się, że wszystkie pola są uzupełnione"));
+                    ex.Message));
             }
 
             _context.Promotions.Add(newPromotion);

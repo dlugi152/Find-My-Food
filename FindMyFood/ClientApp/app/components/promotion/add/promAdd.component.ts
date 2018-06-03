@@ -1,5 +1,6 @@
 import {
-    Component
+    Component, 
+    OnInit
 } from "@angular/core";
 import flatpickr from "flatpickr";
 import { Polish } from "flatpickr/dist/l10n/pl.js";
@@ -18,13 +19,14 @@ declare var $: any;
     styleUrls: ["./promAdd.component.css"], //jeszcze nie używany
     templateUrl: "./promAdd.component.html"
 })
-export class PromotionAdd {
+export class PromotionAdd implements OnInit {
     opts: any;
     myform: FormGroup;
     periods: { value: string; key: string }[];
     weekDays: { [index: number]: string; key: string;value: string }[];
-    dropdownSettingsMulti: any = {};
-    dropdownSettingsSingle: any = {};
+    dropdownDaysSettingsMulti: any = {};
+    dropdownDaysSettingsSingle: any = {};
+    dropdownPeriodSettingsSingle: any = {};
 
     constructor(private http: HttpClient) {}
 
@@ -36,30 +38,44 @@ export class PromotionAdd {
             { value: "Co tydzień", key: "weekly" },
             { value: "Wybrane dni tygodnia", key: "singledays" }
         ];
-        
-        this.dropdownSettingsMulti = {
+
+        this.dropdownDaysSettingsMulti = {
             singleSelection: false,
-            idField: "key",
-            textField: "value",
-            itemsShowLimit: 3,
-            allowSearchFilter: false,
-            limitSelection: 7
+            text: "Wybierz dni",
+            selectAllText: "Zaznacz wszystkie",
+            unSelectAllText: "Odznacz wszystkie",
+            enableSearchFilter: false,
+            maxHeight: 200,
+            primaryKey: "key",
+            labelKey: "value",
+            classes: "myclass custom-class"
         };
-        this.dropdownSettingsSingle = {
+        this.dropdownDaysSettingsSingle = {
             singleSelection: true,
-            idField: "key",
-            textField: "value",
-            closeDropDownOnSelection: true
+            text: "Wybierz dni",
+            maxHeight: 200,
+            primaryKey: "key",
+            labelKey: "value",
+            enableSearchFilter: false,
+            classes: "myclass custom-class"
+        };
+        this.dropdownPeriodSettingsSingle = {
+            singleSelection: true,
+            text: "Wybierz okres powtarzania",
+            primaryKey: "key",
+            labelKey: "value",
+            enableSearchFilter: false,
+            classes: "myclass custom-class"
         };
 
         this.weekDays = [
-            { key: "monday", value:"Poniedziałek" },
-            { key: "tuesday", value:"Wtorek" },
-            { key: "wednesday", value:"Środa" },
-            { key: "thursday", value:"Czwartek" },
-            { key: "friday", value:"Piątek" },
-            { key: "saturday", value:"Sobota" },
-            { key: "sunday", value:"Niedziela" }
+            { key: "monday", value: "Poniedziałek" },
+            { key: "tuesday", value: "Wtorek" },
+            { key: "wednesday", value: "Środa" },
+            { key: "thursday", value: "Czwartek" },
+            { key: "friday", value: "Piątek" },
+            { key: "saturday", value: "Sobota" },
+            { key: "sunday", value: "Niedziela" }
         ];
 
         this.opts = {
@@ -77,8 +93,7 @@ export class PromotionAdd {
                 "locale": Polish
             }
         };
-
-        //lewa strona formularzy
+        
         this.myform = new FormGroup({
             Description: new FormControl("",
                 [
@@ -93,17 +108,17 @@ export class PromotionAdd {
             DateRange: new FormControl("",),
             StartTime: new FormControl("",),
             EndTime: new FormControl("",),
-            repetitionMode: new FormControl(this.periods[0].key,),
+            repetitionMode: new FormControl("",Validators.required),
             daysInWeek: new FormControl("",)
         });
     }
 
     repetitionChoosen: string;
 
-    updateCalendar(key: string) {
+    updateCalendar(key: any) {
         $("#timePeriodForm").hide(300,
             () => {
-                this.repetitionChoosen = key;
+                this.repetitionChoosen = key.key;
                 $("#timePeriodForm").show(300,
                     () => {
                         flatpickr("#dateRangeId", this.opts.calendar);
@@ -122,6 +137,7 @@ export class PromotionAdd {
                 if (value.daysInWeek.hasOwnProperty(i))
                     days.push(value.daysInWeek[i].key);
             value.daysInWeek = days;
+            value.repetitionMode = value.repetitionMode[0].key;
             console.log(value);
             this.http.post("/api/AddPromotion/", value).subscribe(
                 (val: IStandardResponse) => {

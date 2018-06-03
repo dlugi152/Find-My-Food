@@ -10,7 +10,7 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { PromotionDelete } from "./components/promotion/delete/promDelete.component";
 import { PromotionAdd } from "./components/promotion/add/promAdd.component";
 import { SidebarModule } from "./components/sidebar/sidebar.module";
-//import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { AngularMultiSelectModule } from "angular2-multiselect-dropdown/angular2-multiselect-dropdown";
 import { FooterModule } from "./components/shared/footer/footer.module";
 import { NavbarModule } from "./components/shared/navbar/navbar.module";
 
@@ -27,7 +27,7 @@ import { NavbarModule } from "./components/shared/navbar/navbar.module";
         SidebarModule,
         NavbarModule,
         ReactiveFormsModule,
-        //NgMultiSelectDropDownModule.forRoot(),
+        AngularMultiSelectModule,
         FooterModule,
         HttpModule,
         FormsModule,
