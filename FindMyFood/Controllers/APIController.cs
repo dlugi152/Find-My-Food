@@ -71,6 +71,15 @@ namespace FindMyFood.Controllers
                 from r in joined
                 where IsInRadius(r.Longitude, r.Latitude, lng, lat, radius)
                 select new GetPromotionResponse(promo, r)).ToListAsync();
+            foreach (var response in promotion)
+                try {
+                    response.Rating = _context.Ratings.Where(rating => rating.RestaurantId == response.RestaurantId)
+                        .Average(rating => rating.Rate);
+                }
+                catch (Exception) {
+                    response.Rating = 0;
+                }
+
             return Ok(promotion);
         }
 
@@ -426,14 +435,15 @@ namespace FindMyFood.Controllers
         public double Longitude;
         public double Rating;
         public string RestaurantName;
+        public int RestaurantId;
         public string Tags;
 
         public GetPromotionResponse(Promotion promo, Restaurant rest) {
             RestaurantName = rest.Name;
             Longitude = rest.Longitude;
             Latitude = rest.Latitude;
+            RestaurantId = rest.Id;
             Description = promo.Description;
-            Rating = rest.Ratings.Average(rating => rating.Rate);
             Tags = promo.Tags;
             Address = rest.Address;
         }
