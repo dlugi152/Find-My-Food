@@ -21,9 +21,9 @@ namespace FindMyFood.Controllers
 
         public async Task<IActionResult> Index() {
             var user = await _userManager.GetUserAsync(User);
-            if (user.RestaurantId == null)
-                await _signInManager.SignOutAsync();
-            return View();
+            if (user.RestaurantId.HasValue) return View();
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet("SignOut")]

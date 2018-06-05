@@ -1784,8 +1784,12 @@ textarea.form-control {
     margin-top: 110px;
 }
 
+.multiselect-dropdown[_ngcontent-c2] .dropdown-btn[_ngcontent-c2] {
+    border: 0 !important;
+    padding: 0 0 !important;
+}
+
 .card-user .author {
-    margin-top: -65px;
     text-align: center;
     text-transform: none;
 }

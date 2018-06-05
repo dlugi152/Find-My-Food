@@ -4,7 +4,9 @@
     switch (role) {
     case "1":
         $("#RightPanelRestaurant").hide(300,
-            function() {
+            function () {
+                document.getElementById("Latitude").value = 0;
+                document.getElementById("Longitude").value = 0;
                 $("#RightPanelClient").show(300);
             });
         break;
@@ -60,12 +62,32 @@ function GeocodeForm() {
                     clearPreviousMarker();
                     if (status === google.maps.GeocoderStatus.OK) {
                         const loc = results[0].geometry.location;
+                        var components = results[0].address_components;
+                        var postalCode = "", country = "", city = "", county = "", province = "", street = "", streetNum = "";
+                        $.each(components,
+                            function() {
+                                if (this.types[0] === "postal_code")
+                                    postalCode = this.long_name;
+                                if (this.types[0] === "country")
+                                    country = this.long_name;
+                                if (this.types[0] === "administrative_area_level_1")
+                                    province = this.long_name;
+                                if (this.types[0] === "administrative_area_level_2")
+                                    county = this.long_name;
+                                if (this.types[0] === "locality")
+                                    city = this.long_name;
+                                if (this.types[0] === "street_number" || this.types[0] === "premise")
+                                    streetNum = this.long_name;
+                                if (this.types[0] === "route")
+                                    street = this.long_name;
+                            });
+
                         map.setCenter(loc);
                         prevMarker = new google.maps.Marker({
                             map: map,
                             position: loc
                         });
-                        getcontentString(loc);
+                        getcontentString(loc, country, city, postalCode, province, county, street, streetNum);
                     } else {
                         //alert("Geocode was not successful for the following reason: " + status);
                     }
@@ -74,21 +96,28 @@ function GeocodeForm() {
         3000);
 }
 
-function getcontentString(pos) {
+function getcontentString(pos, country, city, postalCode, province, county, street, streetNum) {
     geocoder.geocode({
             latLng: pos
         },
         function(responses) {
-            var myContent;
+            var realAddress;
             if (responses && responses.length > 0)
-                myContent = responses[0].formatted_address;
+                realAddress = responses[0].formatted_address;
             else
-                myContent = "Nie można ustalić dokładnego adresu";
+                realAddress = "Nie można ustalić dokładnego adresu";
 
             infowindow = new google.maps.InfoWindow({
-                content: myContent
+                content: realAddress
             });
-            document.getElementById("RealAddress").value = myContent;
+            document.getElementById("RealAddress").value = realAddress;
+            document.getElementById("Country").value = country;
+            document.getElementById("City").value = city;
+            document.getElementById("PostalCode").value = postalCode;
+            document.getElementById("Province").value = province;
+            document.getElementById("County").value = county;
+            document.getElementById("Street").value = street;
+            document.getElementById("StreetNum").value = streetNum;
             document.getElementById("Latitude").value = pos.lat();
             document.getElementById("Latitude").value = document.getElementById("Latitude").value.replace(".", ",");
             document.getElementById("Longitude").value = pos.lng();

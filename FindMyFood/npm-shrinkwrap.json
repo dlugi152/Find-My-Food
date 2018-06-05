@@ -166,6 +166,11 @@
       "integrity": "sha1-TgzvrQnfXsSMjdQEM1EvhLFWjWE=",
       "dev": true
     },
+    "@types/jquery": {
+      "version": "3.2.1",
+      "resolved": "https://registry.npmjs.org/@types/jquery/-/jquery-3.2.1.tgz",
+      "integrity": "sha512-GKqrdd++ADesGEsiZ3zuhlBpOONCeHI5//ShzbReEyoIaKavi0ZPHQSbYH/WaLg8Hxu5ezlqTB8S0GFKyop0qA=="
+    },
     "@types/node": {
       "version": "6.0.110",
       "resolved": "https://registry.npmjs.org/@types/node/-/node-6.0.110.tgz",
@@ -274,6 +279,11 @@
       "resolved": "https://registry.npmjs.org/angular/-/angular-1.7.0.tgz",
       "integrity": "sha512-3LboCLjrOuC7dWh953O0+dI3dJ7PexYRSCIrfqoN5qoHyja/wak3eWoxPKb2Sl2qwiPbrUV5KJXwgpUQ48McBQ=="
     },
+    "angular2-multiselect-dropdown": {
+      "version": "2.9.0",
+      "resolved": "https://registry.npmjs.org/angular2-multiselect-dropdown/-/angular2-multiselect-dropdown-2.9.0.tgz",
+      "integrity": "sha1-4GmmCqapyE5+6SalcobySVSuEDc="
+    },
     "angular2-router-loader": {
       "version": "0.3.5",
       "resolved": "https://registry.npmjs.org/angular2-router-loader/-/angular2-router-loader-0.3.5.tgz",
@@ -291,6 +301,11 @@
       "requires": {
         "loader-utils": "0.2.17"
       }
+    },
+    "angular4-datepicker": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/angular4-datepicker/-/angular4-datepicker-1.0.1.tgz",
+      "integrity": "sha512-mfrYkCJ5/HdXZj7J331vOPph9n06tQouUtmCjh4Orqq2FCRpia6LeBq11eBJsF9xdMJtMtvx2VjtyD3rAXRf0A=="
     },
     "angularjs-bootstrap-datetimepicker": {
       "version": "1.1.4",
@@ -750,6 +765,11 @@
       "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-3.3.7.tgz",
       "integrity": "sha1-WjiTlFSfIzMIdaOxUGVldPip63E=",
       "dev": true
+    },
+    "bootstrap-select-dropdown": {
+      "version": "0.13.14",
+      "resolved": "https://registry.npmjs.org/bootstrap-select-dropdown/-/bootstrap-select-dropdown-0.13.14.tgz",
+      "integrity": "sha512-CtEXI1Iv1lT+s7k5GVcb5iQ/tnQEujYq/tPIBbKDZHQ59/0dgcQj/GtTatsbWwa8PKOAlAX9m/V+tBodSjB4vA=="
     },
     "brace-expansion": {
       "version": "1.1.8",
@@ -1654,6 +1674,11 @@
         "is-absolute-url": "2.1.0",
         "isomorphic-fetch": "2.2.1"
       }
+    },
+    "dropdown-select": {
+      "version": "3.1.0",
+      "resolved": "https://registry.npmjs.org/dropdown-select/-/dropdown-select-3.1.0.tgz",
+      "integrity": "sha512-OkLmp2rp7JZlaMOjiG7HDgs2Kc2O5iY119mvjV8q2zdwLv0sNmvK9z2XqFq8pnZqC0gaz9fZnvmYF+9tk0tNpQ=="
     },
     "ee-first": {
       "version": "1.1.1",
@@ -4003,6 +4028,14 @@
       "integrity": "sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=",
       "dev": true
     },
+    "ng-multiselect-dropdown": {
+      "version": "0.1.7",
+      "resolved": "https://registry.npmjs.org/ng-multiselect-dropdown/-/ng-multiselect-dropdown-0.1.7.tgz",
+      "integrity": "sha1-yBK346RSTDeibJE9jk2ojx+SmzA=",
+      "requires": {
+        "tslib": "1.9.0"
+      }
+    },
     "no-case": {
       "version": "2.3.1",
       "resolved": "https://registry.npmjs.org/no-case/-/no-case-2.3.1.tgz",
@@ -6099,8 +6132,7 @@
     "tslib": {
       "version": "1.9.0",
       "resolved": "https://registry.npmjs.org/tslib/-/tslib-1.9.0.tgz",
-      "integrity": "sha512-f/qGG2tUkrISBlQZEjEqoZ3B2+npJjIf04H1wuAv9iA8i04Icp+61KRXxFdha22670NJopsZCIjhC3SnjPRKrQ==",
-      "dev": true
+      "integrity": "sha512-f/qGG2tUkrISBlQZEjEqoZ3B2+npJjIf04H1wuAv9iA8i04Icp+61KRXxFdha22670NJopsZCIjhC3SnjPRKrQ=="
     },
     "tty-browserify": {
       "version": "0.0.0",

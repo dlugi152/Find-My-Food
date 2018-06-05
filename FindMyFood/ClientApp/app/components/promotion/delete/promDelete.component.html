@@ -1,26 +1,32 @@
-<h1>Weather forecast</h1>
+<h1>Twoje promocje</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>Z tego miejsca możesz je usunąć</p>
 
-<p *ngIf="!forecasts">
-    <em>Loading...</em>
+<p *ngIf="!promotions">
+    <em>Ładowanie...</em>
 </p>
 
-<table class="table" *ngIf="forecasts">
+<table class="table" *ngIf="promotions">
     <thead>
     <tr>
-        <th>Date</th>
-        <th>Temp. (C)</th>
-        <th>Temp. (F)</th>
-        <th>Summary</th>
+        <th>Opis</th>
+        <th>Data początkowa</th>
+        <th>Data końcowa</th>
+        <th>Tagi</th>
+        <th>Usuń</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let forecast of forecasts">
-        <td>{{ forecast.dateFormatted }}</td>
-        <td>{{ forecast.temperatureC }}</td>
-        <td>{{ forecast.temperatureF }}</td>
-        <td>{{ forecast.summary }}</td>
+    <tr *ngFor="let promotion of promotions">
+        <td>{{ promotion.description }}</td>
+        <td>{{ promotion.dateStart }}</td>
+        <td>{{ promotion.dateEnd }}</td>
+        <td>{{ promotion.tags }}</td>
+        <td>
+            <a role="button" (click)="deleteById(promotion.id)">
+                <i class="ti-na"></i>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

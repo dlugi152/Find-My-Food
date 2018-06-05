@@ -1,6 +1,15 @@
+@using FindMyFood.Data
+@using FindMyFood.Models
+@model FindMyFood.Models.AccountViewModels.LoginViewModel
+@inject UserManager<ApplicationUser> UserManager
+@inject ApplicationDbContext _context
+
 @{
-    ViewData["Title"] = "Home Page";
+    var user = await UserManager.GetUserAsync(User);
+    var name = _context.Restaurant.SingleOrDefault(restaurant => restaurant.Id == user.RestaurantId)?.Name;
+    ViewData["Title"] = name;
 }
+
 <app asp-prerender-module="ClientApp/dist/main-server">
     <div class="loading">
         <!-- We make this div spin -->

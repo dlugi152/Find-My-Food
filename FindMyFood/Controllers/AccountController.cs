@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FindMyFood.Data;
-using FindMyFood.Extensions;
 using FindMyFood.Models;
 using FindMyFood.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 
 namespace FindMyFood.Controllers
@@ -55,7 +55,7 @@ namespace FindMyFood.Controllers
             try {
                 if (ModelState.IsValid)
                     await Login(model, _signInManager);
-                return View(model);
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception) {
                 return View();
@@ -77,7 +77,7 @@ namespace FindMyFood.Controllers
                 case Enums.RolesEnum.Restaurant:
                     user.Restaurant = new Restaurant(model.RestaurantName, model.RealAddress,
                         model.Longitude,
-                        model.Latitude);
+                        model.Latitude, model.City, model.Country, model.PostalCode, model.County, model.Province, model.Street, model.StreetNum);
                     context.Restaurant.Add(user.Restaurant);
                     break;
                 case Enums.RolesEnum.Client:

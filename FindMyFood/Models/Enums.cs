@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using NpgsqlTypes;
 
 namespace FindMyFood.Models
 {
@@ -10,6 +11,15 @@ namespace FindMyFood.Models
             Restaurant,
             [Display(Name = "Klient")]
             Client
+        }
+
+        public enum PeriodEnum
+        {
+            NoLimit,
+            Once,
+            Daily,
+            Weekly,
+            SingleDays
         }
     }
 }

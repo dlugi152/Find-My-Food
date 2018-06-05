@@ -1,0 +1,197 @@
+<p *ngIf="!restaurant">
+    <em>Ładowanie...</em>
+</p>
+
+<div class="container-fluid" *ngIf="restaurant">
+    <div class="row">
+        <div class="col-lg-4 col-md-5">
+            <div class="card card-user">
+                <div class="image">
+                    <!--<img src="assets/img/background.jpg" alt="..." />-->
+                </div>
+                <div class="content">
+                    <div class="author">
+                        <i class="avatar border-white ti-user" alt="..."></i>
+                        <h4 class="title">
+                            {{restaurant.name}}<br/>
+                            <a href="{{restaurant.website}}">
+                                <small>{{restaurant.website}}</small>
+                            </a>
+                        </h4>
+                    </div>
+                    <p class="description text-center" *ngIf="!restaurant.motto">
+                        "miejsce na Twoje motto"
+                    </p>
+                    <p class="description text-center" *ngIf="restaurant.motto">
+                        "{{restaurant.motto}}"
+                    </p>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-1">
+                            <h5>{{restaurant.nopromotions}}<br/><small>Promocje</small></h5>
+                        </div>
+                        <div class="col-md-4 text-primary">
+                            <h5>{{restaurant.rating}}<br/><small>Średnia ocen</small></h5>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>{{restaurant.norates}}<br/><small>Oceny</small></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" *ngIf="restaurant.lastRates.length">
+                <div class="header">
+                    <h4 class="title">Ostatnie oceny</h4>
+                </div>
+                <div class="content">
+                    <ul class="list-unstyled team-members">
+                        <li *ngFor="let user of restaurant.lastRates">
+                            <div class="row" *ngIf="user">
+                                <div class="col-xs-3">
+                                    <div>
+                                        <i class="avatar border-white ti-user" alt="..."></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    {{user.login}}
+                                    <br/>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <div class="text-primary">{{user.rate}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-7">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Edycja profilu</h4>
+                </div>
+                <div class="content">
+                    <form method="post" (ngSubmit)="onSubmit()" [formGroup]="myform">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nazwa restauracji</label>
+                                    <input type="text" class="form-control border-input" placeholder="Nazwa restauracji" formControlName="name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Adres email</label>
+                                    <input disabled type="text" class="form-control border-input" value="{{restaurant.email}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Imię prezesa</label>
+                                    <input type="text" class="form-control border-input" placeholder="Imię" formControlName="ceofirstname">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nazwisko</label>
+                                    <input type="text" class="form-control border-input" placeholder="Nazwisko" formControlName="ceolastname">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Wyświetlany adres</label>
+                                    <input type="text" class="form-control border-input" disabled placeholder="Adres lokalu" value="{{restaurant.address}}" formControlName="address">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Kod pocztowy</label>
+                                    <input type="text" class="form-control border-input" placeholder="Kod pocztowy" formControlName="postalCode">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Miasto</label>
+                                    <input type="text" class="form-control border-input" placeholder="Miasto" formControlName="city">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Kraj</label>
+                                    <input type="text" class="form-control border-input" placeholder="Kraj" formControlName="country">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Powiat</label>
+                                    <input type="text" class="form-control border-input" placeholder="Powiat" formControlName="county">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Województwo</label>
+                                    <input type="text" class="form-control border-input" placeholder="Województwo" formControlName="province">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Ulica</label>
+                                    <input type="text" class="form-control border-input" placeholder="Ulica" formControlName="street">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Numer</label>
+                                    <input type="text" class="form-control border-input" placeholder="Numer" formControlName="streetNumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Dłuższy opis</label>
+                                    <textarea rows="5" class="form-control border-input" formControlName="longDescription" placeholder="Miejsce na dłuższy opis"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Motto</label>
+                                    <textarea rows="1" class="form-control border-input" formControlName="motto" placeholder="Miejsce na Twoje motto"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Strona domowa</label>
+                                <angular2-multiselect [data]="ports" [(ngModel)]="selectedItems"
+                                                      [settings]="dropdownPortSettings"
+                                                      formControlName="port">
+                                </angular2-multiselect>
+                            </div>
+                            <div class="col-md-9">
+                                <label class="invisible">blank</label>
+                                <textarea rows="1" class="form-control border-input" formControlName="website" placeholder="Adres Twojej strony domowej (może być profil na facebooku)"></textarea>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-info btn-fill btn-wd">Zaktualizuj profil</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
