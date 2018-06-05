@@ -50,6 +50,32 @@ namespace FindMyFood.Controllers
             return Ok(promotion);
         }
 
+        [AllowAnonymous]
+        [HttpGet("Restaurant/{email}&{password}&{value}")]
+        public async Task<IActionResult> Restaurant([FromRoute] string email, [FromRoute] string password,
+            [FromRoute] string value) {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var appUser = _context.Users.SingleOrDefault(user => user.Email.Equals(email));
+            if (appUser == null || !await _userManager.CheckPasswordAsync(appUser, password))
+                return Ok(new StandardStatusResponse(false, "Nieprawidłowe dane logowania"));
+
+            var restaurants = (from rat in _context.Ratings
+                    group rat by rat.RestaurantId
+                    into res
+                    join rest in _context.Restaurant on res.Key equals rest.Id into joined
+                    from r in joined
+                    where r.Name.Contains(value)
+                    select new {
+                        r.Id,
+                        r.Name,
+                        Rate = res.Average(rating => rating.Rate),
+                        r.Address
+                    })
+                .ToList();
+
+            return Ok(restaurants);
+        }
+
         private static bool IsInRadius(double lng1, double lat1, double lng2, double lat2, double radius) {
             var p = Math.PI / 180;
             var a = 0.5 - Math.Cos((lat2 - lat1) * p) / 2 + Math.Cos(lat1 * p) *
