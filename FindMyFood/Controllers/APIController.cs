@@ -59,21 +59,16 @@ namespace FindMyFood.Controllers
             if (appUser == null || !await _userManager.CheckPasswordAsync(appUser, password))
                 return Ok(new StandardStatusResponse(false, "Nieprawidłowe dane logowania"));
 
-            var restaurants = (from rat in _context.Ratings
-                    group rat by rat.RestaurantId
-                    into res
-                    join rest in _context.Restaurant on res.Key equals rest.Id into joined
-                    from r in joined
-                    where r.Name.Contains(value)
-                    select new {
-                        r.Id,
-                        r.Name,
-                        Rate = res.Average(rating => rating.Rate),
-                        r.Address
-                    })
-                .ToList();
+            var list = (from rest in _context.Restaurant
+                where rest.Name.Contains(value, StringComparison.CurrentCultureIgnoreCase)
+                select new RestaurantResponse(rest)).ToList();
+            foreach (var x1 in list) {
+                var rate = _context.Ratings.SingleOrDefault(rating =>
+                    rating.RestaurantId == x1.Id && rating.ClientId == appUser.ClientId)?.Rate;
+                x1.Rate = rate ?? -1;
+            }
 
-            return Ok(restaurants);
+            return Ok(list);
         }
 
         private static bool IsInRadius(double lng1, double lat1, double lng2, double lat2, double radius) {
@@ -433,6 +428,20 @@ namespace FindMyFood.Controllers
             catch (Exception ex) {
                 return Ok(new StandardStatusResponse(false, ex.InnerException.Message));
             }
+        }
+    }
+
+    public class RestaurantResponse
+    {
+        public int Id;
+        public int Rate;
+        public string Name;
+        public string Address;
+
+        public RestaurantResponse(Restaurant rest) {
+            Id = rest.Id;
+            Name = rest.Name;
+            Address = rest.Address;
         }
     }
 
