@@ -10,10 +10,9 @@ export interface IRouteInfo {
 }
 
 export const routes: IRouteInfo[] = [
-    { path: "dashboard", title: "Informacje", icon: "ti-home", class: "" },
+    { path: "profile", title: "Profil", icon: "ti-panel", class: "" },
     { path: "promotion-add", title: "Dodaj promocje", icon: "ti-gift", class: "" },
-    { path: "promotion-delete", title: "Usuń promocje", icon: "ti-trash", class: "" },
-    { path: "profile", title: "Profil", icon: "ti-panel", class: "" }
+    { path: "promotion-delete", title: "Usuń promocje", icon: "ti-trash", class: "" }
 ];
 
 @Component({

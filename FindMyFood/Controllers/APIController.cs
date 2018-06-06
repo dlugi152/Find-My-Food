@@ -295,7 +295,7 @@ namespace FindMyFood.Controllers
                 Nopromotions = _context.Promotions.Count(promotion => promotion.RestaurantId == restaurant.Id),
                 Norates = _context.Ratings.Count(rating => rating.RestaurantId == restaurant.Id),
                 Rating = _context.Ratings.Any(rating => rating.RestaurantId == restaurant.Id)
-                    ? _context.Ratings.Average(rating => rating.Rate)
+                    ? _context.Ratings.Where(rating => rating.RestaurantId==restaurant.Id).Average(rating => rating.Rate)
                     : -1,
                 LastRates = (from rate in _context.Ratings.Where(rating => rating.RestaurantId == restaurant.Id)
                     orderby rate.Id descending
