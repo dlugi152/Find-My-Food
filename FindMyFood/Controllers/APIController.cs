@@ -85,12 +85,12 @@ namespace FindMyFood.Controllers
         public async Task<IActionResult> GetPromotionByLocation([FromRoute] double lng, [FromRoute] double lat,
             [FromRoute] double radius) {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            //todo uwzględnić daty
+            
             var promotion = await (from promo in _context.Promotions
                 join r in _context.Restaurant on promo.RestaurantId equals r.Id into joined
                 from r in joined
                 where IsInRadius(r.Longitude, r.Latitude, lng, lat, radius)
+                where promo.IsInDate(DateTime.Now)
                 select new GetPromotionResponse(promo, r)).ToListAsync();
             foreach (var response in promotion)
                 try {

@@ -93,5 +93,38 @@ namespace FindMyFood.Models
                         break;
                 }
         }
+
+        public bool IsInDate(DateTime now) {
+            try {
+                switch (RepetitionMode) {
+                    case Enums.PeriodEnum.NoLimit:
+                        return true;
+                    case Enums.PeriodEnum.Once:
+                        if (now.CompareTo(DateStart) > 0 && now.CompareTo(DateEnd) < 0)
+                            return true;
+                        return false;
+                    case Enums.PeriodEnum.Daily:
+                        if (now.TimeOfDay.CompareTo(DateStart.Value.TimeOfDay) > 0 &&
+                            now.TimeOfDay.CompareTo(DateEnd.Value.TimeOfDay) < 0)
+                            return true;
+                        return false;
+                    case Enums.PeriodEnum.Weekly:
+                        if (_daysOfWeek.Contains(now.DayOfWeek) &&
+                            now.TimeOfDay.CompareTo(DateStart.Value.TimeOfDay) > 0 &&
+                            now.TimeOfDay.CompareTo(DateEnd.Value.TimeOfDay) < 0)
+                            return true;
+                        return false;
+                    case Enums.PeriodEnum.SingleDays:
+                        if (_daysOfWeek.Contains(now.DayOfWeek))
+                            return true;
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            catch (Exception) {
+                return false;
+            }
+        }
     }
 }
