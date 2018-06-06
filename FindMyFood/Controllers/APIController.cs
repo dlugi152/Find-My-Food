@@ -193,15 +193,25 @@ namespace FindMyFood.Controllers
                 ApplicationUser appUser = _context.Users.SingleOrDefault(user => user.Email == email);
                 if (!await _userManager.CheckPasswordAsync(appUser, password))
                     return Ok(new StandardStatusResponse(false, "Nieprawidłowe dane logowania"));
-                Rating rating = new Rating();
                 var id = _context.Client.SingleOrDefault(client => client.Id == appUser.ClientId)?.Id;
                 if (id == null)
                     return Ok(new StandardStatusResponse(false,
                         "Stontaktuj się z administratorem, nieznany błąd z Twoim kontem"));
-                rating.ClientId = (int) id;
-                rating.Rate = rate;
-                rating.RestaurantId = restaurantId;
-                await _context.Ratings.AddAsync(rating);
+                Rating rating = new Rating
+                {
+                    ClientId = id.Value,
+                    Rate = rate,
+                    RestaurantId = restaurantId
+                };
+                Rating oldRate = _context.Ratings.SingleOrDefault(rating1 =>
+                    rating1.ClientId == rating.ClientId && rating1.RestaurantId == rating.RestaurantId);
+                if (oldRate != null) {
+                    oldRate.Rate = rate;
+                    _context.Entry(oldRate).State = EntityState.Modified;
+                }
+                else
+                    _context.Ratings.Add(rating);
+
                 await _context.SaveChangesAsync();
                 return Ok(new StandardStatusResponse(true, "Oceniono"));
             }
